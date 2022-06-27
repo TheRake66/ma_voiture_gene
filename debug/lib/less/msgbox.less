@@ -1,4 +1,5 @@
 @import '../../../.kernel/theme.less';
+@import '../../lib/less/button.less';
 
 
 
@@ -17,22 +18,25 @@ msgbox {
 	height: 100vh;
 	position: fixed;
 	display: flex;
+	padding: 16px;
+	animation: appear .5s ease-in-out;
 
 	> div {
 		display: flex;
 		flex-direction: column;
-		background-color: var(--background);
+		background-color: @black-light;
 		width: 445px;
 		margin: auto;
 		animation: slide 0.75s forwards;
-		border-radius: 8px;
-		box-shadow: 4px 8px 16px var(--shadow);
+		border-radius: @border-radius;
+		box-shadow: @shadow;
 		overflow: hidden;
 
 
 		h1 {
 			margin: 32px;
 			margin-bottom: 0px !important;
+			color: @white;
 		}
 
 		article {
@@ -42,12 +46,18 @@ msgbox {
 
 			img {
 				margin-right: 12px;
+				width: 64px;
+				height: 64px;
+			}
+
+			p {
+				color: @gray;
 			}
 		}
 
 		div {
-			background-color: var(--medium);
-			padding: 16px;
+			padding: 32px;
+			padding-top: 0px;
 			display: flex;
 			
 			button {
@@ -58,13 +68,14 @@ msgbox {
 
 }
 
-
-@keyframes slide {
-	0% {
-		transform: translateY(100vh) scale(60%);
+@keyframes appear {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
 	}
-	100% {
-		transform: translateY(0) scale(100%);
+	to {
+		opacity: 1;
+		transform: translateY(0px);
 	}
 }
 

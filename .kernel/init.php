@@ -25,6 +25,10 @@ k\Io\Convert\Date::timezone();
 // Démarre une session.
 k\Session\Socket::start();
 
+
+Controller\Connexion::autoLogin();
+
+
 // Charge les routes.
 k\Url\Router::load();
 

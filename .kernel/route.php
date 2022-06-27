@@ -2,7 +2,7 @@
 use Kernel\Url\Router as r;
 use Controller as c;
 use Api as a;
-
+use Kernel\Session\User;
 
 
 
@@ -11,7 +11,12 @@ r::notfound('/inscription');
 r::default('/inscription');
 r::add([ '/connexion' => c\Connexion::class ]);
 r::add([ '/inscription' => c\Inscription::class ]);
+r::add([ '/oublie' => c\Oublie::class ]);
 
+
+if (User::has()) {
+
+}
 
 
 

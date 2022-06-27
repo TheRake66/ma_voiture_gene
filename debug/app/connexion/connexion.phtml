@@ -21,18 +21,27 @@ Categorie: Vue
 	<div id="img1"></div>
 	<div id="img2"></div>
 	<div id="img3"></div>
-	<form <?= Attribute::form() ?>>
+
+	<form <?= Attribute::form('post', false, '/connexion') ?>>
+		<?= Csrf::init() ?>
+
 		<h1>Ha, te revoila !</h1>
 		<p>Nous sommes heureux de vous revoir !</p>
+
 		<label for="">ADRESSE E-MAIL</label>
-		<input class="input" type="email" name="email" id="email">
+		<input class="input" type="email" name="email" id="email" required <?= Output::post('email') ?>>
+
 		<label for="">MOT DE PASSE</label>
-		<input class="input" type="password" name="password" id="password">
+		<input class="input" type="password" name="password" id="password"required <?= Output::post('password') ?>>
+
 		<a class="link" href="/oublie">Tu as oublié ton mot de passe ?</a>
-		<button type="submit" class="button">Se connecter</button>
+
+		<button type="submit" class="button" id="connect" name="connect">Se connecter</button>
+		
 		<div>
 			<p>Besoin d'un compte ?</p>
 			<a class="link" href="/inscription">S'inscrire</a>
 		</div>
+
 	</form>
 </connexion>

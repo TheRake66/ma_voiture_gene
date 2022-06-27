@@ -20,5 +20,16 @@
       "debug/app/inscription/inscription.php",
       "debug/app/inscription/inscription.phtml"
     ]
+  },
+  {
+    "name": "oublie",
+    "created": "2022-06-27T16:40:27.4471092+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/app/oublie/oublie.js",
+      "debug/app/oublie/oublie.less",
+      "debug/app/oublie/oublie.php",
+      "debug/app/oublie/oublie.phtml"
+    ]
   }
 ]

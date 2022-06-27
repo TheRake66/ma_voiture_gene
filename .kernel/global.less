@@ -48,7 +48,7 @@ body {
     flex-direction: column;
     background-color: @black-light;
     
-	main, connexion, inscription {
+	main, connexion, inscription, oublie {
 		width: 100%;
 		height: 100vh;
 		display: flex;
@@ -65,12 +65,15 @@ body {
 // Style responsive global à toute l'application.
 @media all and (max-width: @responsive-max-width) {
     * {
-    
+        font-size: @font-size-responsive;
     }
     
 
     
     body {
 
+        h1, h2, h3, h4, h5, h6 {
+            font-size: calc(@font-size-responsive * 2);
+        }
     }
 }

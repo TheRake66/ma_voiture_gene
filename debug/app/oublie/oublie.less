@@ -6,12 +6,11 @@
 
 
 
-
-// Style du composant Inscription.
+// Style du composant Oublie.
 // Author: thiba
 // Version: 1.0
 // Categorie: Style
-inscription {
+oublie {
 	background-color: @blue-light;
 	display: flex;
 	
@@ -70,17 +69,25 @@ inscription {
 
 		h1 {
 			color: @white;
-			margin: 0 auto;
-			margin-bottom: 24px;
 		}
 
-		> label {
-			font-weight: 500;
-			margin-bottom: 8px;
+		h1, > p {
+			margin: 0 auto;
 		}
-		
+
 		p, label {
 			color: @gray;
+		}
+
+		> p {
+			margin-top: 4px;
+			margin-bottom: 24px;
+			text-align: center;
+		}
+
+		label {
+			font-weight: 500;
+			margin-bottom: 8px;
 		}
 
 		a {
@@ -95,75 +102,18 @@ inscription {
 			margin: 12px 0;
 		}
 
-		#cgudiv {
+		div {
 			display: flex;
-
-			label {
-				margin-left: 8px;
-				margin-top: 4px;
-			}
-		}
-
-		div:not(#cgudiv) {
-			display: flex;
-			align-items: center;
+			align-items: baseline;
 
 			p {
 				margin-right: 8px;
-			}
-		}
-
-
-		#cgu {
-			
-			width: 48px;
-			height: 24px;
-			border-radius: 50px;
-			box-shadow: 0 2px 3px @shadow;
-			appearance: none;
-			cursor: pointer;
-			position: relative;
-			background-color: @white;
-			transition: 0.2s;
-
-			&::after {
-				content: '';
-				width: 20px;
-				height: 20px;
-				top: 2px;
-				transform: translateX(2px);
-				position: absolute;
-				background-color: @blue-light;
-				border-radius: 50px;
-				transition: 0.3s;
-			}
-
-			&:checked {
-				background-color: @blue-light;
-
-				&::after {
-					background-color: @white;
-					transform: translateX(26px);
-				}
-			}
-
-			&:hover {
-				&::after {
-					background-color: @blue;
-				}
-				&:checked {
-					background-color: @blue;
-					&::after {
-						background-color: @white;
-					}
-				}
 			}
 		}
 		
 	}
 
 }
-
 @keyframes appear {
 	from {
 		opacity: 0;
@@ -174,6 +124,7 @@ inscription {
 		transform: translateY(0px);
 	}
 }
+
 
 @keyframes shake1 {
 	from {
@@ -204,25 +155,15 @@ inscription {
 
 
 
-
-// Style responsive du composant Inscription.
+// Style responsive du composant Oublie.
 @media all and (max-width: @responsive-max-width) {
-	inscription {
+	oublie {
 		form {
 			width: 100%;
 			height: 100%;
 			border-radius: 0px;
 			box-shadow: none;
 			animation: none;
-			
-			#cgudiv {
-				display: flex;
-
-				label {
-					margin-left: 8px;
-					margin-top: 6px;
-				}
-			}
 		}
 	}
 }

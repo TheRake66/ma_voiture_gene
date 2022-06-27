@@ -3,7 +3,7 @@
         "redirect_to_https": false,
         "self_xss_prevent": false,
         "cookie_path": "/",
-        "cookie_domain": "www.ma_voiture_gene.com",
+        "cookie_domain": "",
         "cookie_only_https": false,
         "cookie_prevent_xss": false,
         "cookie_lifetime": 0
