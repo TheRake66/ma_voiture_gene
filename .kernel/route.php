@@ -5,31 +5,31 @@ use Api as a;
 
 
 
-/*
+
 // Route vers les composants.
-r::notfound('/');
-r::default('/');
-r::add([ '/' => c\::class ]);
-*/
+r::notfound('/accueil');
+r::default('/accueil');
+r::add([ '/accueil' => c\Accueil::class ]);
 
 
-/*
+
+
 // Route vers les API.
 r::add([
-    '/api' => [ 
-        a\::class, [
+    '/api/utilisateurs' => [ 
+        a\Utilisateur::class, [
             r::METHOD_GET,
             r::METHOD_POST
     ]],
-    '/api/{id}' => [ 
-        a\::class, [
+    '/api/utilisateurs/{id}' => [ 
+        a\Utilisateur::class, [
             r::METHOD_GET,
             r::METHOD_PUT,
             r::METHOD_DELETE,
             r::METHOD_PATCH
     ]]
 ]);
-*/
+
 
 
 ?>

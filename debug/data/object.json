@@ -1,2 +1,11 @@
 [
+  {
+    "name": "ma_voiture_gene\\utilisateur",
+    "created": "2022-06-27T09:50:50.855067+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/data/dao/ma_voiture_gene/utilisateur.php",
+      "debug/data/dto/ma_voiture_gene/utilisateur.php"
+    ]
+  }
 ]

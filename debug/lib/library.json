@@ -1,2 +1,12 @@
 [
+  {
+    "name": "msgbox",
+    "created": "2022-06-27T10:41:37.3135803+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/lib/js/msgbox.js",
+      "debug/lib/less/msgbox.less",
+      "debug/lib/php/msgbox.php"
+    ]
+  }
 ]

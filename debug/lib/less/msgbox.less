@@ -1,0 +1,76 @@
+@import '../../../.kernel/theme.less';
+
+
+
+// Style de la page Msgbox
+// Author: Thibault Bustos (TheRake66)
+// Version: 1.0
+// License: MIT License
+// Category: Package
+// Copyright: © 2022 - Thibault BUSTOS (TheRake66)
+msgbox {
+	z-index: 9999999;
+	background-color: rgba(0, 0, 0, 0.2);
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	display: flex;
+
+	> div {
+		display: flex;
+		flex-direction: column;
+		background-color: var(--background);
+		width: 445px;
+		margin: auto;
+		animation: slide 0.75s forwards;
+		border-radius: 8px;
+		box-shadow: 4px 8px 16px var(--shadow);
+		overflow: hidden;
+
+
+		h1 {
+			margin: 32px;
+			margin-bottom: 0px !important;
+		}
+
+		article {
+			margin: 32px;
+			display: flex;
+			align-items: center;
+
+			img {
+				margin-right: 12px;
+			}
+		}
+
+		div {
+			background-color: var(--medium);
+			padding: 16px;
+			display: flex;
+			
+			button {
+				margin-left: auto;
+			}
+		}
+	}
+
+}
+
+
+@keyframes slide {
+	0% {
+		transform: translateY(100vh) scale(60%);
+	}
+	100% {
+		transform: translateY(0) scale(100%);
+	}
+}
+
+// Style responsive de la page Msgbox
+@media all and (max-width: 1000px) {
+	msgbox {
+
+	}
+}

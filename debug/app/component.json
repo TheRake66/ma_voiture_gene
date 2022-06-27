@@ -1,2 +1,13 @@
 [
+  {
+    "name": "accueil",
+    "created": "2022-06-27T09:41:32.2062674+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/app/accueil/accueil.js",
+      "debug/app/accueil/accueil.less",
+      "debug/app/accueil/accueil.php",
+      "debug/app/accueil/accueil.phtml"
+    ]
+  }
 ]
