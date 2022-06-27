@@ -1,0 +1,32 @@
+@import '../cody/theme.less';
+
+
+
+// Librairie de style pour les tuiles.
+// Author: Thibault Bustos (TheRake66)
+// Version: 1.0
+// Categorie: Framework source
+// License: MIT License
+// Copyright: © 2022 - Thibault BUSTOS (TheRake66)
+.tile {
+	background-color: @white;
+	width: fit-content;
+	padding: 32px;
+	border-radius: @radius;
+	box-shadow: 0 2px 4px @shadow;
+}
+
+
+.tile-old {
+	.tile();
+	filter: opacity(50%);
+}
+
+
+
+// Librairie responsive de style pour les tuiles.
+@media all and (max-width: 768px) {
+	.tile {
+
+	}
+}

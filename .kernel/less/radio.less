@@ -1,0 +1,62 @@
+@import '../cody/theme.less';
+
+
+
+// Librairie de style pour les radios de choix.
+// Author: Thibault Bustos (TheRake66)
+// Version: 1.0
+// Categorie: Framework source
+// License: MIT License
+// Copyright: © 2022 - Thibault BUSTOS (TheRake66)
+.radio {
+	width: 24px;
+	height: 24px;
+	border-radius: @radius;
+	box-shadow: 0 2px 3px @shadow;
+	appearance: none;
+	cursor: pointer;
+	position: relative;
+	background-color: @dark-white;
+	transition: 0.2s;
+
+	&::after {
+		content: '';
+		width: 14px;
+		height: 14px;
+		top: 5px;
+		transform: translateX(5px);
+		position: absolute;
+		background-color: @blue;
+		border-radius: @radius;
+		transition: 0.3s;
+	}
+
+	&:checked {
+		background-color: @blue;
+
+		&::after {
+			background-color: @dark-white;
+		}
+	}
+
+	&:hover {
+		filter: brightness(90%);
+	}
+
+	&:disabled {
+		cursor: not-allowed;
+
+		&::after {
+			background-color: @light-gray;
+		}
+	}
+}
+
+
+
+// Librairie responsive de style pour les radios de choix.
+@media all and (max-width: 768px) {
+	.radio {
+
+	}
+}

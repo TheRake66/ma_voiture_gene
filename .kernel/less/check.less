@@ -1,0 +1,63 @@
+@import '../cody/theme.less';
+
+
+
+// Librairie de style pour les case à cocher.
+// Author: Thibault Bustos (TheRake66)
+// Version: 1.0
+// Categorie: Framework source
+// License: MIT License
+// Copyright: © 2022 - Thibault BUSTOS (TheRake66)
+.check {	
+	width: 48px;
+	height: 24px;
+	border-radius: @radius;
+	box-shadow: 0 2px 3px @shadow;
+	appearance: none;
+	cursor: pointer;
+	position: relative;
+	background-color: @dark-white;
+	transition: 0.2s;
+
+	&::after {
+		content: '';
+		width: 20px;
+		height: 20px;
+		top: 2px;
+		transform: translateX(2px);
+		position: absolute;
+		background-color: @blue;
+		border-radius: @radius;
+		transition: 0.3s;
+	}
+
+	&:checked {
+		background-color: @blue;
+
+		&::after {
+			background-color: @dark-white;
+			transform: translateX(26px);
+		}
+	}
+
+	&:hover {
+		filter: brightness(90%);
+	}
+
+	&:disabled {
+		cursor: not-allowed;
+
+		&::after {
+			background-color: @light-gray;
+		}
+	}
+}
+
+
+
+// Librairie responsive de style pour les case à cocher.
+@media all and (max-width: 768px) {
+	.check {
+
+	}
+}

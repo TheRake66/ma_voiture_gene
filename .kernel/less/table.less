@@ -1,0 +1,53 @@
+@import '../cody/theme.less';
+
+
+
+// Librairie de style pour les tableaux.
+// Author: Thibault Bustos (TheRake66)
+// Version: 1.0
+// Categorie: Framework source
+// License: MIT License
+// Copyright: © 2022 - Thibault BUSTOS (TheRake66)
+.table {
+	background-color: @white;
+	border-radius: @radius;
+	box-shadow: 0 2px 4px @shadow;
+	border-collapse: collapse;
+	overflow: hidden;
+
+	th, td {
+		padding: 16px;
+		font-size: @font-medium;
+		font-size: @font-medium;
+	}
+
+	thead {
+		tr {
+			background-color: @blue;
+			
+			th {
+				color: @white;
+				font-weight: 500;
+			}
+		}
+	}
+
+	tbody {
+		tr {
+			&.odd {
+				background-color: @dark-white;
+			}
+			td {
+			}
+		}
+	}
+}
+
+
+
+// Librairie responsive de style pour les tableaux.
+@media all and (max-width: 768px) {
+	.table {
+
+	}
+}

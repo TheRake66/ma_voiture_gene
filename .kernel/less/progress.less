@@ -1,0 +1,62 @@
+@import '../cody/theme.less';
+
+
+
+// Librairie de style pour les barres de progression.
+// Author: Thibault Bustos (TheRake66)
+// Version: 1.0
+// Categorie: Framework source
+// License: MIT License
+// Copyright: © 2022 - Thibault BUSTOS (TheRake66)
+.progress {
+	-webkit-appearance: none;
+	box-shadow: 0 2px 4px @shadow;
+	overflow: hidden;
+	border-radius: @radius;
+	height: 32px;
+	width: 100%;
+
+	&::-webkit-progress-bar {
+		background-color: @dark-white;
+	}
+
+	&::-webkit-progress-value {
+		background-color: @blue;
+	}
+}
+
+
+.progress-good {
+	.progress();
+
+	&::-webkit-progress-value {
+		background-color: @green;
+	}
+}
+
+
+.progress-warn {
+	.progress();
+
+	&::-webkit-progress-value {
+		background-color: @yellow;
+	}
+}
+
+
+.progress-bad {
+	.progress();
+
+	&::-webkit-progress-value {
+		background-color: @red;
+	}
+}
+
+
+
+// Librairie responsive de style pour les barres de progression.
+@media all and (max-width: 768px) {
+	.progress {
+
+	}
+}

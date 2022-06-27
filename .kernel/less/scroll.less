@@ -1,0 +1,50 @@
+@import '../cody/theme.less';
+
+
+
+// Librairie de style pour les barres de défilement.
+// Author: Thibault Bustos (TheRake66)
+// Version: 1.0
+// Categorie: Framework source
+// License: MIT License
+// Copyright: © 2022 - Thibault BUSTOS (TheRake66)
+.scroll {
+	
+	&::-webkit-scrollbar {
+		height: 12px;
+		width: 12px;
+		background: @dark-white;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background: @blue;
+		border-radius: @radius-hard;
+		box-shadow: 0 2px 4px @shadow;
+
+		&:hover {
+			filter: brightness(110%);
+		}
+
+		&:active {
+			filter: brightness(120%);
+		}
+	}
+
+	&::-webkit-scrollbar-corner {
+		background: @dark-white;
+	}
+
+	&::-webkit-resizer {
+		background: #3B78FF;
+	}
+	
+}
+
+
+
+// Librairie responsive de style pour les barres de défilement.
+@media all and (max-width: 768px) {
+	.scroll {
+
+	}
+}

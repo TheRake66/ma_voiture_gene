@@ -1,0 +1,75 @@
+{
+    "security": {
+        "redirect_to_https": false,
+        "self_xss_prevent": false,
+        "cookie_path": "/",
+        "cookie_domain": "www.ma_voiture_gene.com",
+        "cookie_only_https": false,
+        "cookie_prevent_xss": false,
+        "cookie_lifetime": 0
+    },
+    "render": {
+        "use_minifying": false,
+        "catch_error": true, 
+        "show_error_message": true,
+        "show_supervisor": true,
+        "wait_dom_loaded": true,
+        "delay_after_load": 200,
+        "api_beautify_json": true
+    },
+    "log": {
+        "use_log_file": true,
+        "ip_identify": false,
+        "throw_if_unwritable": true,
+        "max_lenght": 1000,
+        "query": {
+            "print_query": true,
+            "print_parameters": true,
+            "print_results": true,
+            "print_mail": true,
+            "print_mail_header": true,
+            "print_mail_content": true
+        }
+    },
+    "website_head": {
+        "charset": "utf-8",
+        "description": "ma_voiture_gene",
+        "keywords": "ma_voiture_gene",
+        "author": "thiba",
+        "viewport": "width=device-width, initial-scale=1.0",
+        "theme_color": "#3B78FF",
+        "robots": "index, follow",
+        "title": "ma_voiture_gene"
+    },
+    "region": {
+        "timezone": "Europe/Paris",
+        "main_lang": "fr"
+    },
+    "session": {
+        "open_session": true,
+        "multiple_session": true,
+        "session_name": "ma_voiture_gene",
+        "token_lifetime_days": 31,
+        "regenerate_delay": -1,
+        "regenerate_delete_old": false
+    },
+    "database": {
+        "default_database": "ma_voiture_gene",
+        "progressive_connection": true,
+        "databases_list": [
+            {
+				"login": "root", 
+				"password": "", 
+				"host": "localhost", 
+				"port": "3306", 
+				"name": "ma_voiture_gene", 
+                "encoding": "utf8", 
+                "type": "mysql",
+                "throw_sql_error": true,
+                "throw_transaction": true,
+                "emulate_prepare": false,
+                "persistent_mode": false
+            }
+        ]
+    }
+}
