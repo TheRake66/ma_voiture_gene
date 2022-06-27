@@ -12,7 +12,7 @@
         "use_minifying": false,
         "catch_error": true, 
         "show_error_message": true,
-        "show_supervisor": true,
+        "show_supervisor": false,
         "wait_dom_loaded": true,
         "delay_after_load": 200,
         "api_beautify_json": true
@@ -37,7 +37,7 @@
         "keywords": "ma_voiture_gene",
         "author": "thiba",
         "viewport": "width=device-width, initial-scale=1.0",
-        "theme_color": "#3B78FF",
+        "theme_color": "#3F3D56",
         "robots": "index, follow",
         "title": "ma_voiture_gene"
     },

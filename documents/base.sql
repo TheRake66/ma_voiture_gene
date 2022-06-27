@@ -42,7 +42,8 @@ CREATE TABLE Plaque(
 CREATE TABLE Message(
         id               Int  Auto_increment  NOT NULL ,
         contenu          Text NOT NULL ,
-        date             Datetime NOT NULL ,
+        envoye_le        Datetime NOT NULL ,
+        vue_le           Datetime ,
         id_Utilisateur   Int NOT NULL ,
         id_Utilisateur_1 Int NOT NULL
 	,CONSTRAINT Message_PK PRIMARY KEY (id)

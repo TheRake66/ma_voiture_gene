@@ -8,5 +8,35 @@
       "debug/lib/less/msgbox.less",
       "debug/lib/php/msgbox.php"
     ]
+  },
+  {
+    "name": "input",
+    "created": "2022-06-27T12:45:28.209616+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/lib/js/input.js",
+      "debug/lib/less/input.less",
+      "debug/lib/php/input.php"
+    ]
+  },
+  {
+    "name": "button",
+    "created": "2022-06-27T12:45:32.0294828+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/lib/js/button.js",
+      "debug/lib/less/button.less",
+      "debug/lib/php/button.php"
+    ]
+  },
+  {
+    "name": "link",
+    "created": "2022-06-27T12:49:22.2727788+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/lib/js/link.js",
+      "debug/lib/less/link.less",
+      "debug/lib/php/link.php"
+    ]
   }
 ]

@@ -20,7 +20,8 @@ class Message extends Crud {
      */
     public $_id;
     public $contenu;
-    public $date;
+    public $envoye_le;
+    public $vue_le;
     public $id_Utilisateur;
     public $id_Utilisateur_1;
     
@@ -32,15 +33,17 @@ class Message extends Crud {
      * @return void
      */
     function __construct(
-        $_id = null,
+        $id = null,
         $contenu = null,
-        $date = null,
+        $envoye_le = null,
+        $vue_le = null,
         $id_Utilisateur = null,
         $id_Utilisateur_1 = null
     ) {
-        $this->_id = $_id;
+        $this->_id = $id;
         $this->contenu = $contenu;
-        $this->date = $date;
+        $this->envoye_le = $envoye_le;
+        $this->vue_le = $vue_le;
         $this->id_Utilisateur = $id_Utilisateur;
         $this->id_Utilisateur_1 = $id_Utilisateur_1;
     }

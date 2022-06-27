@@ -1,16 +1,5 @@
 [
   {
-    "name": "accueil",
-    "created": "2022-06-27T09:41:32.2062674+02:00",
-    "madeby": "thiba",
-    "paths": [
-      "debug/app/accueil/accueil.js",
-      "debug/app/accueil/accueil.less",
-      "debug/app/accueil/accueil.php",
-      "debug/app/accueil/accueil.phtml"
-    ]
-  },
-  {
     "name": "connexion",
     "created": "2022-06-27T11:48:38.1161285+02:00",
     "madeby": "thiba",
@@ -19,6 +8,17 @@
       "debug/app/connexion/connexion.less",
       "debug/app/connexion/connexion.php",
       "debug/app/connexion/connexion.phtml"
+    ]
+  },
+  {
+    "name": "inscription",
+    "created": "2022-06-27T13:40:16.3170995+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/app/inscription/inscription.js",
+      "debug/app/inscription/inscription.less",
+      "debug/app/inscription/inscription.php",
+      "debug/app/inscription/inscription.phtml"
     ]
   }
 ]

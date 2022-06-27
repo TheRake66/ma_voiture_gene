@@ -1,0 +1,31 @@
+@import '../../../.kernel/theme.less';
+
+
+
+// Librairie Button.
+// Author: thiba
+// Version: 1.0
+.button {
+	border: none;
+	outline: none;
+	border-radius: @border-radius;
+	padding: 12px;
+	background-color: @blue-light;
+	color: @white;
+	font-size: 16px;
+	transition: .1s;
+	cursor: pointer;
+
+	&:hover {
+		background-color: @blue;
+	}
+}
+
+
+
+// Librairie responsive Button.
+@media all and (max-width: @responsive-max-width) {
+	.button {
+
+	}
+}

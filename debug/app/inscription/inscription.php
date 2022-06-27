@@ -1,22 +1,21 @@
 <?php
 namespace Controller;
-
-use Kernel\Database\Transaction;
 use Kernel\Security\Vulnerability\Xss;
 use Kernel\Security\Vulnerability\Csrf;
 use Kernel\Security\Validation;
 use Kernel\Io\Render;
-use Model\Dto\Ma_voiture_gene\Utilisateur;
+
+
 
 /**
- * Controleur du composant Accueil.
+ * Controleur du composant Inscription.
  * 
  * @author thiba
  * @version 1.0
  * @package Controller
  * @category Controleur
  */
-class Accueil extends Render {
+class Inscription extends Render {
 
     /**
      * Point d'entrée du controleur.
@@ -25,6 +24,10 @@ class Accueil extends Render {
      * @return void
      */
     function __construct() {
+
+       // if
+
+
         $this->view();
     }
 

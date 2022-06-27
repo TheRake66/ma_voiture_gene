@@ -7,13 +7,13 @@ import Location from '../../../.kernel/js/url/location.js';
 
 
 /**
- * Script du composant Accueil.
+ * Script du composant Inscription.
  * 
  * @author thiba
  * @version 1.0
  * @category Script
  */
-export default class Accueil {
+export default class Inscription {
 
     /**
      * Point d'entrée du script.
@@ -22,19 +22,7 @@ export default class Accueil {
      * @return {void}
      */
     constructor() {
-    }
-
-
-
-    refresh() {
-        let accueil = Finder.query('accueil');
-        Rest.getFor('/api/utilisateurs',
-            (content, json) => { // Success
-                Dom.insert(/*html*/`
-                    <span>${content.nom} ${content.prenom}</span>
-                `, accueil);
-            }
-        );
+        
     }
 
 }

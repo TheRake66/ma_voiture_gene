@@ -7,9 +7,10 @@ use Api as a;
 
 
 // Route vers les composants.
-r::notfound('/connexion');
-r::default('/connexion');
+r::notfound('/inscription');
+r::default('/inscription');
 r::add([ '/connexion' => c\Connexion::class ]);
+r::add([ '/inscription' => c\Inscription::class ]);
 
 
 

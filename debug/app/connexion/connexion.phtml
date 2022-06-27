@@ -18,5 +18,21 @@ Version: 1.0
 Categorie: Vue
  -->
 <connexion>
-	<p>Le composant Connexion fonctionne !</p>
+	<div id="img1"></div>
+	<div id="img2"></div>
+	<div id="img3"></div>
+	<form <?= Attribute::form() ?>>
+		<h1>Ha, te revoila !</h1>
+		<p>Nous sommes heureux de vous revoir !</p>
+		<label for="">ADRESSE E-MAIL</label>
+		<input class="input" type="email" name="email" id="email">
+		<label for="">MOT DE PASSE</label>
+		<input class="input" type="password" name="password" id="password">
+		<a class="link" href="/oublie">Tu as oublié ton mot de passe ?</a>
+		<button type="submit" class="button">Se connecter</button>
+		<div>
+			<p>Besoin d'un compte ?</p>
+			<a class="link" href="/inscription">S'inscrire</a>
+		</div>
+	</form>
 </connexion>

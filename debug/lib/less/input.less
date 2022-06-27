@@ -1,0 +1,30 @@
+@import '../../../.kernel/theme.less';
+
+
+
+// Librairie Input.
+// Author: thiba
+// Version: 1.0
+.input {
+	border: none;
+	outline: none;
+	border-radius: @border-radius;
+	padding: 12px;
+	background-color: @black;
+	color: @gray;
+	font-size: 16px;
+	transition: .1s;
+
+	&:focus {
+		box-shadow: 0 0 0 4px @blue-light;
+	}
+}
+
+
+
+// Librairie responsive Input.
+@media all and (max-width: @responsive-max-width) {
+	.input {
+
+	}
+}
