@@ -9,5 +9,16 @@
       "debug/app/accueil/accueil.php",
       "debug/app/accueil/accueil.phtml"
     ]
+  },
+  {
+    "name": "connexion",
+    "created": "2022-06-27T11:48:38.1161285+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/app/connexion/connexion.js",
+      "debug/app/connexion/connexion.less",
+      "debug/app/connexion/connexion.php",
+      "debug/app/connexion/connexion.phtml"
+    ]
   }
 ]

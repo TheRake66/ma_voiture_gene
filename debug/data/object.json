@@ -7,5 +7,32 @@
       "debug/data/dao/ma_voiture_gene/utilisateur.php",
       "debug/data/dto/ma_voiture_gene/utilisateur.php"
     ]
+  },
+  {
+    "name": "ma_voiture_gene\\plaque",
+    "created": "2022-06-27T11:49:56.3365274+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/data/dao/ma_voiture_gene/plaque.php",
+      "debug/data/dto/ma_voiture_gene/plaque.php"
+    ]
+  },
+  {
+    "name": "ma_voiture_gene\\message",
+    "created": "2022-06-27T11:50:38.0904874+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/data/dao/ma_voiture_gene/message.php",
+      "debug/data/dto/ma_voiture_gene/message.php"
+    ]
+  },
+  {
+    "name": "ma_voiture_gene\\exemple",
+    "created": "2022-06-27T11:51:50.0680774+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/data/dao/ma_voiture_gene/exemple.php",
+      "debug/data/dto/ma_voiture_gene/exemple.php"
+    ]
   }
 ]
