@@ -1,0 +1,70 @@
+@import '../../../.kernel/theme.less';
+
+
+
+// Style du composant Menu.
+// Author: thiba
+// Version: 1.0
+// Categorie: Style
+menu {
+	background-color: @black;
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+
+	> div {
+		border-radius: 0 0 20px 20px;
+		background-color: @black-light;
+		height: 100%;
+		overflow: auto;
+	}
+
+	> nav {
+		background-color: @black;
+		margin: 0 auto;
+		display: flex;
+
+		a {
+			width: fit-content;
+			height: fit-content;
+			position: relative;
+			width: 56px;
+			height: 67px;
+
+			img {
+				z-index: 1;
+				position: absolute;
+				margin: 8px 4px;
+				padding: 8px;
+				width: 48px;
+				height: 48px;
+				
+				&.active {
+					border-radius: @border-radius-big;
+					background-color: @black-light;
+				}
+			}
+
+			div {
+				z-index: 0;
+				position: absolute;
+				width: 80px;
+				height: 64px;
+				top: -20%;
+				left: 50%;
+				transform: translate(-50%, 0%);
+				border-radius: 100%;
+				background-color: @black;
+			}
+		}
+	}
+}
+
+
+
+// Style responsive du composant Menu.
+@media all and (max-width: @responsive-max-width) {
+	menu {
+
+	}
+}

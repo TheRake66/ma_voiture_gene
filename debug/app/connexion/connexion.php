@@ -4,6 +4,7 @@ use Kernel\Security\Vulnerability\Xss;
 use Kernel\Security\Vulnerability\Csrf;
 use Kernel\Security\Validation;
 use Kernel\Io\Render;
+use Kernel\Security\Cookie;
 use Kernel\Session\Token;
 use Kernel\Session\User;
 use Kernel\Url\Location;
@@ -29,16 +30,18 @@ class Connexion extends Render {
      * @return void
      */
     function __construct() {
+        if (isset($_GET['deconnexion'])) {
+            User::logout();
 
-        if (isset($_GET['creee'])) {
+        } elseif (isset($_GET['creee'])) {
             Msgbox::show('Inscription', 'Votre compte a été créé avec succès.');
 
         } elseif (isset($_POST['connect'])) {
-            if (Csrf::check()) {
+            if (Csrf::valid()) {
                 Csrf::destroy();
 
-                $email = Xss::escape($_POST['email']);
-                $password = Xss::escape($_POST['password']);
+                $email = Xss::filter($_POST['email']);
+                $password = Xss::filter($_POST['password']);
 
                 $user = new Utilisateur();
                 $user->email = $email;
@@ -47,11 +50,13 @@ class Connexion extends Render {
                 if ($user) {
                     $hash = hash('sha256', $password . $user->sel);
                     if ($hash === $user->mot_de_passe) {
-                        User::login($user);
-                        $user->jeton = Token::get();
+                        $token = Token::generate();
+                        User::login($user, $token);
+                        $user->jeton = $token;
                         $user->derniere_connexion = new \DateTime();
                         $user->update();
-                        Location::go('/application');
+                        Cookie::set('session_id', $user->_id);
+                        Location::go('/conversations');
                     } else {
                         Msgbox::show('Attention', 'L\'adresse e-mail ou le mot de passe sont incorrects.', Msgbox::IMG_WARN);
                     }
@@ -84,6 +89,7 @@ class Connexion extends Render {
                 $user->derniere_connexion = new \DateTime();
                 $user->update();
             } else {
+                Token::remove();
                 Location::go('/connexion');
             }
         }

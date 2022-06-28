@@ -30,10 +30,10 @@ class Oublie extends Render {
     function __construct() {
 
         if (isset($_POST['new'])) {
-            if (Csrf::check()) {
+            if (Csrf::valid()) {
                 Csrf::destroy();
 
-                $email = Xss::escape($_POST['email']);
+                $email = Xss::filter($_POST['email']);
                 $user = new Utilisateur();
                 $user->email = $email;
                 $user = $user->read('email');   

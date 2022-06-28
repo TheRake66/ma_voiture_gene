@@ -39,7 +39,7 @@ class Msgbox {
                 <div>		
                     <h1>' . $titre . '</h1>
                     <article>
-                        <img ' . Attribute::src('/assets/img/' . $level . '.PNG', 'Msgbox') . '>
+                        <img ' . Attribute::src('/assets/img/msgbox/' . $level . '.PNG', 'Msgbox') . '>
                         <p>' . $content . '</p>
                     </article>
                     <div>

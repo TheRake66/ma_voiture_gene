@@ -34,5 +34,32 @@
       "debug/data/dao/ma_voiture_gene/exemple.php",
       "debug/data/dto/ma_voiture_gene/exemple.php"
     ]
+  },
+  {
+    "name": "ma_voiture_gene\\conversation",
+    "created": "2022-06-28T17:45:42.7012059+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/data/dao/ma_voiture_gene/conversation.php",
+      "debug/data/dto/ma_voiture_gene/conversation.php"
+    ]
+  },
+  {
+    "name": "ma_voiture_gene\\membre",
+    "created": "2022-06-28T17:45:49.4680496+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/data/dao/ma_voiture_gene/membre.php",
+      "debug/data/dto/ma_voiture_gene/membre.php"
+    ]
+  },
+  {
+    "name": "ma_voiture_gene\\vu",
+    "created": "2022-06-28T17:49:53.0710703+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/data/dao/ma_voiture_gene/vu.php",
+      "debug/data/dto/ma_voiture_gene/vu.php"
+    ]
   }
 ]

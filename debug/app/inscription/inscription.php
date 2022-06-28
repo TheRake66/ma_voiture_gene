@@ -29,19 +29,19 @@ class Inscription extends Render {
     function __construct() {
 
         if (isset($_POST['inscription'])) {
-            if (Csrf::check()) {
+            if (Csrf::valid()) {
                 Csrf::destroy();
 
                 if ($_POST['password'] === $_POST['confirm']) {
                     $sel = Encoded::random(10);
-                    $password = Xss::escape($_POST['password']);
+                    $password = Xss::filter($_POST['password']);
                     $hash = hash('sha256', $password . $sel);
                     
                     $user = new Utilisateur(
                         null,
-                        Xss::escape($_POST['nom']),
-                        Xss::escape($_POST['prenom']),
-                        Xss::escape($_POST['email']),
+                        Xss::filter($_POST['nom']),
+                        Xss::filter($_POST['prenom']),
+                        Xss::filter($_POST['email']),
                         $hash,
                         $sel);
 

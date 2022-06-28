@@ -31,5 +31,71 @@
       "debug/app/oublie/oublie.php",
       "debug/app/oublie/oublie.phtml"
     ]
+  },
+  {
+    "name": "menu",
+    "created": "2022-06-28T08:54:25.3322895+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/app/menu/menu.js",
+      "debug/app/menu/menu.less",
+      "debug/app/menu/menu.php",
+      "debug/app/menu/menu.phtml"
+    ]
+  },
+  {
+    "name": "menu\\conversation",
+    "created": "2022-06-28T12:46:23.8067291+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/app/menu/conversation/conversation.js",
+      "debug/app/menu/conversation/conversation.less",
+      "debug/app/menu/conversation/conversation.php",
+      "debug/app/menu/conversation/conversation.phtml"
+    ]
+  },
+  {
+    "name": "menu\\conversation\\message",
+    "created": "2022-06-28T12:46:33.3653087+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/app/menu/conversation/message/message.js",
+      "debug/app/menu/conversation/message/message.less",
+      "debug/app/menu/conversation/message/message.php",
+      "debug/app/menu/conversation/message/message.phtml"
+    ]
+  },
+  {
+    "name": "menu\\parametre",
+    "created": "2022-06-28T12:46:38.702633+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/app/menu/parametre/parametre.js",
+      "debug/app/menu/parametre/parametre.less",
+      "debug/app/menu/parametre/parametre.php",
+      "debug/app/menu/parametre/parametre.phtml"
+    ]
+  },
+  {
+    "name": "menu\\vehicule",
+    "created": "2022-06-28T12:46:42.5497137+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/app/menu/vehicule/vehicule.js",
+      "debug/app/menu/vehicule/vehicule.less",
+      "debug/app/menu/vehicule/vehicule.php",
+      "debug/app/menu/vehicule/vehicule.phtml"
+    ]
+  },
+  {
+    "name": "menu\\scanner",
+    "created": "2022-06-28T12:46:48.0107647+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/app/menu/scanner/scanner.js",
+      "debug/app/menu/scanner/scanner.less",
+      "debug/app/menu/scanner/scanner.php",
+      "debug/app/menu/scanner/scanner.phtml"
+    ]
   }
 ]

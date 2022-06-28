@@ -1,0 +1,173 @@
+@import '../../../../../.kernel/theme.less';
+@import '../../../../lib/less/input.less';
+@import '../../../../lib/less/button.less';
+@import '../../../../lib/less/msgbox.less';
+
+
+// Style du composant Message.
+// Author: thiba
+// Version: 1.0
+// Categorie: Style
+menu-conversation-message {
+	display: flex;
+	flex-direction: column;
+	background-color: @black;
+	height: calc(100%);
+
+	header {
+		display: flex;
+		align-items: center;
+		padding: 16px;
+		
+		a {
+			display: flex;
+			margin-left: 6px;
+
+			img {
+				width: 10px;
+			}
+		}
+
+		span {
+			margin-left: auto;
+			margin-right: 12px;
+			text-align: end;
+		}
+
+		> img {
+			background-color: @blue;
+			border-radius: 100%;
+			width: 32px;
+			height: 32px;
+		}
+	}
+
+	section {
+		overflow: auto;
+		height: 100%;
+		background-color: @black-light;
+		border-radius: 20px 20px 0 0;
+
+		#section {
+			display: flex;
+			padding: 24px 0;
+			flex-direction: column;
+
+			> span {
+				margin: 16px auto;
+			}
+
+			> div {
+				display: flex;
+				align-items: top;
+				max-width: 70%;
+				margin-bottom: 12px;
+
+				&.left {
+					margin-right: auto;
+
+					article {
+						margin-left: 8px;
+
+						div {
+							left: -6px;
+						}
+					}
+
+					i {
+						margin-lrft: auto;
+					}
+				}
+
+				&.right {
+					margin-left: auto;
+
+					article {
+						margin-right: 8px;
+
+						div {
+							right: -6px;
+						}
+					}
+
+					i {
+						margin-right: auto;
+					}
+				}
+
+				&:hover {
+					i {
+						display: block;
+					}
+				}
+
+				article {
+					display: flex;
+					flex-direction: column;
+					position: relative;
+
+					div {
+						position: absolute;
+						background-color: @blue-light;
+						width: 12px;
+						height: 12px;
+						transform: rotate(45deg);
+						top: 16px;
+					}
+
+					span {
+						background-color: @blue-light;
+						word-break: break-word;
+						border-radius: @border-radius;
+						padding: 12px;
+						min-height: 43px;
+						min-width: 43px;
+					}
+
+					i {
+						margin-top: 4px;
+						display: none;
+					}
+				}
+
+				img {
+					margin: 8px;
+					background-color: @blue;
+					border-radius: 100%;
+					width: 32px;
+					height: 32px;
+					transform: translateY(-2px);
+				}
+			}
+		}
+	}
+
+	> div {
+		background-color: @black-light;
+		display: flex;
+		align-items: center;
+		padding: 12px;
+
+		input {
+			width: 100%;
+			margin-right: 12px;
+			border-radius: @border-radius-big !important;
+		}
+
+		img {
+			width: 45px;
+			padding: 12px !important;
+			border-radius: @border-radius-big !important;
+		}
+	}
+
+}
+
+
+
+// Style responsive du composant Message.
+@media all and (max-width: @responsive-max-width) {
+	menu-conversation-message {
+
+	}
+}

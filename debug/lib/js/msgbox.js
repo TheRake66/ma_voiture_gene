@@ -24,7 +24,7 @@ export default class Msgbox {
      * @param {string} level l'image de la msgbox
      */
     static show(titre, content, level = Msgbox.IMG_OK) {
-        level = '/assets/img/' + level + '.png';
+        level = '/assets/img/msgbox/' + level + '.png';
         Dom.insert(/*html*/`
             <msgbox>
                 <div>

@@ -28,12 +28,24 @@ class Utilisateur extends Rest {
      */
     function get($route, $query, $body) {
         $this->match('/api/utilisateurs', function() {
-            $this->send(DTOUtilisateur::all(), 0, 'Recupération des utilisateurs réussie.');
+            $users = DTOUtilisateur::all();
+            if ($users) {
+                foreach ($users as $user) {
+                    if ($user->photo) {
+                        $user->photo = base64_encode($user->photo);
+                    }
+                }
+            }
+            $this->send($users, 0, 'Recupération des utilisateurs réussie.');
         });
         $this->match('/api/utilisateurs/{id}', function() use ($query) {
             $id = $this->data($query, 'id');
             $user = new DTOUtilisateur($id);
-            $this->send($user->read(), 0, 'Recupération de l\'utilisateur réussie.');
+            $user = $user->read();
+            if ($user && $user->photo) {
+                $user->photo = base64_encode($user->photo);
+            }
+            $this->send($user, 0, 'Recupération de l\'utilisateur réussie.');
         });
     }
 

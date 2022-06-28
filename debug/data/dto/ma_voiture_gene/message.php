@@ -21,9 +21,8 @@ class Message extends Crud {
     public $_id;
     public $contenu;
     public $envoye_le;
-    public $vue_le;
     public $id_Utilisateur;
-    public $id_Utilisateur_1;
+    public $id_Conversation;
     
 
     /**
@@ -36,16 +35,14 @@ class Message extends Crud {
         $id = null,
         $contenu = null,
         $envoye_le = null,
-        $vue_le = null,
         $id_Utilisateur = null,
-        $id_Utilisateur_1 = null
+        $id_Conversation = null
     ) {
         $this->_id = $id;
         $this->contenu = $contenu;
         $this->envoye_le = $envoye_le;
-        $this->vue_le = $vue_le;
         $this->id_Utilisateur = $id_Utilisateur;
-        $this->id_Utilisateur_1 = $id_Utilisateur_1;
+        $this->id_Conversation = $id_Conversation;
     }
 	
 }

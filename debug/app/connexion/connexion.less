@@ -25,32 +25,32 @@ connexion {
 
 	#img1 {
 		width: 50%;
-		background-image: url('../../../assets/img/1295100.svg');
-		opacity: .35;
+		background-image: url('../../../assets/img/template/nuage.svg');
+		opacity: .25;
 		right: -10%;
 		animation: shake1 1.5s ease-in-out infinite alternate;
 	}
 
 	#img2 {	
 		z-index: 2;
-		width: 40%;
-		background-image: url('../../../assets/img/1295100.svg');
-		opacity: .15;
-		left: -5%;
-		transform: scaleX(-1);
+		width: 45%;
+		background-image: url('../../../assets/img/template/nuage.svg');
+		opacity: .35;
+		left: -8%;
+		transform: rotate(10deg) scaleX(-1);
 		animation: shake2 1.7s ease-in-out infinite alternate;
-		animation-delay: .2s;
+		animation-delay: .3s;
 	}
 
 	#img3 {
 		z-index: 3;
 		width: 30%;
-		background-image: url('../../../assets/img/1295100.svg');
+		background-image: url('../../../assets/img/template/nuage.svg');
 		opacity: .25;
 		left: 50%;
 		transform: translateX(-60%) scaleX(-1);
 		animation: shake3 1.3s ease-in-out infinite alternate;
-		animation-delay: .3s;
+		animation-delay: .2s;
 	}
 
 
@@ -139,10 +139,10 @@ connexion {
 
 @keyframes shake2 {
 	from {
-		transform: translateX(0px) scaleX(-1);
+		transform: rotate(10deg) translateX(0px) scaleX(-1);
 	}
 	to {
-		transform: translateX(10px) scaleX(-1);
+		transform: rotate(10deg) translateX(10px) scaleX(-1);
 	}
 }
 

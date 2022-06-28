@@ -4,6 +4,7 @@ namespace Model\Dao\Ma_voiture_gene;
 use Kernel\DataBase\Toogle;
 use Kernel\DataBase\Transaction;
 use Kernel\DataBase\Query;
+use Kernel\Session\User;
 use Model\Dto\Ma_voiture_gene\Message as Dto;
 
 
@@ -17,7 +18,7 @@ use Model\Dto\Ma_voiture_gene\Message as Dto;
  * @category DAO (Data Access Object)
  */
 class Message {
-
+    
 }
 
 ?>
