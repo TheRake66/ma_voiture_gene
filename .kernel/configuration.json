@@ -19,7 +19,7 @@
     },
     "log": {
         "use_log_file": true,
-        "ip_identify": false,
+        "ip_identify": true,
         "throw_if_unwritable": true,
         "max_lenght": 1000,
         "query": {

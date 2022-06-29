@@ -3,6 +3,8 @@
 @import '../../lib/less/input.less';
 @import '../../lib/less/button.less';
 @import '../../lib/less/msgbox.less';
+@import '../../lib/less/toogle.less';
+
 
 
 
@@ -12,7 +14,7 @@
 // Version: 1.0
 // Categorie: Style
 inscription {
-	background-color: @blue-light;
+	background-color: @blue;
 	display: flex;
 	
 	#img1, #img2, #img3 {
@@ -116,48 +118,6 @@ inscription {
 
 		#cgu {
 			
-			width: 48px;
-			height: 24px;
-			border-radius: @border-radius-big;
-			box-shadow: 0 2px 3px @shadow;
-			appearance: none;
-			cursor: pointer;
-			position: relative;
-			background-color: @white;
-			transition: 0.2s;
-
-			&::after {
-				content: '';
-				width: 20px;
-				height: 20px;
-				top: 2px;
-				transform: translateX(2px);
-				position: absolute;
-				background-color: @blue-light;
-				border-radius: @border-radius-big;
-				transition: 0.3s;
-			}
-
-			&:checked {
-				background-color: @blue-light;
-
-				&::after {
-					background-color: @white;
-					transform: translateX(26px);
-				}
-			}
-
-			&:hover {
-				&::after {
-					background-color: @blue;
-				}
-				&:checked {
-					background-color: @blue;
-					&::after {
-						background-color: @white;
-					}
-				}
-			}
 		}
 		
 	}

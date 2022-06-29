@@ -25,10 +25,12 @@ export default class Message {
     input = Finder.id('input');
     picture = Finder.id('picture');
     section = Finder.id('section');
+
     my_id = Cookie.get('ma_voiture_gene_session_id');
-    interlocutor_id = null;
     my = null;
-    interlocutor = null;
+    interlocutors = [];
+
+    last_message_offset = 0;
 
 
     /**
@@ -40,9 +42,12 @@ export default class Message {
     constructor() {
         this.loadMy();
         this.loadConversation();
-        setTimeout(() => {
-            this.loadMessages();
-        }, 300);
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                this.refreshMessage();
+            }, 100);
+        });
+
     }
 
 
@@ -93,6 +98,8 @@ export default class Message {
      * @returns {void}
      */
     addMessageMy(message) {
+        this.last_message_offset++;
+
         Dom.insert(/*html*/`
             <div class="right">
                 <article>
@@ -114,16 +121,20 @@ export default class Message {
      * @param {int} interlocutor L'id de l'interlocuteur.
      * @returns {void}
      */
-    addMessageInterlocutor(message, interlocutor) {        
-        Rest.get(`/api/utilisateurs/${message.id_Utilisateur}`,
-        (utilisateur, json) => { // Success
-            interlocutor = utilisateur;
-        },
-        null, null, null, null, 0, false);
+    addMessageInterlocutor(message, interlocutor) {     
+        if (this.interlocutors[interlocutor] === undefined) {
+            Rest.get(`/api/utilisateurs/${message.id_Utilisateur}`,
+            (utilisateur, json) => { // Success
+                this.interlocutors[interlocutor] = utilisateur;
+            },
+            null, null, null, null, 0, false);
+        }   
+        
+        this.last_message_offset++;
 
         Dom.insert(/*html*/`
             <div class="left">
-                <img src="${this.toImg(interlocutor.photo)}" alt="PP">
+                <img src="${this.toImg(this.interlocutors[interlocutor].photo)}" alt="PP">
                 <article>
                     <div></div>
                     <span>${message.contenu}</span>
@@ -131,12 +142,15 @@ export default class Message {
                 </article>
             </div>
         `, this.section);
+
+        Rest.post(`/api/messages/${message._id}/vu/${this.my_id}`);
+
         this.scrollToLast();
     }
 
 
     /**
-     * Charges les infor,mations de la conversation.
+     * Charges les informations de la conversation.
      * 
      * @returns {void}
      */
@@ -153,61 +167,6 @@ export default class Message {
             'data:image/png;base64,' + receiver.photo;
 
         this.name.innerText = receiver.prenom + ' ' + receiver.nom;
-    }
-
-
-    /**
-     * Charge les messages de la conversation.
-     * 
-     * @returns {void}
-     */
-    loadMessages() {
-        let last_date = null;
-
-        Rest.getFor(`/api/conversations/${this.id.value}/messages`,
-            (message, json) => { // Success
-
-                // Date
-                let date = new Date(message.envoye_le);
-                if (last_date === null || 
-                    (last_date.getDay() !== date.getDay() &&
-                    last_date.getMonth() !== date.getMonth() &&
-                    last_date.getFullYear() !== date.getFullYear())) {
-                    Dom.insert(/*html*/`
-                        <span>${message.envoye_le}</span>
-                    `, this.section);
-                    last_date = date;
-                }
-
-                // Ajout du message
-                let i_am_sender = message.id_Utilisateur == this.my_id;
-                if (i_am_sender) {
-                    this.addMessageMy(message);
-                } else {                    
-                    this.addMessageInterlocutor(message, message.id_Utilisateur);
-                }
-            },
-            () => { // Pre
-                
-            },
-            () => { // Post
-                
-            },
-            () => { // Empty
-                
-            },
-            () => { // Failed
-                
-            },
-            () => { // Expired,
-                
-            },
-            {
-                
-            },
-            0,
-            true
-        );
     }
 
 
@@ -249,4 +208,61 @@ export default class Message {
             true
         );
     }
+
+
+    /**
+     * Rafraichit les messages.
+     * 
+     * @returns {void}
+     */
+    async refreshMessage() {
+        let last_date = null;
+        while (true) {
+            Rest.getFor(`/api/conversations/${this.id.value}/messages/${this.last_message_offset}`,
+                (message, json) => { // Success
+                    // Date
+                    let date = new Date(message.envoye_le);
+                    if (last_date === null || 
+                        (last_date.getDay() !== date.getDay() &&
+                        last_date.getMonth() !== date.getMonth() &&
+                        last_date.getFullYear() !== date.getFullYear())) {
+                        Dom.insert(/*html*/`
+                            <span>${message.envoye_le}</span>
+                        `, this.section);
+                        last_date = date;
+                    }
+
+                    // Ajout du message
+                    let i_am_sender = message.id_Utilisateur == this.my_id;
+                    if (i_am_sender) {
+                        this.addMessageMy(message);
+                    } else {                    
+                        this.addMessageInterlocutor(message, message.id_Utilisateur);
+                    }
+                },
+                () => { // Pre
+                    
+                },
+                () => { // Post
+
+                },
+                () => { // Empty
+                    
+                },
+                () => { // Failed
+                    
+                },
+                () => { // Expired,
+                    
+                },
+                {
+                    
+                },
+                0,
+                true
+            );
+            await new Promise(resolve => setTimeout(resolve, 3000));
+        }
+    }
+
 }

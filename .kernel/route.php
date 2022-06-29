@@ -9,20 +9,24 @@ use Kernel\Session\User;
 // Route vers les composants.
 r::notfound('/connexion');
 r::default('/connexion');
-r::add([ '/connexion' => c\Connexion::class ]);
-r::add([ '/inscription' => c\Inscription::class ]);
-r::add([ '/oublie' => c\Oublie::class ]);
+r::add([ 
+    '/connexion' => c\Connexion::class,
+    '/inscription' => c\Inscription::class,
+    '/oublie' => c\Oublie::class 
+]);
 
 
 if (User::has()) {
     r::notfound('/conversations');
     r::default('/conversations');
-    r::add([ '/vehicules' => c\Menu::class ]);
-    r::add([ '/scanner' => c\Menu::class ]);
-    r::add([ '/conversations' => c\Menu::class ]);
-    r::add([ '/conversations/{id}' => c\Menu::class ]);
-    r::add([ '/parametres' => c\Menu::class ]);
-    r::add([ '/deconnexion' => c\Menu::class ]);
+    r::add([ 
+        '/vehicules' => c\Menu::class,
+        '/scanner' => c\Menu::class,
+        '/conversations' => c\Menu::class,
+        '/conversations/{id}' => c\Menu::class,
+        '/parametres' => c\Menu::class,
+        '/deconnexion' => c\Menu::class 
+    ]);
 }
 
 
@@ -43,7 +47,8 @@ r::add([
     ]],
     '/api/messages/{id}/vu/{user}' => [ 
         a\Message::class, [
-            r::METHOD_GET
+            r::METHOD_GET,
+            r::METHOD_POST
     ]],
     '/api/conversations/moi' => [ 
         a\Conversation::class, [
@@ -53,6 +58,10 @@ r::add([
         a\Conversation::class, [
             r::METHOD_GET,
             r::METHOD_POST
+    ]],
+    '/api/conversations/{id}/messages/{offset}' => [ 
+        a\Conversation::class, [
+            r::METHOD_GET
     ]],
     '/api/conversations/{id}/membres' => [ 
         a\Conversation::class, [

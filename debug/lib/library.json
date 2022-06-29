@@ -38,5 +38,15 @@
       "debug/lib/less/link.less",
       "debug/lib/php/link.php"
     ]
+  },
+  {
+    "name": "toogle",
+    "created": "2022-06-29T08:15:20.7200529+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/lib/js/toogle.js",
+      "debug/lib/less/toogle.less",
+      "debug/lib/php/toogle.php"
+    ]
   }
 ]

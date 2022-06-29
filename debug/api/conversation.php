@@ -36,6 +36,12 @@ class Conversation extends Rest {
             $id = $this->data($query, 'id');
             $this->send(DAOConversation::getMessages($id), 0, 'Recupere les messages de la conversation.');
         });
+        $this->match('/api/conversations/{id}/messages/{offset}', function() use ($query) {
+            $id = $this->data($query, 'id');
+            $offset = $this->data($query, 'offset');
+            $this->send(DAOConversation::getMessagesOffset($id, $offset), 0, 'Recupere les derniers messages de la conversation.');
+            
+        });
         $this->match('/api/conversations/{id}/membres', function() use ($query) {
             $id = $this->data($query, 'id');
             $members = DAOConversation::getMembers($id);

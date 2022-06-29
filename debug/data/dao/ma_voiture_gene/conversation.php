@@ -45,6 +45,7 @@ class Conversation {
         }, Message::class);
     }
     
+    
     /**
      * Recupere les membres de la conversation.
      * 
@@ -67,6 +68,7 @@ class Conversation {
         }, Utilisateur::class);
     }
 
+
     /**
      * Recupere les messages d'une conversation.
      * 
@@ -81,6 +83,29 @@ class Conversation {
                 ORDER BY envoye_le',
                 Message::class,
                 $id);
+        }, Message::class);
+    }
+
+
+    /**
+     * Recupere les messages d'une conversation depuis un message.
+     * 
+     * @param int $offset Le message de depart.
+     * @return array Les messages.
+     */
+    static function getMessagesOffset($id, $offset) {
+        return Toogle::object(function() use ($id, $offset) {
+            return Query::objects(
+                'SELECT *
+                FROM message
+                WHERE id_Conversation = ?
+                ORDER BY envoye_le
+                LIMIT 100000 OFFSET ?',
+                Message::class,
+                [
+                    $id,
+                    $offset
+                ]);
         }, Message::class);
     }
 
