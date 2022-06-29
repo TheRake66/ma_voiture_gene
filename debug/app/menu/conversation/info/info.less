@@ -13,6 +13,15 @@ menu-conversation-info {
 	flex-direction: column;
 	padding: 32px;
 	height: 100%;
+	position: relative;
+
+	#retour {
+		position: absolute;
+		top: 23px;
+		left: 16px;
+		height: 24px;
+		display: none;
+	}
 
 	#picture {
 		border-radius: 100%;
@@ -49,6 +58,8 @@ menu-conversation-info {
 // Style responsive du composant Info.
 @media all and (max-width: @responsive-max-width) {
 	menu-conversation-info {
-
+		#retour {
+			display: block;
+		}
 	}
 }

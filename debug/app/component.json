@@ -108,5 +108,16 @@
       "debug/app/menu/conversation/info/info.php",
       "debug/app/menu/conversation/info/info.phtml"
     ]
+  },
+  {
+    "name": "menu\\conversation\\liste",
+    "created": "2022-06-29T15:50:05.7909386+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/app/menu/conversation/liste/liste.js",
+      "debug/app/menu/conversation/liste/liste.less",
+      "debug/app/menu/conversation/liste/liste.php",
+      "debug/app/menu/conversation/liste/liste.phtml"
+    ]
   }
 ]

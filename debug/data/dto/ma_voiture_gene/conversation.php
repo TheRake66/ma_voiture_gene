@@ -19,6 +19,7 @@ class Conversation extends Crud {
      * @var mixed Les propriétés de l'objet.
      */
     public $_id;
+    public $cree_le;
     
 
     /**
@@ -28,9 +29,11 @@ class Conversation extends Crud {
      * @return void
      */
     function __construct(
-        $id = null
+        $id = null,
+        $cree_le = null
     ) {
         $this->_id = $id;
+        $this->cree_le = $cree_le;
     }
 	
 }

@@ -11,8 +11,7 @@ menu {
 	display: flex;
 	flex-direction: row-reverse !important;
 	height: 100vh;
-	overflow: hidden;
-
+	
 	> div {
 		border-radius: @border-radius-medium;
 		background-color: @black-light;
@@ -70,6 +69,9 @@ menu {
 	menu {
 		flex-direction: column !important;
 
+		> div {
+
+		}
 		
 		> nav {
 			flex-direction: row;
@@ -84,6 +86,7 @@ menu {
 				height: 50px;
 
 				&.active {
+					background-color: @black;
 
 					img {
 						padding: 8px;
@@ -111,15 +114,15 @@ menu {
 				}
 
 				div {
-					display: block;
+					display: none;
 					z-index: 0;
 					position: absolute;
-					width: 100px;
-					height: 100px;
+					width: 80px;
+					height: 50px;
 					left: 50%;
-					top: 50%;
-					transform: translate(-50%, -50%);
-					border-radius: 100%;
+					top: -50%;
+					transform: translate(-50%, 0%);
+					border-radius: 100% 100% 0 0;
 					background-color: @black;
 				}
 			}

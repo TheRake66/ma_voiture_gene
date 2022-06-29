@@ -20,17 +20,17 @@ export default class Message {
     /**
      * Les éléments.
      */
-    id = Finder.id('id');
-    name = Finder.id('name');
-    input = Finder.id('input');
-    send = Finder.id('send');
-    picture = Finder.id('picture');
-    section = Finder.id('section');
+    container = Finder.query('menu-conversation-message');
+    name = Finder.query('menu-conversation-message #name');
+    input = Finder.query('menu-conversation-message #input');
+    send = Finder.query('menu-conversation-message #send');
+    picture = Finder.query('menu-conversation-message #picture');
+    section = Finder.query('menu-conversation-message #section');
 
+    conversation_id = null;
     my_id = Cookie.get('ma_voiture_gene_session_id');
     my = null;
     interlocutors = [];
-
     last_message_offset = 0;
 
 
@@ -42,13 +42,7 @@ export default class Message {
      */
     constructor() {
         this.loadMy();
-        this.loadConversation();
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                this.refreshMessage();
-            }, 100);
-        });
-
+        this.refreshMessage();
     }
 
 
@@ -137,6 +131,11 @@ export default class Message {
                         Attribute.disable(this.send);
                         this.send.style.display = 'none';
                         this.input.value = 'Vous ne pouvez pas discuter avec cet utilisateur.';
+                    } else {
+                        Attribute.enable(this.input);
+                        Attribute.enable(this.send);
+                        this.send.style.display = 'block';
+                        this.input.value = '';
                     }
                 },
             null, null, null, null, 0, false);
@@ -169,7 +168,7 @@ export default class Message {
     loadConversation() {
         let receiver = null
 
-        Rest.getFor(`/api/conversations/${this.id.value}/membres`,
+        Rest.getFor(`/api/conversations/${this.conversation_id}/membres`,
             (utilisateur, json) => { // Success
                 receiver = utilisateur;
             },
@@ -191,7 +190,7 @@ export default class Message {
         let contenu = this.input.value;
         if (contenu.trim() === '') return;
         let error = () => Msgbox.show('Erreur', 'Le message n\'a pas pu être envoyé.', Msgbox.IMG_ERROR);
-        Rest.post(`/api/conversations/${this.id.value}/messages`,
+        Rest.post(`/api/conversations/${this.conversation_id}/messages`,
             (content, json) => { // Success
                 if (content) {
                     let message = {
@@ -217,7 +216,7 @@ export default class Message {
                 contenu: contenu
             },
             0,
-            true
+            false
         );
     }
 
@@ -230,7 +229,7 @@ export default class Message {
     async refreshMessage() {
         let last_date = null;
         while (true) {
-            Rest.getFor(`/api/conversations/${this.id.value}/messages/${this.last_message_offset}`,
+            Rest.getFor(`/api/conversations/${this.conversation_id}/messages/${this.last_message_offset}`,
                 (message, json) => { // Success
                     // Date
                     let date = new Date(message.envoye_le);
@@ -271,10 +270,47 @@ export default class Message {
                     
                 },
                 0,
-                true
+                false
             );
             await new Promise(resolve => setTimeout(resolve, 3000));
         }
+    }
+ 
+
+    /**
+     * Change la conversation.
+     * 
+     * @param {int} id L'id de la conversation
+     * @returns {void}
+     */
+    changeConv(id) {
+        this.conversation_id = id;
+        this.interlocutors = [];
+        this.last_message_offset = 0;
+        Dom.clear(this.section);
+        this.loadConversation();
+    }
+
+
+    /**
+     * Retour en arrière.
+     * 
+     * @returns {void}
+     */
+    comeBack() {
+        Attribute.hide(this.container);
+        menu_conversation_liste.container.style.display = 'flex';
+    }
+
+
+    /**
+     * Affiche les informations de la conversation.
+     * 
+     * @returns {void}
+     */
+    showInfo() {
+        Attribute.hide(this.container);
+        menu_conversation_info.container.style.display = 'flex';
     }
 
 }

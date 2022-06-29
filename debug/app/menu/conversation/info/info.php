@@ -23,13 +23,7 @@ class Info extends Render {
      * @return void
      */
     function __construct() {
-        if (!isset($GLOBALS['_ROUTE']['id'])) {
-            Location::go('/conversations');
-        }
-
-        $this->view([
-            'id' => $GLOBALS['_ROUTE']['id']
-        ]);
+        $this->view();
     }
 
 }

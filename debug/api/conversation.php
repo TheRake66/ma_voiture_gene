@@ -8,6 +8,7 @@ use Kernel\Security\Vulnerability\Csrf;
 use Kernel\Security\Validation;
 use Kernel\Session\User;
 use Model\Dao\Ma_voiture_gene\Conversation as DAOConversation;
+use Model\Dto\Ma_voiture_gene\Conversation as Ma_voiture_geneConversation;
 use Model\Dto\Ma_voiture_gene\Message;
 
 /**
@@ -31,6 +32,10 @@ class Conversation extends Rest {
     function get($route, $query, $body) {
         $this->match('/api/conversations/moi', function() {
             $this->send(DAOConversation::getMy(), 0, 'Recupere la liste des conversations de l\'utilisateur');
+        });
+        $this->match('/api/conversations/{id}', function() use ($query) {
+            $id = $this->data($query, 'id');
+            $this->send((new Ma_voiture_geneConversation($id))->read(), 0, 'Recupere la conversation');
         });
         $this->match('/api/conversations/{id}/messages', function() use ($query) {
             $id = $this->data($query, 'id');

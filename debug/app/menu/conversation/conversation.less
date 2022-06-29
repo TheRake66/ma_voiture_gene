@@ -8,62 +8,23 @@
 // Categorie: Style
 menu-conversation {
 	display: flex;
-	flex-direction: column;
 	height: 100%;
 
-	> span {
-		margin: auto;
+	menu-conversation-liste {
+		width: 25%;
+		min-width: 300px;
 	}
 
-	a {
-		display: flex;
-		align-items: center;
-		text-decoration: none;
-		margin-bottom: 16px;
-		padding: 24px;
-		
-		> img {
-			background-color: @blue;
-			border-radius: 100%;
-			width: 64px;
-			height: 64px;
-		}
+	menu-conversation-message {
+		width: 50%;
+		border-left: solid 2px @black;
+		border-right: solid 2px @black;
+		min-width: 500px;
+	}
 
-		article {
-			display: flex;
-			flex-direction: column;
-			margin: 0;
-			margin-left: 16px;
-			max-width: calc(100% - 150px);
-			height: 70%;
-
-			b {
-				margin-bottom: 4px;
-			}
-
-			b, p {
-				overflow: hidden;
-				white-space: nowrap;
-				text-overflow: ellipsis;
-			}
-		}
-
-		div {
-			display: flex;
-			flex-direction: column;
-			margin-left: auto;
-			height: 70%;
-
-			i {
-				margin-bottom: 4px;
-			}
-
-			img {
-				width: 16px;
-				height: 16px;
-			}
-		}
-
+	menu-conversation-info {
+		width: 25%;
+		min-width: 300px;
 	}
 }
 
@@ -72,6 +33,24 @@ menu-conversation {
 // Style responsive du composant Conversation.
 @media all and (max-width: @responsive-max-width) {
 	menu-conversation {
+
+		menu-conversation-liste {
+			width: 100%;
+			min-width: none;
+		}
+	
+		menu-conversation-message {
+			width: 100%;
+			display: none;
+			min-width: 0px;
+			border: none;
+		}
+	
+		menu-conversation-info {
+			width: 100%;
+			display: none;
+			min-width: 0px;
+		}
 
 	}
 }

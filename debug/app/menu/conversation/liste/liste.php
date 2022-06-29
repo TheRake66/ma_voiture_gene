@@ -4,17 +4,18 @@ use Kernel\Security\Vulnerability\Xss;
 use Kernel\Security\Vulnerability\Csrf;
 use Kernel\Security\Validation;
 use Kernel\Io\Render;
-use Kernel\Url\Location;
+
+
 
 /**
- * Controleur du composant Message.
+ * Controleur du composant Liste.
  * 
  * @author thiba
  * @version 1.0
  * @package Controller\Menu\Conversation
  * @category Controleur
  */
-class Message extends Render {
+class Liste extends Render {
 
     /**
      * Point d'entrée du controleur.

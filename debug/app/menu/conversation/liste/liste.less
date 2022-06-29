@@ -1,0 +1,77 @@
+@import '../../../../../.kernel/theme.less';
+
+
+
+// Style du composant Liste.
+// Author: thiba
+// Version: 1.0
+// Categorie: Style
+menu-conversation-liste {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+
+	> span {
+		margin: auto;
+	}
+
+	> div {
+		display: flex;
+		align-items: center;
+		text-decoration: none;
+		margin-bottom: 16px;
+		padding: 24px;
+		
+		> img {
+			background-color: @blue;
+			border-radius: 100%;
+			width: 64px;
+			height: 64px;
+		}
+
+		article {
+			display: flex;
+			flex-direction: column;
+			margin: 0;
+			margin-left: 16px;
+			max-width: calc(100% - 150px);
+			height: 70%;
+
+			b {
+				margin-bottom: 4px;
+			}
+
+			b, p {
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+		}
+
+		div {
+			display: flex;
+			flex-direction: column;
+			margin-left: auto;
+			height: 70%;
+
+			i {
+				margin-bottom: 4px;
+			}
+
+			img {
+				width: 16px;
+				height: 16px;
+			}
+		}
+
+	}
+}
+
+
+
+// Style responsive du composant Liste.
+@media all and (max-width: @responsive-max-width) {
+	menu-conversation-liste {
+
+	}
+}

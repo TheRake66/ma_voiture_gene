@@ -18,11 +18,12 @@ Version: 1.0
 Categorie: Vue
  -->
 <menu-conversation-info>
-	<input type="hidden" name="id" id="id" <?= Attribute::value($id) ?>>
+	
+	<img id="retour" onclick="menu_conversation_info.comeBack()" src="/assets/img/icons8-arrière-60.png" alt="Retour">
 	
 	<img id="picture" src="/assets/img/default.png" alt="PP">
-	<h1 id="name">Test test</h1>
-	<i id="date">Depuis le 2022-06-28 18:09:19</i>
+	<h1 id="name"></h1>
+	<i id="date"></i>
 
 	<label class="label top">LA CONVERSATION</label>
 	<button class="button-danger" onclick="menu_conversation_info.deleteConv()">Supprimer cette conversation</button>

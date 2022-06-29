@@ -20,15 +20,10 @@ Categorie: Vue
 <menu-conversation-message>
 
 	<header>
-		<input type="hidden" name="id" id="id" <?= Attribute::value($id) ?>>
-		<a href="/conversations">
-			<img src="/assets/img/icons8-arrière-60.png" alt="Retour">
-		</a>
+		<img id="retour" onclick="menu_conversation_message.comeBack()" src="/assets/img/icons8-arrière-60.png" alt="Retour">
 		<span id="name"></span>
 		<img id="picture" src="/assets/img/default.png" alt="PP">
-		<a <?= Attribute::href('/conversations/' . $id . '/details') ?>>
-			<img src="/assets/img/icons8-info-60.png" alt="Info" id="info">
-		</a>
+		<img id="info" onclick="menu_conversation_message.showInfo()" src="/assets/img/icons8-info-60.png" alt="Info">
 	</header>
 
 	<section>

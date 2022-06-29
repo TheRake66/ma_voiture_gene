@@ -16,6 +16,15 @@ import Location from '../../../../../.kernel/js/url/location.js';
 export default class Info {
 
     /**
+     * Les éléments.
+     */
+    container = Finder.query('menu-conversation-info');
+    retour = Finder.query('menu-conversation-info #retour');
+    name = Finder.query('menu-conversation-info #name');
+    date = Finder.query('menu-conversation-info #date');
+    picture = Finder.query('menu-conversation-info #picture');
+
+    /**
      * Point d'entrée du script.
      * 
      * @access public
@@ -23,6 +32,42 @@ export default class Info {
      */
     constructor() {
         
+    }
+ 
+
+    /**
+     * Change la conversation.
+     * 
+     * @param {int} id L'id de la conversation
+     * @returns {void}
+     */
+    changeConv(id) {
+        Rest.getFor(`/api/conversations/${id}/membres`,
+            (utilisateur, json) => { // Success
+                this.picture.src = utilisateur.photo === null ?
+                    '/assets/img/default.png' :
+                    'data:image/png;base64,' + utilisateur.photo;
+
+                this.name.innerText = utilisateur.prenom + ' ' + utilisateur.nom;
+            },
+            null, null, null, null, null, null, 0, false);
+
+        Rest.get(`/api/conversations/${id}`,
+            (conversation, json) => { // Success
+                this.date.innerText = `Depuis le ${conversation.cree_le}`;
+            },
+            null, null, null, null, 0, false);
+    }
+
+
+    /**
+     * Retour en arrière.
+     * 
+     * @returns {void}
+     */
+    comeBack() {
+        Attribute.hide(this.container);
+        menu_conversation_message.container.style.display = 'flex';
     }
 
 }

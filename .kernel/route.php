@@ -59,6 +59,10 @@ r::add([
         a\Conversation::class, [
             r::METHOD_GET
     ]],
+    '/api/conversations/{id}' => [ 
+        a\Conversation::class, [
+            r::METHOD_GET
+    ]],
     '/api/conversations/{id}/messages' => [ 
         a\Conversation::class, [
             r::METHOD_GET,
