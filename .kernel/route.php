@@ -24,6 +24,7 @@ if (User::has()) {
         '/scanner' => c\Menu::class,
         '/conversations' => c\Menu::class,
         '/conversations/{id}' => c\Menu::class,
+        '/conversations/{id}/details' => c\Menu::class,
         '/parametres' => c\Menu::class,
         '/deconnexion' => c\Menu::class 
     ]);
@@ -44,6 +45,10 @@ r::add([
             r::METHOD_PUT,
             r::METHOD_DELETE,
             r::METHOD_PATCH
+    ]],
+    '/api/utilisateurs/{id}/bloque' => [ 
+        a\Utilisateur::class, [
+            r::METHOD_GET
     ]],
     '/api/messages/{id}/vu/{user}' => [ 
         a\Message::class, [

@@ -1,0 +1,38 @@
+<?php
+use Kernel\Security\Vulnerability\Xss;
+use Kernel\Security\Vulnerability\Csrf;
+use Kernel\Html\Attribute;
+use Kernel\Html\Builder;
+use Kernel\Html\Output;
+use Kernel\Convert\Encoded;
+use Kernel\Convert\Number;
+use Kernel\Url\Location;
+?>
+
+
+
+<!-- 
+Vue du composant Info.
+Author: thiba
+Version: 1.0
+Categorie: Vue
+ -->
+<menu-conversation-info>
+	<input type="hidden" name="id" id="id" <?= Attribute::value($id) ?>>
+	
+	<img id="picture" src="/assets/img/default.png" alt="PP">
+	<h1 id="name">Test test</h1>
+	<i id="date">Depuis le 2022-06-28 18:09:19</i>
+
+	<label class="label top">LA CONVERSATION</label>
+	<button class="button-danger" onclick="menu_conversation_info.deleteConv()">Supprimer cette conversation</button>
+	<p>Supprime définitivement la conversation et tous ses messages tous les participants.</p>
+
+	<label class="label">L'UTILISATEUR</label>
+	<button class="button-danger" onclick="menu_conversation_info.blockUser()">Bloquer cet utilisateur</button>
+	<p>Empêche l'utilisateur de vous envoyer de nouveaux messages.</p>
+	<br>
+	<button class="button-danger-border" onclick="menu_conversation_info.repportUser()">Signaler cette utilisateur</button>
+	<p>Signale l'utilisateur aux administrateurs.</p>
+
+</menu-conversation-info>

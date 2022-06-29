@@ -37,7 +37,8 @@ class Menu extends Render {
                     '/scanner' => Scanner::class,
                     '/conversations' => Conversation::class,
                     '/parametres' => Parametre::class,
-                    '/conversations/{id}' => Conversation\Message::class
+                    '/conversations/{id}' => Conversation\Message::class,
+                    '/conversations/{id}/details' => Conversation\Info::class
                 ];
                 $current = $composants[Router::current()];
                 if (!is_null($current)) {

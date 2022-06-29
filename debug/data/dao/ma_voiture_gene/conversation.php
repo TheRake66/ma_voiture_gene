@@ -30,14 +30,19 @@ class Conversation {
                 'SELECT *
                 FROM message AS m1
                 WHERE m1.id IN (
+
                     SELECT MAX(m2.id)
                     FROM message AS m2
+
                     INNER JOIN conversation AS c 
                         ON c.id = m2.id_Conversation
+
                     INNER JOIN membre AS m 
                         ON m.id_Conversation = c.id
                         AND m.id = ?
+
                     WHERE m2.id_Conversation = m1.id_Conversation
+                    AND m.id 
                     GROUP BY m2.id_Conversation
                 )',
                 Message::class,

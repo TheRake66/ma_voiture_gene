@@ -23,6 +23,7 @@ export default class Message {
     id = Finder.id('id');
     name = Finder.id('name');
     input = Finder.id('input');
+    send = Finder.id('send');
     picture = Finder.id('picture');
     section = Finder.id('section');
 
@@ -127,6 +128,17 @@ export default class Message {
             (utilisateur, json) => { // Success
                 this.interlocutors[interlocutor] = utilisateur;
             },
+            null, null, null, null, 0, false);
+
+            Rest.get(`/api/utilisateurs/${message.id_Utilisateur}/bloque`,
+                (content, json) => { // Success
+                    if (content) {
+                        Attribute.disable(this.input);
+                        Attribute.disable(this.send);
+                        this.send.style.display = 'none';
+                        this.input.value = 'Vous ne pouvez pas discuter avec cet utilisateur.';
+                    }
+                },
             null, null, null, null, 0, false);
         }   
         

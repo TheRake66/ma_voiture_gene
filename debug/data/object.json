@@ -61,5 +61,23 @@
       "debug/data/dao/ma_voiture_gene/vu.php",
       "debug/data/dto/ma_voiture_gene/vu.php"
     ]
+  },
+  {
+    "name": "ma_voiture_gene\\bloque",
+    "created": "2022-06-29T14:43:47.9480949+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/data/dao/ma_voiture_gene/bloque.php",
+      "debug/data/dto/ma_voiture_gene/bloque.php"
+    ]
+  },
+  {
+    "name": "ma_voiture_gene\\signale",
+    "created": "2022-06-29T14:43:50.5897579+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/data/dao/ma_voiture_gene/signale.php",
+      "debug/data/dto/ma_voiture_gene/signale.php"
+    ]
   }
 ]

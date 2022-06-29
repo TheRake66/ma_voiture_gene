@@ -1,0 +1,54 @@
+@import '../../../../../.kernel/theme.less';
+@import '../../../../lib/less/button.less';
+@import '../../../../lib/less/label.less';
+
+
+
+// Style du composant Info.
+// Author: thiba
+// Version: 1.0
+// Categorie: Style
+menu-conversation-info {
+	display: flex;
+	flex-direction: column;
+	padding: 32px;
+	height: 100%;
+
+	#picture {
+		border-radius: 100%;
+		background-color: @blue;
+		width: 100px;
+		height: 100px;
+		margin: 0 auto;
+		margin-bottom: 8px;
+	}
+
+	#name {
+		margin: 0 auto;
+	}
+
+	#date {
+		margin: 0 auto;
+	}
+
+	label {
+		margin-top: 52px;
+	}
+
+	label.label.top {
+		margin-top: auto !important;
+	}
+
+	p {
+		margin-top: 8px;
+	}
+}
+
+
+
+// Style responsive du composant Info.
+@media all and (max-width: @responsive-max-width) {
+	menu-conversation-info {
+
+	}
+}

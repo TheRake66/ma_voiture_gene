@@ -26,7 +26,7 @@ Categorie: Vue
 		</a>
 		<span id="name"></span>
 		<img id="picture" src="/assets/img/default.png" alt="PP">
-		<a <?= Attribute::href('/conversations/' . $id . '/membres') ?>>
+		<a <?= Attribute::href('/conversations/' . $id . '/details') ?>>
 			<img src="/assets/img/icons8-info-60.png" alt="Info" id="info">
 		</a>
 	</header>
@@ -37,7 +37,7 @@ Categorie: Vue
 
 	<div>
 		<input id="input" type="text" class="input" placeholder="Votre message...">
-		<img onclick="menu_conversation_message.sendInput()" class="button" src="/assets/img/icons8-avion-en-papier-60.png" alt="Send">
+		<img id="send" onclick="menu_conversation_message.sendInput()" class="button" src="/assets/img/icons8-avion-en-papier-60.png" alt="Send">
 	</div>
 
 </menu-conversation-message>

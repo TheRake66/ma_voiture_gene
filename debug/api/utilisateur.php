@@ -6,6 +6,8 @@ use Kernel\Communication\Rest;
 use Kernel\Security\Vulnerability\Xss;
 use Kernel\Security\Vulnerability\Csrf;
 use Kernel\Security\Validation;
+use Kernel\Session\User;
+use Model\Dto\Ma_voiture_gene\Bloque;
 use Model\Dto\Ma_voiture_gene\Utilisateur as DTOUtilisateur;
 
 /**
@@ -46,6 +48,14 @@ class Utilisateur extends Rest {
                 $user->photo = base64_encode($user->photo);
             }
             $this->send($user, 0, 'Recupération de l\'utilisateur réussie.');
+        });
+        $this->match('/api/utilisateurs/{id}/bloque', function() use ($query) {
+            $id = $this->data($query, 'id');
+            $moi = User::get()->_id;
+            $il_ma_bloque = new Bloque($id, $moi);
+            $je_lai_bloque = new Bloque($moi, $id);
+            $bloque = $il_ma_bloque->exists() || $je_lai_bloque->exists();
+            $this->send($bloque, 0, 'Verification si l\'utilisateur est bloqué.');
         });
     }
 

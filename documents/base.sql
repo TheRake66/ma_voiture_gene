@@ -51,7 +51,8 @@ CREATE TABLE Exemple(
 #------------------------------------------------------------
 
 CREATE TABLE Conversation(
-        id Int  Auto_increment  NOT NULL
+        id      Int  Auto_increment  NOT NULL ,
+        cree_le Datetime NOT NULL
 	,CONSTRAINT Conversation_PK PRIMARY KEY (id)
 )ENGINE=InnoDB;
 
@@ -99,5 +100,34 @@ CREATE TABLE Vu(
 
 	,CONSTRAINT Vu_Utilisateur_FK FOREIGN KEY (id) REFERENCES Utilisateur(id)
 	,CONSTRAINT Vu_Message0_FK FOREIGN KEY (id_Message) REFERENCES Message(id)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Bloque
+#------------------------------------------------------------
+
+CREATE TABLE Bloque(
+        id             Int NOT NULL ,
+        id_Utilisateur Int NOT NULL
+	,CONSTRAINT Bloque_PK PRIMARY KEY (id,id_Utilisateur)
+
+	,CONSTRAINT Bloque_Utilisateur_FK FOREIGN KEY (id) REFERENCES Utilisateur(id)
+	,CONSTRAINT Bloque_Utilisateur0_FK FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Signale
+#------------------------------------------------------------
+
+CREATE TABLE Signale(
+        id             Int NOT NULL ,
+        id_Utilisateur Int NOT NULL ,
+        raison         Text NOT NULL
+	,CONSTRAINT Signale_PK PRIMARY KEY (id,id_Utilisateur)
+
+	,CONSTRAINT Signale_Utilisateur_FK FOREIGN KEY (id) REFERENCES Utilisateur(id)
+	,CONSTRAINT Signale_Utilisateur0_FK FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id)
 )ENGINE=InnoDB;
 

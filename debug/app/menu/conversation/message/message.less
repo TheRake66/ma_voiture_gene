@@ -95,9 +95,9 @@ menu-conversation-message {
 					}
 				}
 
-				&:hover {
+				&:active {
 					i {
-						max-height: 20px;
+						display: block;
 					}
 				}
 
@@ -126,9 +126,7 @@ menu-conversation-message {
 
 					i {
 						margin-top: 4px;
-						max-height: 0px;
-						overflow: hidden;
-						transition: max-height 0.1s ease-in;
+						display: none;
 					}
 				}
 
@@ -152,12 +150,12 @@ menu-conversation-message {
 
 		input {
 			width: 100%;
-			margin-right: 12px;
 			border-radius: @border-radius-big !important;
 		}
 
 		img {
 			width: 45px;
+			margin-left: 12px;
 			padding: 12px !important;
 			border-radius: @border-radius-big !important;
 		}
