@@ -44,17 +44,18 @@ class Menu extends Render {
                     return new $current();
                 }
             },
-            'make' => function($route, $img, $alt) {
+            'make' => function($route, $img, $alt, $text) {
                 $active = Router::current() === $route;
                 $img = Builder::create('img', [
                     'src' => '/assets/img/menu/' . $img . '.png',
                     'alt' => $alt,
-                    'class' => $active ? 'active' : ''
                 ]);
+                $span = Builder::create('span', [], $text);
                 $div = $active ? Builder::create('div', null, null, false) : '';
                 $a = Builder::create('a', [
-                    'href' => $route
-                ], $img . $div);
+                    'href' => $route,
+                    'class' => $active ? 'active' : ''
+                ], $img . $div . $span);
                 return $a;
             }
         ]);

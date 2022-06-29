@@ -97,7 +97,7 @@ menu-conversation-message {
 
 				&:hover {
 					i {
-						display: block;
+						max-height: 20px;
 					}
 				}
 
@@ -118,7 +118,7 @@ menu-conversation-message {
 					span {
 						background-color: @blue;
 						word-break: break-word;
-						border-radius: @border-radius-medium;
+						border-radius: @border-radius;
 						padding: 12px;
 						min-height: 43px;
 						min-width: 43px;
@@ -126,12 +126,14 @@ menu-conversation-message {
 
 					i {
 						margin-top: 4px;
-						display: none;
+						max-height: 0px;
+						overflow: hidden;
+						transition: max-height 0.1s ease-in;
 					}
 				}
 
 				img {
-					margin: 8px;
+					margin: 8px 12px;
 					background-color: @blue;
 					border-radius: 100%;
 					width: 32px;
@@ -168,6 +170,13 @@ menu-conversation-message {
 // Style responsive du composant Message.
 @media all and (max-width: @responsive-max-width) {
 	menu-conversation-message {
-
+		#section {
+			> div {
+				img {
+					
+					margin: 8px;
+				}
+			}
+		} 
 	}
 }
