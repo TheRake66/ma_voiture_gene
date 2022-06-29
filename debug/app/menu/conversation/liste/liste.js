@@ -75,7 +75,13 @@ export default class Liste {
                     if (today.getFullYear() === envoye_le.getFullYear() &&
                         today.getMonth() === envoye_le.getMonth() &&
                         today.getDate() === envoye_le.getDate()) {
-                        date_str += envoye_le.getHours() + ':' + envoye_le.getMinutes();
+                        let hours = envoye_le.getHours() < 10 ? 
+                            '0' + envoye_le.getHours() : 
+                            envoye_le.getHours();
+                        let minutes = envoye_le.getMinutes() < 10 ? 
+                            '0' + envoye_le.getMinutes() : 
+                            envoye_le.getMinutes();
+                        date_str += hours + ':' + minutes;
                     } else {
                         date_str += envoye_le.getDate() + ' ' + envoye_le.toLocaleString('default', { month: 'long' });
                     }
