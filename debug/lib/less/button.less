@@ -17,13 +17,17 @@
 	cursor: pointer;
 
 	&:hover {
-		background-color: @blue;
+		background-color: @blue-light;
 	}
 }
 
 .button-danger {
 	.button();
 	background-color: @red;
+
+	&:hover {
+		background-color: @red-light;
+	}
 }
 
 .button-danger-border {
@@ -31,6 +35,10 @@
 	background-color: transparent;
 	color: @red;
 	border: 1px solid @red;
+
+	&:hover {
+		background-color: transparent;
+	}
 }
 
 

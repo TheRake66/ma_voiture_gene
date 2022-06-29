@@ -298,8 +298,7 @@ export default class Message {
      * @returns {void}
      */
     comeBack() {
-        Attribute.hide(this.container);
-        menu_conversation_liste.container.style.display = 'flex';
+        menu_conversation_liste.container.style.transform = 'translateX(0%)';
     }
 
 
@@ -309,8 +308,7 @@ export default class Message {
      * @returns {void}
      */
     showInfo() {
-        Attribute.hide(this.container);
-        menu_conversation_info.container.style.display = 'flex';
+        this.container.style.transform = 'translateX(-100%)';
     }
 
 }

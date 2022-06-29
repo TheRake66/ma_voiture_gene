@@ -66,8 +66,7 @@ export default class Info {
      * @returns {void}
      */
     comeBack() {
-        Attribute.hide(this.container);
-        menu_conversation_message.container.style.display = 'flex';
+        menu_conversation_message.container.style.transform = 'translateX(0%)';
     }
 
 }

@@ -181,8 +181,7 @@ export default class Liste {
     changeConv(id) {
         const mq = window.matchMedia("(max-width: 768px)");
         if (mq.matches) {
-            Attribute.hide(this.container);
-            menu_conversation_message.container.style.display = 'flex';
+            this.container.style.transform = 'translateX(-100%)';
         }
         if (this.last_clicked_id !== id) {
             menu_conversation_message.changeConv(id);

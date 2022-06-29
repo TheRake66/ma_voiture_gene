@@ -9,6 +9,7 @@
 menu-conversation {
 	display: flex;
 	height: 100%;
+	position: relative;
 
 	menu-conversation-liste {
 		width: 25%;
@@ -34,22 +35,28 @@ menu-conversation {
 @media all and (max-width: @responsive-max-width) {
 	menu-conversation {
 
-		menu-conversation-liste {
+		menu-conversation-liste, menu-conversation-message, menu-conversation-info {
 			width: 100%;
-			min-width: none;
+			height: 100%;
+			position: absolute;
+			min-width: 0px;
+			top: 0;
+			left: 0;
+			background-color: @black-light;
+			transition: all 0.2s ease-in-out
+		}
+
+		menu-conversation-liste {
+			z-index: 3;
 		}
 	
 		menu-conversation-message {
-			width: 100%;
-			display: none;
-			min-width: 0px;
 			border: none;
+			z-index: 2;
 		}
 	
 		menu-conversation-info {
-			width: 100%;
-			display: none;
-			min-width: 0px;
+			z-index: 1;
 		}
 
 	}
