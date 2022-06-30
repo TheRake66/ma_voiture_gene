@@ -294,7 +294,10 @@ export default class Message {
                         
                     },
                     () => { // Post
-
+                        // Change au moment de la reception des messages en pc
+                        if (!window.onMobile) {
+                            Rest.post(`/api/conversations/${this.conversation_id}/vu`);
+                        }
                     },
                     () => { // Empty
                         
@@ -324,7 +327,6 @@ export default class Message {
      * @returns {void}
      */
     changeConv(id) {
-        Rest.post(`/api/conversations/${id}/vu`);
         this.conversation_id = id;
         this.interlocutors = [];
         this.last_message_offset = 0;

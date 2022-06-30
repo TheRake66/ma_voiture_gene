@@ -4,6 +4,7 @@ namespace Model\Dao\Ma_voiture_gene;
 use Kernel\DataBase\Toogle;
 use Kernel\DataBase\Transaction;
 use Kernel\DataBase\Query;
+use Kernel\Debug\Log;
 use Kernel\Session\User;
 use Model\Dto\Ma_voiture_gene\Conversation as Dto;
 use Model\Dto\Ma_voiture_gene\Message;
@@ -27,6 +28,7 @@ class Conversation {
      * @return bool True si tout s'est bien passé.
      */
     static function setVu($id) {
+        Log::add(User::get());
         return Toogle::object(function() use ($id) {
             return Query::execute(
                 'INSERT INTO vu (id, id_Message, vu_le)
@@ -41,7 +43,7 @@ class Conversation {
                 AND m.id_Conversation = ?', 
                 [
                     User::get()->_id,
-                    $id,
+                    User::get()->_id,
                     $id
                 ]);
         }, Vu::class);

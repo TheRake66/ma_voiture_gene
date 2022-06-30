@@ -62,10 +62,12 @@ export default class Liste {
                     let titre = receiver.prenom + ' ' + receiver.nom;
     
                     let vu = '';
-                    Rest.get(`/api/messages/${message._id}/vu/${receiver._id}`,
+                    if (message.id_Utilisateur == my_id) {                            
+                        Rest.get(`/api/messages/${message._id}/vu/${receiver._id}`,
                         (content, json) => { // Success
                             vu = /*html*/`<img src="/assets/img/icons8-double-coche-30.png" alt="Vu"/>`;
                         }, null, null, null, null, 0, false);
+                    }
     
     
     
@@ -183,6 +185,8 @@ export default class Liste {
     changeConv(id) {
         if (window.onMobile) {
             this.container.style.transform = 'translateX(-100%)';
+            // Change au moment de l'ouverture en mobile
+            Rest.post(`/api/conversations/${id}/vu`);
         }
         if (this.last_clicked_id !== id) {
             menu_conversation_message.changeConv(id);
@@ -190,4 +194,5 @@ export default class Liste {
         }
         this.last_clicked_id = id;
     }
+
 }

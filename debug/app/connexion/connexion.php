@@ -79,18 +79,20 @@ class Connexion extends Render {
      * @return void
      */
     public static function autoLogin() {
-        if (Token::has()) {
+        if (!User::has()) {
             $token = Token::get();
-            $user = new Utilisateur();
-            $user->jeton = $token;
-            $user = $user->read('jeton');
-            if ($user && strtotime($user->derniere_connexion) > strtotime('-31 day')) {
-                User::login($user, $token);
-                $user->derniere_connexion = new \DateTime();
-                $user->update();
-            } else {
-                Token::remove();
-                Location::go('/connexion');
+            if ($token) {
+                $user = new Utilisateur();
+                $user->jeton = $token;
+                $user = $user->read('jeton');
+                if ($user && strtotime($user->derniere_connexion) > strtotime('-31 day')) {
+                    User::login($user, $token);
+                    $user->derniere_connexion = new \DateTime();
+                    $user->update();
+                } else {
+                    Token::remove();
+                    Location::go('/connexion');
+                }
             }
         }
     }

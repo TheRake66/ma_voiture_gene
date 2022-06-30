@@ -63,7 +63,7 @@
 				"host": "localhost", 
 				"port": "3306", 
 				"name": "ma_voiture_gene", 
-                "encoding": "utf8", 
+                "encoding": "utf8mb4", 
                 "type": "mysql",
                 "throw_sql_error": true,
                 "throw_transaction": true,
