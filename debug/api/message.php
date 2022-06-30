@@ -8,6 +8,7 @@ use Kernel\Security\Vulnerability\Csrf;
 use Kernel\Security\Validation;
 use Model\Dao\Ma_voiture_gene\Conversation;
 use Model\Dao\Ma_voiture_gene\Message as DAOMessage;
+use Model\Dto\Ma_voiture_gene\Exemple;
 use Model\Dto\Ma_voiture_gene\Message as DTOMessage;
 use Model\Dto\Ma_voiture_gene\Vu;
 
@@ -35,6 +36,9 @@ class Message extends Rest {
             $user = $this->data($query, 'user');
             $vu = (new Vu($id, $user))->read();
             $this->send($vu, 0, 'Recuperation de la date de vu du message');
+        });
+        $this->match('/api/messages/exemples', function() {
+            $this->send(Exemple::all(), 0, 'Recuperation des exemples.');
         });
     }
 

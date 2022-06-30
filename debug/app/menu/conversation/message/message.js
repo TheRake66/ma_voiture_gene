@@ -5,6 +5,7 @@ import Rest from '../../../../../.kernel/js/communication/rest.js';
 import Location from '../../../../../.kernel/js/url/location.js';
 import Cookie from '../../../../../.kernel/js/io/cookie.js';
 import Msgbox from '../../../../lib/js/msgbox.js';
+import Builder from '../../../../../.kernel/js/html/builder.js';
 
 
 
@@ -26,6 +27,7 @@ export default class Message {
     send = Finder.query('menu-conversation-message #send');
     picture = Finder.query('menu-conversation-message #picture');
     section = Finder.query('menu-conversation-message #section');
+    predefini = Finder.query('menu-conversation-message #predefini');
 
     conversation_id = null;
     my_id = Cookie.get('ma_voiture_gene_session_id');
@@ -42,7 +44,45 @@ export default class Message {
      */
     constructor() {
         this.loadMy();
+        this.loadPredefini();
         this.refreshMessage();
+    }
+
+
+
+    loadPredefini() {
+        Rest.getFor('/api/messages/exemples',
+            (exemple, json) => { // Success
+                Dom.append(
+                    Builder.create('button', {
+                        innerText: exemple.contenu,
+                        className: 'button-circle',
+                        onclick: () => {
+                            this.input.value = exemple.contenu;
+                        }
+                    }), this.predefini);
+            },
+            () => { // Pre
+                
+            },
+            () => { // Post
+                
+            },
+            () => { // Empty
+                
+            },
+            () => { // Failed
+                
+            },
+            () => { // Expired,
+                
+            },
+            {
+                
+            },
+            0,
+            true
+        );
     }
 
 
@@ -227,49 +267,51 @@ export default class Message {
     async refreshMessage() {
         let last_date = null;
         while (true) {
-            Rest.getFor(`/api/conversations/${this.conversation_id}/messages/${this.last_message_offset}`,
-                (message, json) => { // Success
-                    // Date
-                    let date = new Date(message.envoye_le);
-                    if (last_date === null || 
-                        (last_date.getDay() !== date.getDay() &&
-                        last_date.getMonth() !== date.getMonth() &&
-                        last_date.getFullYear() !== date.getFullYear())) {
-                        Dom.insert(/*html*/`
-                            <span>${message.envoye_le}</span>
-                        `, this.section);
-                        last_date = date;
-                    }
+            if (this.conversation_id !==null) {
+                Rest.getFor(`/api/conversations/${this.conversation_id}/messages/${this.last_message_offset}`,
+                    (message, json) => { // Success
+                        // Date
+                        let date = new Date(message.envoye_le);
+                        if (last_date === null || 
+                            (last_date.getDay() !== date.getDay() &&
+                            last_date.getMonth() !== date.getMonth() &&
+                            last_date.getFullYear() !== date.getFullYear())) {
+                            Dom.insert(/*html*/`
+                                <span>${message.envoye_le}</span>
+                            `, this.section);
+                            last_date = date;
+                        }
 
-                    // Ajout du message
-                    let i_am_sender = message.id_Utilisateur == this.my_id;
-                    if (i_am_sender) {
-                        this.addMessageMy(message);
-                    } else {                    
-                        this.addMessageInterlocutor(message, message.id_Utilisateur);
-                    }
-                },
-                () => { // Pre
-                    
-                },
-                () => { // Post
+                        // Ajout du message
+                        let i_am_sender = message.id_Utilisateur == this.my_id;
+                        if (i_am_sender) {
+                            this.addMessageMy(message);
+                        } else {                    
+                            this.addMessageInterlocutor(message, message.id_Utilisateur);
+                        }
+                    },
+                    () => { // Pre
+                        
+                    },
+                    () => { // Post
 
-                },
-                () => { // Empty
-                    
-                },
-                () => { // Failed
-                    
-                },
-                () => { // Expired,
-                    
-                },
-                {
-                    
-                },
-                0,
-                false
-            );
+                    },
+                    () => { // Empty
+                        
+                    },
+                    () => { // Failed
+                        
+                    },
+                    () => { // Expired,
+                        
+                    },
+                    {
+                        
+                    },
+                    0,
+                    false
+                );
+            }
             await new Promise(resolve => setTimeout(resolve, 3000));
         }
     }

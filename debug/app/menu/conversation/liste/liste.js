@@ -137,10 +137,8 @@ export default class Liste {
                         let div = Finder.queryLast('.conv_div', this.container);
                         this.conversations[message.id_Conversation] = div;
                         
-                        if (this.conversations.length === 2) {
-                            menu_conversation_message.changeConv(message.id_Conversation);
-                            menu_conversation_info.changeConv(message.id_Conversation);
-                            this.last_clicked_id = message.id_Conversation;
+                        if (this.conversations.length === 2 && !window.onMobile) {
+                            this.changeConv(message.id_Conversation);
                         }
                     }
                 },
@@ -183,8 +181,7 @@ export default class Liste {
      * @returns {void}
      */
     changeConv(id) {
-        const mq = window.matchMedia("(max-width: 768px)");
-        if (mq.matches) {
+        if (window.onMobile) {
             this.container.style.transform = 'translateX(-100%)';
         }
         if (this.last_clicked_id !== id) {

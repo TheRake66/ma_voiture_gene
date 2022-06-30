@@ -149,19 +149,34 @@ menu-conversation-message {
 	> div {
 		background-color: @black-light;
 		display: flex;
-		align-items: center;
-		padding: 12px;
+		flex-direction: column;
 
-		input {
+
+		#predefini {
+			display: flex;
+			overflow: auto;
 			width: 100%;
-			border-radius: @border-radius-big !important;
+
+			button {
+				margin: 8px;
+			}
 		}
 
-		img {
-			width: 45px;
-			margin-left: 12px;
-			padding: 12px !important;
-			border-radius: @border-radius-big !important;
+		#sender {
+			display: flex;
+			padding: 12px;
+
+			input {
+				width: 100%;
+				border-radius: @border-radius-big !important;
+			}
+	
+			img {
+				width: 45px;
+				margin-left: 12px;
+				padding: 12px !important;
+				border-radius: @border-radius-big !important;
+			}
 		}
 	}
 
