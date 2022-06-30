@@ -55,7 +55,7 @@ class Inscription extends Render {
                         Msgbox::show('Attention', 'Cette adresse e-mail est déjà utilisée.', Msgbox::IMG_WARN);
                     }
                 } else {
-                    Msgbox::show('Les mots de passe ne correspondent pas.', 'error');
+                    Msgbox::show('Erreur', 'Les mots de passe ne correspondent pas.', Msgbox::IMG_ERROR);
                 }
             } else {
                 Msgbox::show('Erreur', 'Une erreur est survenue lors de la vérification du jeton CSRF.', Msgbox::IMG_ERROR);
