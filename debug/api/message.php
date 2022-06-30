@@ -48,15 +48,7 @@ class Message extends Rest {
      * @return mixed Résultat de l'appel.
      */
     function post($route, $query, $body) {
-        $this->match('/api/messages/{id}/vu/{user}', function() use ($query) {
-            $id = $this->data($query, 'id');
-            $user = $this->data($query, 'user');
-            $vu = new Vu($id, $user, new \DateTime());
-            if (!$vu->exists()) {
-                $vu->create();
-            }
-            $this->send(null, 0, 'Message vu  par l\'utilisateur.');
-        });
+        $this->send(null, 0, 'Fonction non implémentée !', 500);
     }
 
 

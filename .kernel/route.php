@@ -52,12 +52,15 @@ r::add([
     ]],
     '/api/messages/{id}/vu/{user}' => [ 
         a\Message::class, [
-            r::METHOD_GET,
-            r::METHOD_POST
+            r::METHOD_GET
     ]],
     '/api/conversations/moi' => [ 
         a\Conversation::class, [
             r::METHOD_GET
+    ]],
+    '/api/conversations/{id}/vu' => [ 
+        a\Conversation::class, [
+            r::METHOD_POST
     ]],
     '/api/conversations/{id}' => [ 
         a\Conversation::class, [

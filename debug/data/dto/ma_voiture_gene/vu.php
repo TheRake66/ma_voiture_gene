@@ -18,8 +18,8 @@ class Vu extends Crud {
     /**
      * @var mixed Les propriétés de l'objet.
      */
+    public $_id_Message;
     public $_id;
-    public $_id_Utilisateur;
     public $vu_le;
     
 
@@ -30,12 +30,12 @@ class Vu extends Crud {
      * @return void
      */
     function __construct(
+        $_id_Message = null,
         $_id = null,
-        $_id_Utilisateur = null,
         $vu_le = null
     ) {
+        $this->_id_Message = $_id_Message;
         $this->_id = $_id;
-        $this->_id_Utilisateur = $_id_Utilisateur;
         $this->vu_le = $vu_le;
     }
 	

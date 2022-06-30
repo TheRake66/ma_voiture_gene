@@ -154,8 +154,6 @@ export default class Message {
             </div>
         `, this.section);
 
-        Rest.post(`/api/messages/${message._id}/vu/${this.my_id}`);
-
         this.scrollToLast();
     }
 
@@ -284,6 +282,7 @@ export default class Message {
      * @returns {void}
      */
     changeConv(id) {
+        Rest.post(`/api/conversations/${id}/vu`);
         this.conversation_id = id;
         this.interlocutors = [];
         this.last_message_offset = 0;

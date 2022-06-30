@@ -82,6 +82,10 @@ class Conversation extends Rest {
                 $id);
             $this->send($message->create(), 0, 'Envoie un message.');
         });
+        $this->match('/api/conversations/{id}/vu', function() use ($query) {
+            $id = $this->data($query, 'id');
+            $this->send(DAOConversation::setVu($id), 0, 'Met les messages en vu.');
+        });
     }
 
 

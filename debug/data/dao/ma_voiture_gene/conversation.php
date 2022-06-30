@@ -8,6 +8,7 @@ use Kernel\Session\User;
 use Model\Dto\Ma_voiture_gene\Conversation as Dto;
 use Model\Dto\Ma_voiture_gene\Message;
 use Model\Dto\Ma_voiture_gene\Utilisateur;
+use Model\Dto\Ma_voiture_gene\Vu;
 
 /**
  * Classe DAO Conversation.
@@ -18,6 +19,34 @@ use Model\Dto\Ma_voiture_gene\Utilisateur;
  * @category DAO (Data Access Object)
  */
 class Conversation {
+
+    /**
+     * Met tous les messages en vu.
+     * 
+     * @param int $id L'id de la conversation.
+     * @return bool True si tout s'est bien passé.
+     */
+    static function setVu($id) {
+        return Toogle::object(function() use ($id) {
+            return Query::execute(
+                'INSERT INTO vu (id, id_Message, vu_le)
+                SELECT ?, m.id, NOW()
+                FROM message AS m
+                WHERE m.id NOT IN (
+                    SELECT v.id_Message
+                    FROM vu AS v
+                    WHERE v.id_message = m.id
+					AND v.id = ?
+                )
+                AND m.id_Conversation = ?', 
+                [
+                    User::get()->_id,
+                    $id,
+                    $id
+                ]);
+        }, Vu::class);
+    }
+
 
     /**
      * Recupere la liste des conversations de l'utilisateur.

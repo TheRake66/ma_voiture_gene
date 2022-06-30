@@ -22,6 +22,7 @@ export default class Liste {
     container = Finder.query('menu-conversation-liste');
     conversations = [];
     last_clicked_id = null;
+    cleared = false;
 
 
     /**
@@ -144,7 +145,10 @@ export default class Liste {
                     }
                 },
                 () => { // Pre
-                    
+                    if (!this.cleared) {
+                        Dom.clear(this.container);
+                        this.cleared = true;
+                    }
                 },
                 () => { // Post
                     
