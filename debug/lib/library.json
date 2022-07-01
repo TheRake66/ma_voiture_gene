@@ -58,5 +58,24 @@
       "debug/lib/less/label.less",
       "debug/lib/php/label.php"
     ]
+  },
+  {
+    "name": "confirmbox",
+    "created": "2022-07-01T10:05:31.5518076+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/lib/js/confirmbox.js",
+      "debug/lib/less/confirmbox.less",
+      "debug/lib/php/confirmbox.php"
+    ]
+  },
+  {
+    "name": "modal",
+    "created": "2022-07-01T10:05:45.0112184+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/lib/less/modal.less",
+      "debug/lib/js/modal.js"
+    ]
   }
 ]

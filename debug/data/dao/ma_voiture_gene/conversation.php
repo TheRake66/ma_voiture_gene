@@ -21,6 +21,49 @@ use Model\Dto\Ma_voiture_gene\Vu;
  */
 class Conversation {
 
+
+    static function delete($id) {
+        return Toogle::object(function() use ($id) {
+            try {
+                Transaction::begin();
+
+                Query::execute(
+                    'DELETE v.*
+                    FROM vu AS v
+                    INNER JOIN message AS m 
+                        ON v.id_message = m.id
+                        AND m.id_conversation = ?',
+                    $id);
+
+                Query::execute(
+                    'DELETE 
+                    FROM message 
+                    WHERE id_conversation = ?',
+                    $id);
+
+                Query::execute(
+                    'DELETE 
+                    FROM membre 
+                    WHERE id_conversation = ?',
+                    $id);
+
+                Query::execute(
+                    'DELETE 
+                    FROM conversation 
+                    WHERE id = ?', 
+                    $id);
+                
+                Transaction::commit();
+                return true;
+            } catch (\Exception $e) {
+                Transaction::rollback();
+                Log::add($e->getMessage());
+                return false;
+            }
+        }, Dto::class);
+    }
+
+
     /**
      * Met tous les messages en vu.
      * 
@@ -28,7 +71,6 @@ class Conversation {
      * @return bool True si tout s'est bien passé.
      */
     static function setVu($id) {
-        Log::add(User::get());
         return Toogle::object(function() use ($id) {
             return Query::execute(
                 'INSERT INTO vu (id, id_Message, vu_le)

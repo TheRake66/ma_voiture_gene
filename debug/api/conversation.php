@@ -111,7 +111,10 @@ class Conversation extends Rest {
      * @return mixed Résultat de l'appel.
      */
     function delete($route, $query, $body) {
-        $this->send(null, 0, 'Fonction non implémentée !', 500);
+        $this->match('/api/conversations/{id}', function() use ($query) {
+            $id = $this->data($query, 'id');
+            $this->send(DAOConversation::delete($id), 0, 'Supprime la conversation');
+        });
     }
 
 

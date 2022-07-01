@@ -48,6 +48,12 @@ r::add([
     ]],
     '/api/utilisateurs/{id}/bloque' => [ 
         a\Utilisateur::class, [
+            r::METHOD_GET,
+            r::METHOD_POST,
+            r::METHOD_DELETE
+    ]],
+    '/api/utilisateurs/{id}/bloque/moi' => [ 
+        a\Utilisateur::class, [
             r::METHOD_GET
     ]],
     '/api/messages/{id}/vu/{user}' => [ 
@@ -68,7 +74,8 @@ r::add([
     ]],
     '/api/conversations/{id}' => [ 
         a\Conversation::class, [
-            r::METHOD_GET
+            r::METHOD_GET,
+            r::METHOD_DELETE
     ]],
     '/api/conversations/{id}/messages' => [ 
         a\Conversation::class, [

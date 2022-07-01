@@ -52,10 +52,14 @@ class Utilisateur extends Rest {
         $this->match('/api/utilisateurs/{id}/bloque', function() use ($query) {
             $id = $this->data($query, 'id');
             $moi = User::get()->_id;
-            $il_ma_bloque = new Bloque($id, $moi);
             $je_lai_bloque = new Bloque($moi, $id);
-            $bloque = $il_ma_bloque->exists() || $je_lai_bloque->exists();
-            $this->send($bloque, 0, 'Verification si l\'utilisateur est bloqué.');
+            $this->send($je_lai_bloque->exists(), 0, 'Verification si l\'utilisateur est bloqué.');
+        });
+        $this->match('/api/utilisateurs/{id}/bloque/moi', function() use ($query) {
+            $id = $this->data($query, 'id');
+            $moi = User::get()->_id;
+            $il_ma_bloque = new Bloque($id, $moi);
+            $this->send($il_ma_bloque->exists(), 0, 'Verification si l\'utilisateur est bloqué.');
         });
     }
 
@@ -69,7 +73,12 @@ class Utilisateur extends Rest {
      * @return mixed Résultat de l'appel.
      */
     function post($route, $query, $body) {
-        $this->send(null, 0, 'Fonction non implémentée !', 500);
+        $this->match('/api/utilisateurs/{id}/bloque', function() use ($query) {
+            $id = $this->data($query, 'id');
+            $moi = User::get()->_id;
+            $je_lai_bloque = new Bloque($moi, $id);
+            $this->send($je_lai_bloque->create(), 0, 'Bloquage de l\'utilisateur est bloqué.');
+        });
     }
 
 
@@ -95,7 +104,12 @@ class Utilisateur extends Rest {
      * @return mixed Résultat de l'appel.
      */
     function delete($route, $query, $body) {
-        $this->send(null, 0, 'Fonction non implémentée !', 500);
+        $this->match('/api/utilisateurs/{id}/bloque', function() use ($query) {
+            $id = $this->data($query, 'id');
+            $moi = User::get()->_id;
+            $je_lai_bloque = new Bloque($moi, $id);
+            $this->send($je_lai_bloque->delete(), 0, 'Debloquage de l\'utilisateur est bloqué.');
+        });
     }
 
 

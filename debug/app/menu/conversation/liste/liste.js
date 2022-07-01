@@ -107,6 +107,7 @@ export default class Liste {
                     }
                     
     
+
                     // On crée l'élément ou on le modifie ===============
                     let div = this.conversations[message.id_Conversation];
                     if (div) {
@@ -139,10 +140,11 @@ export default class Liste {
                         let div = Finder.queryLast('.conv_div', this.container);
                         this.conversations[message.id_Conversation] = div;
                         
-                        if (this.conversations.length === 2 && !window.onMobile) {
+                        if (Object.keys(this.conversations).length === 1 && !window.onMobile) {
                             this.changeConv(message.id_Conversation);
                         }
                     }
+                    
                 },
                 () => { // Pre
                     if (!this.cleared) {
@@ -193,6 +195,18 @@ export default class Liste {
             menu_conversation_info.changeConv(id);
         }
         this.last_clicked_id = id;
+    }
+
+
+    /**
+     * Supprime la conversation.
+     * 
+     * @returns {void}
+     */
+    deleteConv() {
+        this.conversations[this.last_clicked_id].remove();
+        delete this.conversations[this.last_clicked_id];
+        this.last_clicked_id = null;
     }
 
 }

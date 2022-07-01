@@ -1,0 +1,100 @@
+@import '../../../.kernel/theme.less';
+@import '../../lib/less/button.less';
+
+
+
+// Librairie Confirmbox.
+// Author: thiba
+// Version: 1.0
+confirmbox {
+	z-index: 9999999;
+	background-color: rgba(0, 0, 0, 0.2);
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	display: flex;
+	padding: 16px;
+	animation: appear .5s ease-in-out;
+
+	> div {
+		display: flex;
+		flex-direction: column;
+		background-color: @black-light;
+		width: 445px;
+		margin: auto;
+		animation: slide 0.75s forwards;
+		border-radius: @border-radius;
+		box-shadow: @shadow;
+		overflow: hidden;
+
+
+		h1 {
+			margin: 32px;
+			margin-bottom: 0px !important;
+			color: @white;
+		}
+
+		article {
+			margin: 32px;
+			display: flex;
+			align-items: center;
+
+			img {
+				margin-right: 12px;
+				width: 64px;
+				height: 64px;
+			}
+
+			p {
+				color: @gray;
+			}
+		}
+
+		div {
+			padding: 24px;
+			display: flex;
+			justify-content: space-between;
+			background-color: @black;
+			
+			.confirm-no {
+				background-color: @red;
+
+				&:hover {
+					background-color: @red-light;
+				}
+			}
+
+			.confirm-yes {
+				background-color: @green;
+
+				&:hover {
+					background-color: @green-light;
+				}
+			}
+		}
+	}
+
+}
+
+@keyframes appear {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0px);
+	}
+}
+
+
+
+
+// Librairie responsive Confirmbox.
+@media all and (max-width: @responsive-max-width) {
+	.confirmbox {
+
+	}
+}

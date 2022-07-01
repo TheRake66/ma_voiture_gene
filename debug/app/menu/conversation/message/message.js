@@ -32,7 +32,8 @@ export default class Message {
     conversation_id = null;
     my_id = Cookie.get('ma_voiture_gene_session_id');
     my = null;
-    interlocutors = [];
+    interlocutor_id = null;
+    interlocutor_id = null;
     last_message_offset = 0;
 
 
@@ -49,7 +50,11 @@ export default class Message {
     }
 
 
-
+    /**
+     * Charge les messages prédéfinis.
+     * 
+     * @returns {void}
+     */
     loadPredefini() {
         Rest.getFor('/api/messages/exemples',
             (exemple, json) => { // Success
@@ -127,6 +132,20 @@ export default class Message {
 
 
     /**
+     * Charge les informations de l'interlocuteur.
+     * 
+     * @returns {void}
+     */
+    loadInterlocutor() {
+        Rest.get(`/api/utilisateurs/${this.interlocutor_id}`,
+            (utilisateur, json) => { // Success
+                this.interlocutor = utilisateur;
+            },
+            null, null, null, null, 0, false);
+    }
+
+
+    /**
      * Ajoute un message à l'utilisateur.
      * 
      * @param {Object} message Le message.
@@ -145,6 +164,7 @@ export default class Message {
                 <img src="${this.toImg(this.my.photo)}" alt="PP">
             </div>
         `, this.section);
+
         this.scrollToLast();
     }
 
@@ -153,39 +173,14 @@ export default class Message {
      * Ajoute un message à l'interlocuteur.
      * 
      * @param {Object} message Le message.
-     * @param {int} interlocutor L'id de l'interlocuteur.
      * @returns {void}
      */
-    addMessageInterlocutor(message, interlocutor) {     
-        if (this.interlocutors[interlocutor] === undefined) {
-            Rest.get(`/api/utilisateurs/${message.id_Utilisateur}`,
-            (utilisateur, json) => { // Success
-                this.interlocutors[interlocutor] = utilisateur;
-            },
-            null, null, null, null, 0, false);
-
-            Rest.get(`/api/utilisateurs/${message.id_Utilisateur}/bloque`,
-                (content, json) => { // Success
-                    if (content) {
-                        Attribute.disable(this.input);
-                        Attribute.disable(this.send);
-                        this.send.style.display = 'none';
-                        this.input.value = 'Vous ne pouvez pas discuter avec cet utilisateur.';
-                    } else {
-                        Attribute.enable(this.input);
-                        Attribute.enable(this.send);
-                        this.send.style.display = 'block';
-                        this.input.value = '';
-                    }
-                },
-            null, null, null, null, 0, false);
-        }   
-        
+    addMessageInterlocutor(message) {
         this.last_message_offset++;
 
         Dom.insert(/*html*/`
             <div class="left">
-                <img src="${this.toImg(this.interlocutors[interlocutor].photo)}" alt="PP">
+                <img src="${this.toImg(this.interlocutor.photo)}" alt="PP">
                 <article>
                     <div></div>
                     <span>${message.contenu}</span>
@@ -199,23 +194,67 @@ export default class Message {
 
 
     /**
+     * Vérifie si un message peut être ajouté.
+     * 
+     * @returns {void} 
+     */
+    checkBloque() {
+        let bloquer = false;
+        let message = '';
+
+        Rest.get(`/api/utilisateurs/${this.interlocutor_id}/bloque`,
+            (content, json) => { // Success
+                if (content) {
+                    bloquer = true;
+                    message = 'Vous avez bloqué cet utilisateur.';
+                }
+            },
+
+        null, null, null, null, 0, false);
+
+        if (!bloquer) {
+            Rest.get(`/api/utilisateurs/${this.interlocutor_id}/bloque/moi`,
+                (content, json) => { // Success
+                    if (content) {
+                        bloquer = true;
+                        message = 'Cet utilisateur vous a bloqué.';
+                    }
+                },
+            null, null, null, null, 0, false);
+        }
+
+        if (bloquer) {
+            Attribute.disable(this.input);
+            Attribute.disable(this.send);
+            this.predefini.style.display = 'none';
+            this.send.style.display = 'none';
+            this.input.value = message;
+        } else {
+            Attribute.enable(this.input);
+            Attribute.enable(this.send);
+            this.predefini.style.display = 'flex';
+            this.send.style.display = 'block';
+            this.input.value = '';
+        }
+    }
+
+
+    /**
      * Charges les informations de la conversation.
      * 
      * @returns {void}
      */
     loadConversation() {
-        let receiver = null
-
         Rest.getFor(`/api/conversations/${this.conversation_id}/membres`,
             (utilisateur, json) => { // Success
-                receiver = utilisateur;
+                this.interlocutor = utilisateur;
+                this.interlocutor_id = utilisateur._id;
+                this.picture.src = this.interlocutor.photo === null ?
+                    '/assets/img/default.png' :
+                    'data:image/png;base64,' + this.interlocutor.photo;
+                this.name.innerText = this.interlocutor.prenom + ' ' + this.interlocutor.nom;
             },
             null, null, null, null, null, null, 0, false);
-        this.picture.src = receiver.photo === null ?
-            '/assets/img/default.png' :
-            'data:image/png;base64,' + receiver.photo;
-
-        this.name.innerText = receiver.prenom + ' ' + receiver.nom;
     }
 
 
@@ -287,7 +326,7 @@ export default class Message {
                         if (i_am_sender) {
                             this.addMessageMy(message);
                         } else {                    
-                            this.addMessageInterlocutor(message, message.id_Utilisateur);
+                            this.addMessageInterlocutor(message);
                         }
                     },
                     () => { // Pre
@@ -314,6 +353,7 @@ export default class Message {
                     0,
                     false
                 );
+                this.checkBloque();
             }
             await new Promise(resolve => setTimeout(resolve, 3000));
         }
@@ -328,10 +368,37 @@ export default class Message {
      */
     changeConv(id) {
         this.conversation_id = id;
-        this.interlocutors = [];
+        this.interlocutor_id = null;
+        this.interlocutor = null;
         this.last_message_offset = 0;
         Dom.clear(this.section);
+        Attribute.enable(this.input);
+        Attribute.enable(this.send);
+        this.predefini.style.display = 'flex';
         this.loadConversation();
+        this.checkBloque();
+    }
+
+
+    /**
+     * Supprimer la conversation.
+     * 
+     * @returns {void}
+     */
+    deleteConv() {
+        this.conversation_id = null;
+        this.interlocutor_id = null;
+        this.interlocutor = null;
+        this.last_message_offset = 0;
+        Dom.clear(this.section);
+        Attribute.disable(this.input);
+        Attribute.disable(this.send);
+        this.predefini.style.display = 'none';
+        this.picture.src = '/assets/img/default.png';
+        this.name.innerText = '';
+        if (window.onMobile) {
+            this.comeBack();
+        }
     }
 
 
