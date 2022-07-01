@@ -27,6 +27,8 @@ export default class Info {
     date = Finder.query('menu-conversation-info #date');
     picture = Finder.query('menu-conversation-info #picture');
     bloque = Finder.query('menu-conversation-info #bloque');
+    delete = Finder.query('menu-conversation-info #delete');
+    report = Finder.query('menu-conversation-info #report');
     conversation_id = null;
     interlocutor_id = null;
     bloquer = false;
@@ -51,6 +53,9 @@ export default class Info {
      */
     changeConv(id) {
         this.conversation_id = id;
+        Attribute.enable(this.delete);
+        Attribute.enable(this.report);
+        Attribute.enable(this.bloque);
 
         Rest.getFor(`/api/conversations/${id}/membres`,
             (utilisateur, json) => { // Success
@@ -180,6 +185,9 @@ export default class Info {
                                 this.conversation_id = null;
                                 this.name.innerText = '';
                                 this.date.innerText = '';
+                                Attribute.disable(this.delete);
+                                Attribute.disable(this.report);
+                                Attribute.disable(this.bloque);
                                 this.picture.src = '/assets/img/default.png';
                                 menu_conversation_message.deleteConv();
                                 menu_conversation_liste.deleteConv();

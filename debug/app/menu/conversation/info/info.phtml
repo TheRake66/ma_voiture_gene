@@ -26,14 +26,14 @@ Categorie: Vue
 	<i id="date"></i>
 
 	<label class="label top">LA CONVERSATION</label>
-	<button class="button-danger" onclick="menu_conversation_info.deleteConv()">Supprimer cette conversation</button>
+	<button disabled id="delete" class="button-danger" onclick="menu_conversation_info.deleteConv()">Supprimer cette conversation</button>
 	<p>Supprime définitivement la conversation et tous ses messages tous les participants.</p>
 
 	<label class="label">L'UTILISATEUR</label>
-	<button id="bloque" class="button-danger" onclick="menu_conversation_info.blockUser()">Bloquer cet utilisateur</button>
+	<button disabled id="bloque" class="button-danger" onclick="menu_conversation_info.blockUser()">Bloquer cet utilisateur</button>
 	<p>Empêche l'utilisateur de vous envoyer de nouveaux messages.</p>
 	<br>
-	<button class="button-danger-border" onclick="menu_conversation_info.repportUser()">Signaler cette utilisateur</button>
+	<button disabled id="report" class="button-danger-border" onclick="menu_conversation_info.repportUser()">Signaler cette utilisateur</button>
 	<p>Signale l'utilisateur aux administrateurs.</p>
 
 </menu-conversation-info>
