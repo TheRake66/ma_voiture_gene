@@ -30,13 +30,21 @@ export default class Modal {
                     <h1>${titre}</h1>
                     <article ${id !== null ? `id="${id}"` : ''}>${content}</article>
                     <div>
-                        <button class="warn" id="cancel">Annuler</button>
-                        <button class="good" id="submit">Valider</button>
+                        <button class="warn button-danger" id="cancel">Annuler</button>
+                        <button class="good button-ok" id="submit">Valider</button>
                     </div>
                 </div>
             </modal>`);
         Finder.query('modal #cancel').onclick = oncancel ?? (() => { Finder.query('modal').remove() });
         Finder.query('modal #submit').onclick = onsubmit ?? {};
+    }
+
+
+    /**
+     * Fermer un modal
+     */
+    static close() {
+        Finder.query('modal').remove();
     }
 
 }

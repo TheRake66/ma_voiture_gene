@@ -23,8 +23,6 @@ if (User::has()) {
         '/vehicules' => c\Menu::class,
         '/scanner' => c\Menu::class,
         '/conversations' => c\Menu::class,
-        '/conversations/{id}' => c\Menu::class,
-        '/conversations/{id}/details' => c\Menu::class,
         '/parametres' => c\Menu::class,
         '/deconnexion' => c\Menu::class 
     ]);
@@ -52,10 +50,16 @@ r::add([
             r::METHOD_POST,
             r::METHOD_DELETE
     ]],
+    '/api/utilisateurs/{id}/rapport' => [ 
+        a\Utilisateur::class, [
+            r::METHOD_POST
+    ]],
     '/api/utilisateurs/{id}/bloque/moi' => [ 
         a\Utilisateur::class, [
             r::METHOD_GET
     ]],
+
+
     '/api/messages/{id}/vu/{user}' => [ 
         a\Message::class, [
             r::METHOD_GET
@@ -64,6 +68,8 @@ r::add([
         a\Message::class, [
             r::METHOD_GET
     ]],
+
+
     '/api/conversations/moi' => [ 
         a\Conversation::class, [
             r::METHOD_GET

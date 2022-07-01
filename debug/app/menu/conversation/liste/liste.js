@@ -23,6 +23,7 @@ export default class Liste {
     conversations = [];
     last_clicked_id = null;
     cleared = false;
+    open = false;
 
 
     /**
@@ -187,8 +188,7 @@ export default class Liste {
     changeConv(id) {
         if (window.onMobile) {
             this.container.style.transform = 'translateX(-100%)';
-            // Change au moment de l'ouverture en mobile
-            Rest.post(`/api/conversations/${id}/vu`);
+            this.open = true;
         }
         if (this.last_clicked_id !== id) {
             menu_conversation_message.changeConv(id);

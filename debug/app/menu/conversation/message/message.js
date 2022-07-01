@@ -35,6 +35,7 @@ export default class Message {
     interlocutor_id = null;
     interlocutor_id = null;
     last_message_offset = 0;
+    bloquer = false;
 
 
     /**
@@ -223,18 +224,21 @@ export default class Message {
             null, null, null, null, 0, false);
         }
 
-        if (bloquer) {
-            Attribute.disable(this.input);
-            Attribute.disable(this.send);
-            this.predefini.style.display = 'none';
-            this.send.style.display = 'none';
-            this.input.value = message;
-        } else {
-            Attribute.enable(this.input);
-            Attribute.enable(this.send);
-            this.predefini.style.display = 'flex';
-            this.send.style.display = 'block';
-            this.input.value = '';
+        if (bloquer !== this.bloquer) {
+            if (bloquer) {
+                Attribute.disable(this.input);
+                Attribute.disable(this.send);
+                this.predefini.style.display = 'none';
+                this.send.style.display = 'none';
+                this.input.value = message;
+            } else {
+                Attribute.enable(this.input);
+                Attribute.enable(this.send);
+                this.predefini.style.display = 'flex';
+                this.send.style.display = 'block';
+                this.input.value = '';
+            }
+            this.bloquer = bloquer;
         }
     }
 
@@ -334,7 +338,7 @@ export default class Message {
                     },
                     () => { // Post
                         // Change au moment de la reception des messages en pc
-                        if (!window.onMobile) {
+                        if (!window.onMobile || menu_conversation_liste.open) {
                             Rest.post(`/api/conversations/${this.conversation_id}/vu`);
                         }
                     },
@@ -409,6 +413,7 @@ export default class Message {
      */
     comeBack() {
         menu_conversation_liste.container.style.transform = 'translateX(0%)';
+        menu_conversation_liste.open = false;
     }
 
 

@@ -8,6 +8,7 @@ use Kernel\Security\Vulnerability\Csrf;
 use Kernel\Security\Validation;
 use Kernel\Session\User;
 use Model\Dto\Ma_voiture_gene\Bloque;
+use Model\Dto\Ma_voiture_gene\Signale;
 use Model\Dto\Ma_voiture_gene\Utilisateur as DTOUtilisateur;
 
 /**
@@ -78,6 +79,16 @@ class Utilisateur extends Rest {
             $moi = User::get()->_id;
             $je_lai_bloque = new Bloque($moi, $id);
             $this->send($je_lai_bloque->create(), 0, 'Bloquage de l\'utilisateur est bloqué.');
+        });
+        $this->match('/api/utilisateurs/{id}/rapport', function() use ($query, $body) {
+            $id = $this->data($query, 'id');
+            $raison = $this->data($body, 'raison');
+            $signal = new Signale(User::get()->_id, $id, $raison);
+            if (!$signal->exists()) {
+                $this->send($signal->create(), 0, 'Signalement de l\'utilisateur.');
+            } else {
+                $this->send($signal->update(), 0, 'Mise a jour du signalement de l\'utilisateur.');
+            }
         });
     }
 

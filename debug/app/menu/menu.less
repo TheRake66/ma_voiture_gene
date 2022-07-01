@@ -64,6 +64,21 @@ menu {
 	}
 }
 
+@media all and (max-width: 1400px) {
+	menu {
+		> nav {
+			min-width: 80px;
+			max-width: 80px;
+			padding: 16px;
+			overflow: hidden;
+			
+			a {
+				text-indent: -9999px;
+				padding: 8px;
+			}
+		}
+	}
+}
 
 
 // Style responsive du composant Menu.
@@ -76,9 +91,12 @@ menu {
 		}
 		
 		> nav {
+			min-width: none;
+			max-width: none;
 			flex-direction: row;
 			padding: 12px;
 			margin: 0 auto;
+			overflow: unset;
 
 			a {
 				padding: 0;
@@ -86,6 +104,7 @@ menu {
 				position: relative;
 				width: 50px;
 				height: 50px;
+				text-indent: 0px;
 
 				&.active {
 					background-color: @black;

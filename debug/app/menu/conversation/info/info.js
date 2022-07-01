@@ -5,6 +5,7 @@ import Rest from '../../../../../.kernel/js/communication/rest.js';
 import Location from '../../../../../.kernel/js/url/location.js';
 import Confirmbox from '../../../../lib/js/confirmbox.js';
 import Msgbox from '../../../../lib/js/msgbox.js';
+import Modal from '../../../../lib/js/modal.js';
 
 
 
@@ -53,6 +54,7 @@ export default class Info {
      */
     changeConv(id) {
         this.conversation_id = id;
+        
         Attribute.enable(this.delete);
         Attribute.enable(this.report);
         Attribute.enable(this.bloque);
@@ -88,8 +90,48 @@ export default class Info {
     }
 
 
+    /**
+     * Signale la conversation.
+     * 
+     * @returns {void}
+     */
     repportUser() {
-        
+        Modal.create('Rapport', /*html*/`
+            <textarea class="input" id="rapport" placeholder="Raison du signalement..."></textarea>`, 
+            () => {
+                let raison = Finder.query('#rapport').value.trim();
+                if (raison === '') {
+                    Msgbox.show('Erreur', 'Vous devez entrer une raison.', Msgbox.IMG_ERROR);
+                } else if (raison.length < 10) {
+                    Msgbox.show('Erreur', 'Vous devez entrer une raison de plus de 10 caractères.', Msgbox.IMG_ERROR);
+                } else {
+                    let error = () => Msgbox.show('Erreur', 'Une erreur est survenue.', Msgbox.IMG_ERROR);
+                    Rest.post(`/api/utilisateurs/${this.interlocutor_id}/rapport`,
+                        (content, json) => { // Success
+                            if (content) {
+                                Modal.close();
+                                Msgbox.show('Rapport', 'Votre rapport a été envoyé.', Msgbox.IMG_OK);
+                            } else {
+                                error();
+                            }
+                        },
+                        () => { // Empty
+                            error();
+                        },
+                        () => { // Failed
+                            error();
+                        },
+                        () => { // Expired
+                            error();
+                        },
+                        {
+                            raison: raison
+                        },
+                        0,
+                        true
+                    );
+                }
+            });
     }
 
 
@@ -100,7 +142,6 @@ export default class Info {
      */
     blockUser() {
         let error = () => Msgbox.show('Erreur', 'Une erreur est survenue.', Msgbox.IMG_ERROR);
-        console.log(this.bloquer);
         if (this.bloquer) {
             Rest.delete(`/api/utilisateurs/${this.interlocutor_id}/bloque`,
                 (content, json) => { // Success

@@ -2,6 +2,7 @@
 @import '../../../../lib/less/button.less';
 @import '../../../../lib/less/label.less';
 @import '../../../../lib/less/confirmbox.less';
+@import '../../../../lib/less/modal.less';
 
 
 
@@ -58,12 +59,26 @@ menu-conversation-info {
 }
 
 
+modal {
+	textarea {
+		min-width: 30vw !important;
+		min-height: 30vh !important;
+	}
+}
+
+
 
 // Style responsive du composant Info.
 @media all and (max-width: @responsive-max-width) {
 	menu-conversation-info {
 		#retour {
 			display: block;
+		}
+	}
+	modal {
+		textarea {
+			min-width: 70vw !important;
+			min-height: 20vh !important;
 		}
 	}
 }
