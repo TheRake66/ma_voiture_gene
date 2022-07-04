@@ -48,6 +48,13 @@ class Utilisateur extends Rest {
             if ($user && $user->photo) {
                 $user->photo = base64_encode($user->photo);
             }
+            $this->send($user, 0, 'Recupération de l\'utilisateur "' . $id . '" réussie.');
+        });
+        $this->match('/api/utilisateurs/moi', function() use ($query) {
+            $user = (new DTOUtilisateur(User::get()->_id))->read();
+            if ($user && $user->photo) {
+                $user->photo = base64_encode($user->photo);
+            }
             $this->send($user, 0, 'Recupération de l\'utilisateur réussie.');
         });
         $this->match('/api/utilisateurs/{id}/bloque', function() use ($query) {

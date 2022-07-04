@@ -100,7 +100,7 @@ class Conversation {
     static function getMy() {
         return Toogle::object(function() {
             return Query::objects(
-                'SELECT *
+                'SELECT c.*
                 FROM conversation AS c
                 INNER JOIN membre AS m 
                     ON m.id_Conversation = c.id
@@ -119,16 +119,16 @@ class Conversation {
     static function getMembers($id) {
         return Toogle::object(function() use ($id) {
             return Query::objects(
-                'SELECT *
+                'SELECT u.*
                 FROM utilisateur AS u
                 INNER JOIN membre AS m 
                     ON m.id = u.id
-                    AND m.id_Conversation = ?
-                WHERE u.id != ?',
+                WHERE u.id != ?
+                AND m.id_Conversation = ?',
                 Utilisateur::class,
                 [
-                    $id,
-                    User::get()->_id
+                    User::get()->_id,
+                    $id
                 ]);
         }, Utilisateur::class);
     }

@@ -4,8 +4,7 @@ use Kernel\Security\Vulnerability\Xss;
 use Kernel\Security\Vulnerability\Csrf;
 use Kernel\Security\Validation;
 use Kernel\Io\Render;
-
-
+use Kernel\Session\User;
 
 /**
  * Controleur du composant Parametre.

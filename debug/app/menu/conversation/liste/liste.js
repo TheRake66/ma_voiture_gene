@@ -56,7 +56,7 @@ export default class Liste {
                     let titre = '';
 
 
-    
+                    
                     // L'interlocuteur ===========================
                     Rest.getFor(`/api/conversations/${conversation._id}/membres`,
                         (utilisateur, json) => { // Success

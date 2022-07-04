@@ -61,7 +61,7 @@ class Conversation extends Rest {
                     }
                 }
             }
-            $this->send($members, 0, 'Recupere les photos la conversation.');
+            $this->send($members, 0, 'Recupere les membres la conversation.');
         });
     }
 

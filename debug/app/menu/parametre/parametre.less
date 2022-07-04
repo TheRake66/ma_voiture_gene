@@ -1,4 +1,9 @@
 @import '../../../../.kernel/theme.less';
+@import '../../../lib/less/label.less';
+@import '../../../lib/less/button.less';
+@import '../../../lib/less/modal.less';
+@import '../../../lib/less/input.less';
+
 
 
 
@@ -7,7 +12,141 @@
 // Version: 1.0
 // Categorie: Style
 menu-parametre {
+	display: flex;
+	flex-direction: column;
+	padding: 48px;
+	width: fit-content;
 
+	> div {
+		background-color: @black;
+		border-radius: @border-radius-medium;
+		display: flex;
+		flex-direction: column;
+		border-top: solid 100px @blue;
+		padding: 16px;
+		width: 600px;
+		box-shadow: @shadow-light;
+
+		.pp {
+			align-items: center;
+			display: flex;
+			position: relative;
+			margin-bottom: 64px;
+
+			img {
+				background-color: @blue;
+				border-radius: 100%;
+				width: 128px;
+				height: 128px;
+				position: absolute;
+				border: solid 8px @black;
+			}
+
+			h3 {
+				margin-left: 138px;
+			}
+
+			button {
+				margin-left: auto;
+			}
+		}
+
+		.info {
+			display: flex;
+			flex-direction: column;
+			background-color: @black-light;
+			border-radius: @border-radius-medium;
+			padding: 16px;
+
+
+			label {
+				
+			}
+	
+			span {
+				color: @white;
+
+				&:not(:last-child) {
+					margin-bottom: 16px;
+				}
+			}
+		}
+	}
+
+	h2 {
+		margin-bottom: 16px;
+	}
+
+	.sep {
+		margin-top: 38px;
+		padding-top: 38px;
+		border-top: solid 1px @black-light-light;
+	}
+
+	button {
+		width: fit-content;
+	}
+}
+
+
+modal #profil {
+	display: flex !important;
+	flex-direction: column !important;
+	width: 400px;
+
+	> div {
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		width: 100%;
+		margin-bottom: 24px;
+
+		img {
+			background-color: @blue;
+			border-radius: 100%;
+			width: 128px;
+			height: 128px;
+			box-shadow: @shadow-light;
+		}
+
+		> div {
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+			margin-left: 4px;
+
+			button {
+				margin: 6px;
+			}
+		}
+	}
+
+	input {
+		width: 100%;
+	}
+
+	input[type=file] {
+		display: none;
+	}
+
+	input:not(:last-child) {
+		margin-bottom: 24px;
+	}
+}
+
+
+modal #pass {
+	display: flex !important;
+	flex-direction: column !important;
+	width: 300px;
+
+	input {
+		width: 100%;
+	}
+
+	input:not(:last-child) {
+		margin-bottom: 24px;
+	}
 }
 
 
@@ -15,6 +154,54 @@ menu-parametre {
 // Style responsive du composant Parametre.
 @media all and (max-width: @responsive-max-width) {
 	menu-parametre {
+		width: 100%;
+		padding: 32px;
+		
+		> div {
+			width: 100%;
+			border-top: solid 64px @blue;
 
+			.pp {
+				margin-bottom: 42px;
+	
+				img {
+					width: 96px;
+					height: 96px;
+				}
+
+				h3 {
+					margin-left: 100px;
+				}
+
+				button {
+					text-indent: -9999px;
+					background-image: url('../../../../assets/img/icons8-modifier-30.png');
+					min-width: 38px;
+					min-height: 38px;
+					max-width: 38px;
+					max-height: 38px;
+					padding: 12px;
+					background-size: 26px;
+					background-repeat: no-repeat;
+					background-position: center;
+				}
+			}
+		}
+	}
+
+	modal article {
+		width: 70vw !important;
+	}
+
+	
+	modal #profil {
+
+		> div {
+			> div {
+				button {
+					width: 100%;
+				}
+			}
+		}
 	}
 }

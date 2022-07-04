@@ -6,6 +6,7 @@ use Kernel\Html\Builder;
 use Kernel\Html\Output;
 use Kernel\Convert\Encoded;
 use Kernel\Convert\Number;
+use Kernel\Session\User;
 use Kernel\Url\Location;
 ?>
 
@@ -18,5 +19,25 @@ Version: 1.0
 Categorie: Vue
  -->
 <menu-parametre>
-	<p>Le composant Parametre fonctionne !</p>
+	<h2>Mon compte</h2>
+	<div>
+		<div class="pp">
+			<img id="image" src="/assets/img/default.png" alt="PP">
+			<h3 id="titre">...</h3>
+			<button class="button" onclick="menu_parametre.modifyProfil()">Modifier le profil</button>
+		</div>
+
+		<div class="info">
+			<label class="label-small" for="">NOM</label>
+			<span id="nom">...</span>
+
+			<label class="label-small" for="">PRENOM</label>
+			<span id="prenom">...</span>
+
+			<label class="label-small" for="">ADRESSE E-MAIL</label>
+			<span id="email">...</span>
+		</div>
+	</div>
+	<h2 class="sep">Mot de passe</h2>
+	<button class="button" onclick="menu_parametre.modifyPass()">Changer le mot de passe</button>
 </menu-parametre>

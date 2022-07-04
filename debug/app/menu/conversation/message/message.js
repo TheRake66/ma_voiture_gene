@@ -310,7 +310,7 @@ export default class Message {
     async refreshMessage() {
         let last_date = null;
         while (true) {
-            if (this.conversation_id !==null) {
+            if (this.conversation_id !== null) {
                 Rest.getFor(`/api/conversations/${this.conversation_id}/messages/${this.last_message_offset}`,
                     (message, json) => { // Success
                         // Date
@@ -358,8 +358,10 @@ export default class Message {
                     false
                 );
                 this.checkBloque();
+                await new Promise(resolve => setTimeout(resolve, 3000));
+            } else {
+                await new Promise(resolve => setTimeout(resolve, 100));
             }
-            await new Promise(resolve => setTimeout(resolve, 3000));
         }
     }
  

@@ -37,6 +37,10 @@ r::add([
             r::METHOD_GET,
             r::METHOD_POST
     ]],
+    '/api/utilisateurs/moi' => [ 
+        a\Utilisateur::class, [
+            r::METHOD_GET
+    ]],
     '/api/utilisateurs/{id}' => [ 
         a\Utilisateur::class, [
             r::METHOD_GET,
