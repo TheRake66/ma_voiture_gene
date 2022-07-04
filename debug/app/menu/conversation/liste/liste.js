@@ -46,71 +46,100 @@ export default class Liste {
         let my_id = Cookie.get('ma_voiture_gene_session_id');
         while (true) {
             Rest.getFor('/api/conversations/moi',
-                (message, json) => { // Success
-    
-                    // Conversation ===========================
+                (conversation, json) => { // Success
                     let receiver = null
-                    Rest.getFor(`/api/conversations/${message.id_Conversation}/membres`,
+                    let message = null;
+                    let vu = '';
+                    let date_str = '';
+                    let texte = '';
+                    let photo = '';
+                    let titre = '';
+
+
+    
+                    // L'interlocuteur ===========================
+                    Rest.getFor(`/api/conversations/${conversation._id}/membres`,
                         (utilisateur, json) => { // Success
                             receiver = utilisateur;
                         },
                         null, null, null, null, null, null, 0, false);
                         
-                    let photo = receiver.photo === null ?
+                    photo = receiver.photo === null ?
                         '/assets/img/default.png' :
                         'data:image/png;base64,' + receiver.photo;
     
-                    let titre = receiver.prenom + ' ' + receiver.nom;
-    
-                    let vu = '';
-                    if (message.id_Utilisateur == my_id) {                            
-                        Rest.get(`/api/messages/${message._id}/vu/${receiver._id}`,
+                    titre = receiver.prenom + ' ' + receiver.nom;
+
+
+
+                    // Le message ===========================
+                    Rest.get(`/api/conversations/${conversation._id}/messages/last`,
                         (content, json) => { // Success
-                            vu = /*html*/`<img src="/assets/img/icons8-double-coche-30.png" alt="Vu"/>`;
-                        }, null, null, null, null, 0, false);
-                    }
-    
-    
-    
-                    // Date d'envoi =============================
-                    let envoye_le = new Date(message.envoye_le);
-                    let today = new Date();
-                    let date_str = '';
-                    if (today.getFullYear() === envoye_le.getFullYear() &&
-                        today.getMonth() === envoye_le.getMonth() &&
-                        today.getDate() === envoye_le.getDate()) {
-                        let hours = envoye_le.getHours() < 10 ? 
-                            '0' + envoye_le.getHours() : 
-                            envoye_le.getHours();
-                        let minutes = envoye_le.getMinutes() < 10 ? 
-                            '0' + envoye_le.getMinutes() : 
-                            envoye_le.getMinutes();
-                        date_str += hours + ':' + minutes;
+                            message = content;
+                        },
+                        () => { // Empty
+                            
+                        },
+                        () => { // Failed
+                            
+                        },
+                        () => { // Expired
+                            
+                        },
+                        {
+                            
+                        },
+                        0,
+                        false
+                    );
+                    if (message !== null) {
+
+
+
+                        // Date d'envoi =============================
+                        let envoye_le = new Date(message.envoye_le);
+                        let today = new Date();
+                        if (today.getFullYear() === envoye_le.getFullYear() &&
+                            today.getMonth() === envoye_le.getMonth() &&
+                            today.getDate() === envoye_le.getDate()) {
+                            let hours = envoye_le.getHours() < 10 ? 
+                                '0' + envoye_le.getHours() : 
+                                envoye_le.getHours();
+                            let minutes = envoye_le.getMinutes() < 10 ? 
+                                '0' + envoye_le.getMinutes() : 
+                                envoye_le.getMinutes();
+                            date_str += hours + ':' + minutes;
+                        } else {
+                            date_str += envoye_le.getDate() + ' ' + envoye_le.toLocaleString('default', { month: 'long' });
+                        }
+
+
+
+                        // Vu ou pas ==============================
+                        if (message.id_Utilisateur == my_id) {                
+                            Rest.get(`/api/messages/${message._id}/vu/${receiver._id}`,
+                            (content, json) => { // Success
+                                vu = /*html*/`<img src="/assets/img/icons8-double-coche-30.png" alt="Vu"/>`;
+                            }, null, null, null, null, 0, false);
+                            texte = 'Vous : ' + message.contenu;
+                        } else {
+                            Rest.get(`/api/messages/${message._id}/vu/${my_id}`,
+                                (vu, json) => { // Success
+                                    texte = message.contenu;
+                                },
+                                () => {
+                                    texte = /*html*/`<b>${message.contenu} </b>`;
+                                    date_str = /*html*/`<b>• ${date_str}</b>`;
+                                }, null, null, null, 0, false);
+                        }
                     } else {
-                        date_str += envoye_le.getDate() + ' ' + envoye_le.toLocaleString('default', { month: 'long' });
+                        texte = /*html*/`<i>Dites bonjour à ${receiver.prenom} !</i>`;
                     }
-    
-    
-    
-                    // Le message ==============================
-                    let texte = '';
-                    if (message.id_Utilisateur == my_id) {
-                        texte = 'Vous : ' + message.contenu;
-                    } else {
-                        Rest.get(`/api/messages/${message._id}/vu/${my_id}`,
-                            (vu, json) => { // Success
-                                texte = message.contenu;
-                            },
-                            () => {
-                                texte = /*html*/`<b>${message.contenu} </b>`;
-                                date_str = /*html*/`<b>• ${date_str}</b>`;
-                            }, null, null, null, 0, false);
-                    }
-                    
     
 
+
                     // On crée l'élément ou on le modifie ===============
-                    let div = this.conversations[message.id_Conversation];
+                    let div = this.conversations[conversation._id];
                     if (div) {
                         Dom.replace(/*html*/`
                             <img src="${photo}" alt="PP" />
@@ -139,10 +168,10 @@ export default class Liste {
                         `, this.container);
                         
                         let div = Finder.queryLast('.conv_div', this.container);
-                        this.conversations[message.id_Conversation] = div;
+                        this.conversations[conversation._id] = div;
                         
                         if (Object.keys(this.conversations).length === 1 && !window.onMobile) {
-                            this.changeConv(message.id_Conversation);
+                            this.changeConv(conversation._id);
                         }
                     }
                     

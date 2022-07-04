@@ -88,6 +88,10 @@ r::add([
             r::METHOD_GET,
             r::METHOD_POST
     ]],
+    '/api/conversations/{id}/messages/last' => [ 
+        a\Conversation::class, [
+            r::METHOD_GET
+    ]],
     '/api/conversations/{id}/messages/{offset}' => [ 
         a\Conversation::class, [
             r::METHOD_GET

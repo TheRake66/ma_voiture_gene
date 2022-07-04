@@ -101,24 +101,11 @@ class Conversation {
         return Toogle::object(function() {
             return Query::objects(
                 'SELECT *
-                FROM message AS m1
-                WHERE m1.id IN (
-
-                    SELECT MAX(m2.id)
-                    FROM message AS m2
-
-                    INNER JOIN conversation AS c 
-                        ON c.id = m2.id_Conversation
-
-                    INNER JOIN membre AS m 
-                        ON m.id_Conversation = c.id
-                        AND m.id = ?
-
-                    WHERE m2.id_Conversation = m1.id_Conversation
-                    AND m.id 
-                    GROUP BY m2.id_Conversation
-                )',
-                Message::class,
+                FROM conversation AS c
+                INNER JOIN membre AS m 
+                    ON m.id_Conversation = c.id
+                    AND m.id = ?',
+                Dto::class,
                 User::get()->_id);
         }, Message::class);
     }
@@ -159,6 +146,25 @@ class Conversation {
                 FROM message
                 WHERE id_Conversation = ?
                 ORDER BY envoye_le',
+                Message::class,
+                $id);
+        }, Message::class);
+    }
+
+
+    /**
+     * Recupere le dernier message d'une conversation.
+     * 
+     * @return Object Le dernier message.
+     */
+    static function getLastMessage($id) {
+        return Toogle::object(function() use ($id) {
+            return Query::object(
+                'SELECT *
+                FROM message
+                WHERE id_Conversation = ?
+                ORDER BY envoye_le DESC
+                LIMIT 1',
                 Message::class,
                 $id);
         }, Message::class);

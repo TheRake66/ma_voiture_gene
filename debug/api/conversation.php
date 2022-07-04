@@ -37,6 +37,10 @@ class Conversation extends Rest {
             $id = $this->data($query, 'id');
             $this->send((new Ma_voiture_geneConversation($id))->read(), 0, 'Recupere la conversation');
         });
+        $this->match('/api/conversations/{id}/messages/last', function() use ($query) {
+            $id = $this->data($query, 'id');
+            $this->send(DAOConversation::getLastMessage($id), 0, 'Recupere le dernier message');
+        });
         $this->match('/api/conversations/{id}/messages', function() use ($query) {
             $id = $this->data($query, 'id');
             $this->send(DAOConversation::getMessages($id), 0, 'Recupere les messages de la conversation.');
