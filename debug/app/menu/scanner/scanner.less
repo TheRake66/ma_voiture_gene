@@ -1,4 +1,9 @@
 @import '../../../../.kernel/theme.less';
+@import '../../../lib/less/label.less';
+@import '../../../lib/less/button.less';
+@import '../../../lib/less/modal.less';
+@import '../../../lib/less/input.less';
+@import '../../../lib/less/msgbox.less';
 
 
 
@@ -7,14 +12,70 @@
 // Version: 1.0
 // Categorie: Style
 menu-scanner {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 
+	div {
+		width: 100%;
+		background-color: black;
+		margin-top: auto;
+		margin-bottom: 32px;
+		display: flex;
+
+		video {
+			width: 60vw;
+			height: 60vh;
+			background-color: black;
+			margin: 0 auto;
+		}
+		canvas {
+			display: none;
+		}
+	}
+
+	button {
+		width: fit-content;
+		margin-bottom: auto;
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
 
 
+modal #add {
+	display: flex !important;
+	flex-direction: column !important;
+	width: 300px;
+
+	input {
+		width: 100%;
+	}
+}
 
 // Style responsive du composant Scanner.
 @media all and (max-width: @responsive-max-width) {
 	menu-scanner {
+		position: relative;
+		div {
+			width: 100%;
+			height: 100%;
+			margin: 0;
 
+			video {
+				width: 100%;
+				height: 100%;
+			}
+		}
+		button {
+			position: absolute;
+			left: 50%;
+			bottom: 24px;
+			transform: translateX(-50%);
+		}
+	}
+	
+	modal article {
+		width: 70vw !important;
 	}
 }

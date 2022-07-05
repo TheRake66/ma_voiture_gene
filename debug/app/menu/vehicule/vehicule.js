@@ -77,7 +77,7 @@ export default class Vehicule {
      */
     loadPlates() {
         Dom.clear(this.liste);
-        
+
         Rest.getFor('/api/plaques/moi',
             (plaque, json) => { // Success
                 Dom.insert(/*html*/`
@@ -114,6 +114,11 @@ export default class Vehicule {
     }
 
 
+    /**
+     * Ouvre le modal d'ajout de plaque.
+     * 
+     * @return {void}
+     */
     addPlate() {
         Modal.create('Ajouter', /*html*/`
             <label class="label">NUMERO DE PLAQUE</label>
@@ -124,6 +129,12 @@ export default class Vehicule {
         'add');
     }
 
+
+    /**
+     * Envoie la plaque.
+     * 
+     * @return {void}
+     */
     submitPlate() {
         let numero = Finder.query('modal #numero');
         let trimed = numero.value.trim();

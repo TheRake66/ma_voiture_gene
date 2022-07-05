@@ -36,6 +36,10 @@ r::add([
         a\Plaque::class, [
             r::METHOD_POST
     ]],
+    '/api/plaques/ocr' => [
+        a\Plaque::class, [
+            r::METHOD_POST
+    ]],
     '/api/plaques/moi' => [
         a\Plaque::class, [
             r::METHOD_GET

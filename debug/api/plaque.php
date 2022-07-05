@@ -3,10 +3,12 @@ namespace Api;
 
 use Kernel\Debug\Error;
 use Kernel\Communication\Rest;
+use Kernel\IO\Path;
 use Kernel\Security\Vulnerability\Xss;
 use Kernel\Security\Vulnerability\Csrf;
 use Kernel\Security\Validation;
 use Kernel\Session\User;
+use Library\thiagoalessio\TesseractOCR\TesseractOCR;
 use Model\Dto\Ma_voiture_gene\Plaque as Ma_voiture_genePlaque;
 
 /**
@@ -45,6 +47,60 @@ class Plaque extends Rest {
      * @return mixed Résultat de l'appel.
      */
     function post($route, $query, $body) {
+        $this->match('/api/plaques/ocr', function() use ($body) {
+            $image = $this->data($body, 'image');
+            $base64 = str_replace('data:image/png;base64,', '', (string)$image);
+            $string = base64_decode($base64);
+            $resource = imagecreatefromstring($string);
+    
+            // $width = imagesx($resource);
+            // $height = imagesy($resource);
+    
+            // for($x = 0; $x < $width; $x++) {
+            //     for($y = 0; $y < $height; $y++) {
+            //         $color = imagecolorat($resource, $x, $y);
+            //         $r = ($color >> 16) & 0xFF;
+            //         $g = ($color >> 8) & 0xFF;
+            //         $b = $color & 0xFF;
+            //         $gray = ($r + $g + $b) / 3;
+            //         if($gray > 100) {
+            //            $color = imagecolorallocate($resource, 255, 255, 255);
+            //         } else {
+            //            $color = imagecolorallocate($resource, 0, 0, 0);
+            //         }
+            //         imagesetpixel($resource, $x, $y, $color);
+            //     }
+            // }
+            
+            try {
+                $uuid = uniqid();
+                $folder = Path::absolute('tmp');
+                if (!file_exists($folder)) {
+                    mkdir($folder, 0777, true);
+                }
+                $file = $folder . '/' . $uuid . '.png';
+                imagepng($resource, $file);
+        
+                $string = (new TesseractOCR($file))
+                    ->lang('eng')
+                    ->psm(11)
+                    ->run();
+        
+                unlink($file);
+
+                $m = [];
+                $result = strtoupper($string);
+                preg_match('/[A-Z]{2}-[0-9]{3}-[A-Z]{2}/', $result, $m);
+                if (count($m) > 0) {
+                    $this->send($m[0], 0, 'Analyse de la plaque réussie.');
+                } else {
+                    throw new \Exception('Analyse de la plaque échouée.');
+                }
+    
+            } catch (\Exception $e) {
+                $this->send(false, 0, 'Analyse de la plaque échouée.');
+            }
+        });
         $this->match('/api/plaques', function() use ($body) {
             $numero = $this->data($body, 'numero');
             $id = User::get()->_id;
