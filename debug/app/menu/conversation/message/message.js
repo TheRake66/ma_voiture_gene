@@ -47,7 +47,10 @@ export default class Message {
     constructor() {
         this.loadMy();
         this.loadPredefini();
-        this.refreshMessage();
+        // Dom loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            this.refreshMessage();
+        });
     }
 
 
@@ -308,6 +311,7 @@ export default class Message {
      * @returns {void}
      */
     async refreshMessage() {
+        await new Promise(resolve => setTimeout(resolve, 500));
         let last_date = null;
         while (true) {
             if (this.conversation_id !== null) {

@@ -8,6 +8,7 @@ use Kernel\Security\Vulnerability\Csrf;
 use Kernel\Security\Validation;
 use Kernel\Session\User;
 use Model\Dto\Ma_voiture_gene\Bloque;
+use Model\Dto\Ma_voiture_gene\Plaque;
 use Model\Dto\Ma_voiture_gene\Signale;
 use Model\Dto\Ma_voiture_gene\Utilisateur as DTOUtilisateur;
 
@@ -140,7 +141,36 @@ class Utilisateur extends Rest {
      * @return mixed Résultat de l'appel.
      */
     function patch($route, $query, $body) {
-        $this->send(null, 0, 'Fonction non implémentée !', 500);
+        $this->match('/api/utilisateurs/moi', function() use ($body) {
+            $nom = $this->data($body, 'nom');
+            $prenom = $this->data($body, 'prenom');
+            $email = $this->data($body, 'email');
+            $photo = $this->data($body, 'photo');
+            $user = (new DTOUtilisateur(User::get()->_id))->read();
+            $user->nom = $nom;
+            $user->prenom = $prenom;
+            if ($user->email != $email) {
+                $verif = new DTOUtilisateur();
+                $verif->email = $email;
+                $verif = $verif->exists('email');
+                $this->send(false, 0, 'Email déjà utilisé.', 409);
+            } else {
+                $user->email = $email;
+                $user->photo = $photo ? base64_decode((string)$photo) : null;
+                $this->send($user->update(), 0, 'Mise a jour de l\'utilisateur.');
+            }
+        });
+        $this->match('/api/utilisateurs/moi/motdepasse', function() use ($body) {
+            $ancien = $this->data($body, 'ancien');
+            $nouveau = $this->data($body, 'nouveau');
+            $user = (new DTOUtilisateur(User::get()->_id))->read();
+            if ($user->mot_de_passe == hash('sha256', $ancien . $user->sel)) {
+                $user->mot_de_passe = hash('sha256', $nouveau . $user->sel);
+                $this->send($user->update(), 0, 'Mise a jour du mot de passe.');
+            } else {
+                $this->send(false, 0, 'Mot de passe incorrect.', 401);
+            }
+        });
     }
 
 }

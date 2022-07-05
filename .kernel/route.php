@@ -39,7 +39,12 @@ r::add([
     ]],
     '/api/utilisateurs/moi' => [ 
         a\Utilisateur::class, [
-            r::METHOD_GET
+            r::METHOD_GET,
+            r::METHOD_PATCH
+    ]],
+    '/api/utilisateurs/moi/motdepasse' => [ 
+        a\Utilisateur::class, [
+            r::METHOD_PATCH
     ]],
     '/api/utilisateurs/{id}' => [ 
         a\Utilisateur::class, [

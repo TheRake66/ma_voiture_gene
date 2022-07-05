@@ -98,7 +98,7 @@ export default class Parametre {
                 <label class="label" for="">ADRESSE E-MAIL</label>
                 <input id="email" class="input" type="email">
             `,
-            null,
+            this.submitProfil,
             null,
             'profil');
 
@@ -106,15 +106,14 @@ export default class Parametre {
         let nom = Finder.query('modal #nom');
         let prenom = Finder.query('modal #prenom');
         let email = Finder.query('modal #email');
+        let file = Finder.query('modal #file');
+        let changer = Finder.query('modal #changer');
+        let retirer = Finder.query('modal #retirer');
 
         image.src = this.image.src;
         nom.value = this.nom.innerText;
         prenom.value = this.prenom.innerText;
         email.value = this.email.innerText;
-
-        let file = Finder.query('modal #file');
-        let changer = Finder.query('modal #changer');
-        let retirer = Finder.query('modal #retirer');
 
         file.addEventListener('change', () => {
             let f = file.files[0];
@@ -135,6 +134,66 @@ export default class Parametre {
 
 
     /**
+     * Envoie le profil.
+     * 
+     * @return {void}
+     */
+    submitProfil() {
+        let image = Finder.query('modal #image');
+        let nom = Finder.query('modal #nom');
+        let prenom = Finder.query('modal #prenom');
+        let email = Finder.query('modal #email');
+        let file = Finder.query('modal #file');
+        let changer = Finder.query('modal #changer');
+        let retirer = Finder.query('modal #retirer');
+
+        if (nom.value.trim() === '') {
+            Msgbox.show('Attention', 'Veuillez entrer un nom.', Msgbox.IMG_WARN);
+            nom.focus();
+        } else if (prenom.value.trim() === '') {
+            Msgbox.show('Attention', 'Veuillez entrer un prénom.', Msgbox.IMG_WARN);
+            prenom.focus();
+        } else if (email.value.trim() === '') {
+            Msgbox.show('Attention', 'Veuillez entrer une adresse e-mail.', Msgbox.IMG_WARN);
+            email.focus();
+        } else {
+            Rest.patch('/api/utilisateurs/moi',
+                (content, json) => { // Success
+                    if (content) {
+                        menu_parametre.image.src = image.src;
+                        menu_parametre.titre.innerText = nom.value + ' ' + prenom.value;
+                        menu_parametre.nom.innerText = nom.value;
+                        menu_parametre.prenom.innerText = prenom.value;
+                        menu_parametre.email.innerText = email.value;
+                        Msgbox.show('Succès', 'Vos informations ont été mises à jour.', Msgbox.IMG_OK);
+                        Modal.close();
+                    } else {
+                        Msgbox.show('Attention', 'Cet adresse e-mail est déjà utilisée.', Msgbox.IMG_WARN);
+                    }
+                },
+                () => { // Empty
+                    
+                },
+                () => { // Failed
+                    
+                },
+                () => { // Expired
+                    
+                },
+                {
+                    nom: nom.value.trim(),
+                    prenom: prenom.value.trim(),
+                    email: email.value.trim(),
+                    photo: image.src === '/assets/img/default.png' ? null : image.src.split(',')[1]
+                },
+                0,
+                true
+            );
+        }
+    }
+
+
+    /**
      * Ouvre la modal de modification du mot de passe.
      * 
      * @return {void}
@@ -150,24 +209,57 @@ export default class Parametre {
                 <label class="label" for="">CONFIRMER MOT DE PASSE</label>
                 <input id="confirm" class="input" type="password">
             `,
-            null,
+            this.submitPass,
             null,
             'pass');
+    }
 
+
+    /**
+     * Envoie le nouveau mot de passe.
+     * 
+     * @return {void}
+     */
+    submitPass() {
         let old = Finder.query('modal #old').value.trim();
         let neww = Finder.query('modal #neww').value.trim();
         let confirm = Finder.query('modal #confirm').value.trim();
 
-        let changer = Finder.query('modal #changer');
-        changer.onclick = () => {
-            if (old === '') {
-                Msgbox.error('Veuillez entrer votre ancien mot de passe.');
-            } else if (neww !== confirm) {
-                Msgbox.error('Les mots de passe ne correspondent pas.');
-            } else {
-
-            }
-        };
+        if (old === '') {
+            Msgbox.show('Attention', 'Veuillez entrer votre ancien mot de passe.', Msgbox.IMG_WARN);
+        } else if (neww === '') {
+            Msgbox.show('Attention', 'Veuillez entrer votre nouveau mot de passe.', Msgbox.IMG_WARN);
+        } else if (confirm === '') {
+            Msgbox.show('Attention', 'Veuillez confirmer votre nouveau mot de passe.', Msgbox.IMG_WARN);
+        } else if (neww !== confirm) {
+            Msgbox.show('Attention', 'Les mots de passe ne correspondent pas.', Msgbox.IMG_WARN);
+        } else {
+            Rest.patch('/api/utilisateurs/moi/motdepasse',
+                (content, json) => { // Success
+                    if (content) {
+                        Msgbox.show('Succès', 'Votre mot de passe a été modifié.', Msgbox.IMG_OK);
+                        Modal.close();
+                    } else {
+                        Msgbox.show('Attention', 'Votre ancien mot de passe est incorrect.', Msgbox.IMG_WARN);
+                    }
+                },
+                () => { // Empty
+                    
+                },
+                () => { // Failed
+                    
+                },
+                () => { // Expired
+                    
+                },
+                {
+                    ancien: old,
+                    nouveau: neww
+                },
+                0,
+                true
+            );
+        }
     }
 
 }
