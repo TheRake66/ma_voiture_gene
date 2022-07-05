@@ -22,5 +22,13 @@
     "paths": [
       "debug/api/conversation.php"
     ]
+  },
+  {
+    "name": "plaque",
+    "created": "2022-07-05T10:31:25.7221046+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/api/plaque.php"
+    ]
   }
 ]

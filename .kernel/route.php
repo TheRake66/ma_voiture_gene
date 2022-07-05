@@ -32,6 +32,20 @@ if (User::has()) {
 
 // Route vers les API.
 r::add([
+    '/api/plaques' => [
+        a\Plaque::class, [
+            r::METHOD_POST
+    ]],
+    '/api/plaques/moi' => [
+        a\Plaque::class, [
+            r::METHOD_GET
+    ]],
+    '/api/plaques/{numero}' => [
+        a\Plaque::class, [
+            r::METHOD_DELETE
+    ]],
+
+
     '/api/utilisateurs' => [ 
         a\Utilisateur::class, [
             r::METHOD_GET,

@@ -96,21 +96,21 @@ export default class Info {
      * @returns {void}
      */
     repportUser() {
-        Modal.create('Rapport', /*html*/`
+        Modal.create('Signalement', /*html*/`
             <textarea class="input" id="rapport" placeholder="Raison du signalement..."></textarea>`, 
             () => {
                 let raison = Finder.query('#rapport').value.trim();
                 if (raison === '') {
-                    Msgbox.show('Erreur', 'Vous devez entrer une raison.', Msgbox.IMG_ERROR);
+                    Msgbox.show('Attention', 'Vous devez entrer une raison.', Msgbox.IMG_WARN);
                 } else if (raison.length < 10) {
-                    Msgbox.show('Erreur', 'Vous devez entrer une raison de plus de 10 caractères.', Msgbox.IMG_ERROR);
+                    Msgbox.show('Attention', 'Vous devez entrer une raison de plus de 10 caractères.', Msgbox.IMG_WARN);
                 } else {
                     let error = () => Msgbox.show('Erreur', 'Une erreur est survenue.', Msgbox.IMG_ERROR);
                     Rest.post(`/api/utilisateurs/${this.interlocutor_id}/rapport`,
                         (content, json) => { // Success
                             if (content) {
                                 Modal.close();
-                                Msgbox.show('Rapport', 'Votre rapport a été envoyé.', Msgbox.IMG_OK);
+                                Msgbox.show('Signalement', 'Votre rapport a été envoyé.', Msgbox.IMG_OK);
                             } else {
                                 error();
                             }

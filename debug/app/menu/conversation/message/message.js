@@ -311,7 +311,7 @@ export default class Message {
      * @returns {void}
      */
     async refreshMessage() {
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise(resolve => setTimeout(resolve, 1000));
         let last_date = null;
         while (true) {
             if (this.conversation_id !== null) {

@@ -1,4 +1,9 @@
 @import '../../../../.kernel/theme.less';
+@import '../../../lib/less/label.less';
+@import '../../../lib/less/button.less';
+@import '../../../lib/less/modal.less';
+@import '../../../lib/less/input.less';
+@import '../../../lib/less/msgbox.less';
 
 
 
@@ -7,14 +12,79 @@
 // Version: 1.0
 // Categorie: Style
 menu-vehicule {
+	display: flex;
+	flex-direction: column;
+	padding: 48px;
+	
+	> div {
 
+		display: flex;
+		flex-wrap: wrap;
+		margin-top: 16px;
+		margin-bottom: 24px;
+
+		> p {
+			height: 20vh;
+			line-height: 20vh;
+			margin: auto;
+		}
+
+		> div {
+			background-color: @black;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 32px;
+			margin-right: 16px;
+			margin-bottom: 16px;
+			border-radius: @border-radius;
+
+			span {
+				font-size: calc(@font-size * 1.5);
+				margin-bottom: 16px;
+			}
+		}
+	}
+
+	> button {
+		width: fit-content;
+	}
 }
 
 
+modal #add {
+	display: flex !important;
+	flex-direction: column !important;
+	width: 300px;
+
+	input {
+		width: 100%;
+	}
+}
 
 // Style responsive du composant Vehicule.
 @media all and (max-width: @responsive-max-width) {
 	menu-vehicule {
+		width: 100%;
+		padding: 32px;
 
+		> p {
+		}
+
+		> div {
+			> div {
+				margin-right: 0px;
+				width: 100%;
+				padding: 24px;
+			}
+		}
+
+		> button {
+			width: 100%;
+		}
+	}
+	
+	modal article {
+		width: 70vw !important;
 	}
 }
