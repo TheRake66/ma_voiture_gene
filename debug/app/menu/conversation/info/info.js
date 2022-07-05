@@ -232,7 +232,7 @@ export default class Info {
                                 this.picture.src = '/assets/img/default.png';
                                 menu_conversation_message.deleteConv();
                                 menu_conversation_liste.deleteConv();
-                                if (window.onModile()) {
+                                if (window.onMobile) {
                                     this.comeBack();
                                 }
                             }

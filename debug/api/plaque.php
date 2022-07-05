@@ -35,6 +35,11 @@ class Plaque extends Rest {
             $plaque = new Ma_voiture_genePlaque(null, $id);
             $this->send($plaque->many('id'), 0, 'Récupération des plaques de l\'utilisqteur réussie.');
         });
+        $this->match('/api/plaques/{numero}', function() use ($query) {
+            $numero = $this->data($query, 'numero');
+            $plaque = new Ma_voiture_genePlaque($numero);
+            $this->send($plaque->read(), 0, 'Récupération de la plaque réussie.');
+        });
     }
 
 
@@ -48,14 +53,20 @@ class Plaque extends Rest {
      */
     function post($route, $query, $body) {
         $this->match('/api/plaques/ocr', function() use ($body) {
+            
+            // Preparation de l'image
             $image = $this->data($body, 'image');
             $base64 = str_replace('data:image/png;base64,', '', (string)$image);
-            $string = base64_decode($base64);
-            $resource = imagecreatefromstring($string);
+            $decoded = base64_decode($base64);
+            $resource = imagecreatefromstring($decoded);
+            $uuid = uniqid();
+            $folder = Path::absolute('tmp');
+            $file = $folder . '/' . $uuid . '.png';
+
     
+            // Traitement de l'image en niveau de gris
             // $width = imagesx($resource);
             // $height = imagesy($resource);
-    
             // for($x = 0; $x < $width; $x++) {
             //     for($y = 0; $y < $height; $y++) {
             //         $color = imagecolorat($resource, $x, $y);
@@ -71,35 +82,55 @@ class Plaque extends Rest {
             //         imagesetpixel($resource, $x, $y, $color);
             //     }
             // }
+
             
+            // Création de l'image
+            if (!file_exists($folder)) {
+                mkdir($folder, 0777, true);
+            }
+            imagepng($resource, $file);
+            
+
+            // OCR de l'image
+            $sucess = false;
             try {
-                $uuid = uniqid();
-                $folder = Path::absolute('tmp');
-                if (!file_exists($folder)) {
-                    mkdir($folder, 0777, true);
-                }
-                $file = $folder . '/' . $uuid . '.png';
-                imagepng($resource, $file);
-        
                 $string = (new TesseractOCR($file))
                     ->lang('eng')
                     ->psm(11)
                     ->run();
-        
-                unlink($file);
+                $sucess = true;
+            } catch (\Exception $e) {
+                $sucess = false;
+            }
 
+
+            if ($sucess) {
+                // Suppression de l'image
+                if (file_exists($file)) {
+                    chmod($file, 0644);
+                    unlink($file);
+                }
+
+    
+                // Extraction de la plaque
                 $m = [];
-                $result = strtoupper($string);
-                preg_match('/[A-Z]{2}-[0-9]{3}-[A-Z]{2}/', $result, $m);
+                $string = strtoupper($string);
+                $string = str_replace(' ', '', $string);
+                $string = str_replace('\n', '', $string);
+                preg_match('/[A-Z]{2}-[0-9]{3}-[A-Z]{2}/', $string, $m);
+    
+    
+                // Envoi de la réponse
                 if (count($m) > 0) {
                     $this->send($m[0], 0, 'Analyse de la plaque réussie.');
                 } else {
-                    throw new \Exception('Analyse de la plaque échouée.');
+                    $this->send(false, 0, 'Analyse de la plaque échouée.');
                 }
-    
-            } catch (\Exception $e) {
+            } else {
                 $this->send(false, 0, 'Analyse de la plaque échouée.');
             }
+        
+
         });
         $this->match('/api/plaques', function() use ($body) {
             $numero = $this->data($body, 'numero');

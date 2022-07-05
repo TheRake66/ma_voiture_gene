@@ -44,7 +44,10 @@ export default class Modal {
      * Fermer un modal
      */
     static close() {
-        Finder.query('modal').remove();
+        let modal = Finder.query('modal');
+        if (modal) {
+            modal.remove();
+        }
     }
 
 }

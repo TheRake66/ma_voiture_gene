@@ -3,12 +3,15 @@ namespace Api;
 
 use Kernel\Debug\Error;
 use Kernel\Communication\Rest;
+use Kernel\Database\Statement;
+use Kernel\Database\Transaction;
 use Kernel\Security\Vulnerability\Xss;
 use Kernel\Security\Vulnerability\Csrf;
 use Kernel\Security\Validation;
 use Kernel\Session\User;
 use Model\Dao\Ma_voiture_gene\Conversation as DAOConversation;
 use Model\Dto\Ma_voiture_gene\Conversation as Ma_voiture_geneConversation;
+use Model\Dto\Ma_voiture_gene\Membre;
 use Model\Dto\Ma_voiture_gene\Message;
 
 /**
@@ -37,13 +40,13 @@ class Conversation extends Rest {
             $id = $this->data($query, 'id');
             $this->send((new Ma_voiture_geneConversation($id))->read(), 0, 'Recupere la conversation');
         });
-        $this->match('/api/conversations/{id}/messages/last', function() use ($query) {
-            $id = $this->data($query, 'id');
-            $this->send(DAOConversation::getLastMessage($id), 0, 'Recupere le dernier message');
-        });
         $this->match('/api/conversations/{id}/messages', function() use ($query) {
             $id = $this->data($query, 'id');
             $this->send(DAOConversation::getMessages($id), 0, 'Recupere les messages de la conversation.');
+        });
+        $this->match('/api/conversations/{id}/messages/last', function() use ($query) {
+            $id = $this->data($query, 'id');
+            $this->send(DAOConversation::getLastMessage($id), 0, 'Recupere le dernier message');
         });
         $this->match('/api/conversations/{id}/messages/{offset}', function() use ($query) {
             $id = $this->data($query, 'id');
@@ -89,6 +92,28 @@ class Conversation extends Rest {
         $this->match('/api/conversations/{id}/vu', function() use ($query) {
             $id = $this->data($query, 'id');
             $this->send(DAOConversation::setVu($id), 0, 'Met les messages en vu.');
+        });
+        $this->match('/api/conversations', function() use ($body) {
+            $interlocuteur = $this->data($body, 'interlocuteur');
+            try {
+                Transaction::begin();
+
+                $conversation = new Ma_voiture_geneConversation(null, new \DateTime());
+                $conversation->create();
+                $conversation->_id = Statement::instance()->lastInsertId();
+
+                $membre1 = new Membre(User::get()->_id, $conversation->_id);
+                $membre1->create();
+
+                $membre2 = new Membre($interlocuteur, $conversation->_id);
+                $membre2->create();
+
+                Transaction::commit();
+                $this->send($conversation->_id, 0, 'Créé une conversation.');
+            } catch (\Exception $e) {
+                Transaction::rollback();
+                $this->send(null, 1, 'Erreur lors de la creation de la conversation.');
+            }
         });
     }
 

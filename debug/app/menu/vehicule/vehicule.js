@@ -43,23 +43,24 @@ export default class Vehicule {
      * @return {void}
      */
     deletePlate(numero) {
+        let error = () => Msgbox.show('Erreur', 'Impossible de supprimer la plaque.', Msgbox.IMG_ERROR);
         Rest.delete(`/api/plaques/${numero}`,
             (content, json) => { // Success
                 if (content) {
                     Msgbox.show('Succès', 'La plaque a été supprimée.');
                     menu_vehicule.loadPlates();
                 } else {
-                    Msgbox.show('Erreur', 'Impossible de supprimer la plaque.', Msgbox.IMG_ERROR);
+                    error();
                 }
             },
             () => { // Empty
-                
+                error();
             },
             () => { // Failed
-                
+                error();
             },
             () => { // Expired
-                
+                error();
             },
             {
                 
@@ -143,6 +144,7 @@ export default class Vehicule {
         } else if (!/^[A-Z]{2}-[0-9]{3}-[A-Z]{2}$/.test(trimed)) {
             Msgbox.show('Attention', 'Veuillez entrer un numéro de plaque valide.', Msgbox.IMG_WARN);
         } else {
+            let error = () => Msgbox.show('Erreur', 'Impossible d\'ajouter la plaque.', Msgbox.IMG_ERROR);
             Rest.post('/api/plaques',
                 (content, json) => { // Success
                     if (content) {
@@ -154,13 +156,13 @@ export default class Vehicule {
                     }
                 },
                 () => { // Empty
-                    
+                    error();
                 },
                 () => { // Failed
-                    
+                    error();
                 },
                 () => { // Expired
-                    
+                    error();
                 },
                 {
                     numero: trimed

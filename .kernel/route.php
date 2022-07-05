@@ -46,7 +46,8 @@ r::add([
     ]],
     '/api/plaques/{numero}' => [
         a\Plaque::class, [
-            r::METHOD_DELETE
+            r::METHOD_DELETE,
+            r::METHOD_GET
     ]],
 
 
@@ -97,6 +98,11 @@ r::add([
     ]],
 
 
+
+    '/api/conversations' => [ 
+        a\Conversation::class, [
+            r::METHOD_POST
+    ]],
     '/api/conversations/moi' => [ 
         a\Conversation::class, [
             r::METHOD_GET

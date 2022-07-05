@@ -4,6 +4,7 @@ import Finder from '../../../../../.kernel/js/html/finder.js';
 import Rest from '../../../../../.kernel/js/communication/rest.js';
 import Location from '../../../../../.kernel/js/url/location.js';
 import Cookie from '../../../../../.kernel/js/io/cookie.js';
+import Query from '../../../../../.kernel/js/url/query.js';
 
 
 
@@ -24,6 +25,7 @@ export default class Liste {
     last_clicked_id = null;
     cleared = false;
     open = false;
+    self_open = false;
 
 
     /**
@@ -43,6 +45,7 @@ export default class Liste {
      * @returns {void}
      */
     async refreshMessage() {
+        await new Promise(resolve => setTimeout(resolve, 1000));
         let my_id = Cookie.get('ma_voiture_gene_session_id');
         while (true) {
             Rest.getFor('/api/conversations/moi',
@@ -154,7 +157,7 @@ export default class Liste {
                         `, div);
                     } else {
                         Dom.insert(/*html*/`
-                            <div class="conv_div" onclick="menu_conversation_liste.changeConv(${message.id_Conversation})">
+                            <div class="conv_div" onclick="menu_conversation_liste.changeConv(${conversation._id})">
                                 <img src="${photo}" alt="PP" />
                                 <article>
                                     <b>${titre}</b>
@@ -170,7 +173,10 @@ export default class Liste {
                         let div = Finder.queryLast('.conv_div', this.container);
                         this.conversations[conversation._id] = div;
                         
-                        if (Object.keys(this.conversations).length === 1 && !window.onMobile) {
+                        if (!this.self_open && Query.get('id') == conversation._id) {
+                            this.changeConv(conversation._id);
+                            this.self_open = true;
+                        } else if (Object.keys(this.conversations).length === 1 && !window.onMobile) {
                             this.changeConv(conversation._id);
                         }
                     }
@@ -201,7 +207,7 @@ export default class Liste {
                     
                 },
                 0,
-                true
+                false
             );
             await new Promise(resolve => setTimeout(resolve, 3000));
         }
