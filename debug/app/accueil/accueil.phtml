@@ -1,0 +1,68 @@
+<?php
+use Kernel\Security\Vulnerability\Xss;
+use Kernel\Security\Vulnerability\Csrf;
+use Kernel\Html\Attribute;
+use Kernel\Html\Builder;
+use Kernel\Html\Output;
+use Kernel\Convert\Encoded;
+use Kernel\Convert\Number;
+use Kernel\Url\Location;
+use Controller\Accueil\Footer;
+use Controller\Accueil\Header;
+?>
+
+
+
+<!-- 
+Vue du composant Accueil.
+Author: thiba
+Version: 1.0
+Categorie: Vue
+ -->
+<accueil>
+
+	<?php new Header ?>
+
+	<div class="presentation">
+		<div id="voiture"></div>
+		<div id="mockup"></div>
+		<h1>Ma voiture gêne</h1>
+		<p>Vous voulez prévenir qu'une personne est garée devant votre porte de garage ou l'entrée de votre pavillon sans appeler la fourrière ? <br/>
+		Notre application vous permet de faire cela en quelques clics !
+		</p>
+		<div class="buttons">		
+			<a href="/inscription" class="button">Inscription</a>
+			<a href="/connexion" class="button button2">Connexion</a>
+		</div>
+		<div id="arrow"></div>
+	</div>
+
+	<div class="banniere">
+		<div id="image"></div>
+		<div class="text">
+			<h3>Prévenir pour éviter les problèmes</h3>
+			<p>Ma voiture gêne est une application web, disponible sous Android, IOS et tous les navigateurs web, qui permet aux usagers de la route de prévenir les propriétaires de voiture d’un incident sur leur véhicule ou d’un mauvais stationnement sur la voie publique.
+			</p>
+		</div>
+	</div>
+
+	<div class="banniere banniere2">
+		<div class="text">
+			<h3>La puissance de la communauté</h3>
+			<p>Tous les utilisateurs peuvent scanner et entrer anonymement leurs plaques d’immatriculation.<br/>
+				Si une plaque scannée a été enregistrée par un utilisateur, il a la possibilité d'entamer une conversation sécurisée avec le propriétaire de la voiture.
+			</p>
+		</div>
+		<div id="image"></div>
+	</div>
+
+	<div class="banniere">
+		<div class="text full-width-text">
+			<h3>Rejoignez la communauté !</h3>
+			<a href="/inscription" class="button">Inscrivez-vous</a>
+		</div>
+	</div>
+
+	<?php new Footer ?>
+
+</accueil>

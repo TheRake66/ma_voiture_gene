@@ -77,8 +77,6 @@ export default class Vehicule {
      * @return {void}
      */
     loadPlates() {
-        Dom.clear(this.liste);
-
         Rest.getFor('/api/plaques/moi',
             (plaque, json) => { // Success
                 Dom.insert(/*html*/`
@@ -89,16 +87,19 @@ export default class Vehicule {
                 `, this.liste);
             },
             () => { // Pre
+                Dom.clear(this.liste);
             },
             () => { // Post
                 
             },
             () => { // Empty
+                Dom.clear(this.liste);
                 Dom.insert(/*html*/`
                     <p>Aucune plaque</p>
                 `, this.liste);
             },
             () => { // Failed
+                Dom.clear(this.liste);
                 Dom.insert(/*html*/`
                     <p>Impossible de charger les plaques</p>
                 `, this.liste);

@@ -1,0 +1,72 @@
+<?php
+use Kernel\Security\Vulnerability\Xss;
+use Kernel\Security\Vulnerability\Csrf;
+use Kernel\Html\Attribute;
+use Kernel\Html\Builder;
+use Kernel\Html\Output;
+use Kernel\Convert\Encoded;
+use Kernel\Convert\Number;
+use Kernel\Url\Location;
+?>
+
+
+
+<!-- 
+Vue du composant Footer.
+Author: thiba
+Version: 1.0
+Categorie: Vue
+ -->
+<accueil-footer>
+	<div class="footer">
+
+		<div class="communication">
+			
+			<div class="copyright">
+				<h4>La meilleure <br/> 
+					des communautés</h4>
+				<div class="langue">
+					<img src="../../../assets/img/france.png" width="50px" alt="france">
+					<p>Français</p>
+				</div>
+			</div>
+
+			<div class="membres">
+				<h5>Membres</h5>
+				<a class="link" target="_blank" href="https://www.linkedin.com/in/thibault-bustos-6a000a198/">Thibault BUSTOS</a>
+				<a class="link" target="_blank" href="https://www.linkedin.com/in/thibault-heytmann-893977215/">Thibault HEYTMANN</a>
+				<a class="link" target="_blank" href="https://www.linkedin.com/in/baptiste-daujat-31a397215/">Baptiste DAUJAT</a>
+				<a class="link" target="_blank" href="https://www.linkedin.com/in/dar%C3%A9-samuel-anyaronke-000a85232/">Samuel ANYARONKE DARE</a>
+			</div>
+
+			<div class="lien">
+				<h5>Liens utiles</h5>
+				<a class="link" target="_blank" href="https://trello.com/invite/b/aezsFozi/017092c983f7339fc6f47b5a566d84c9/ma-voiture-gene ">Trello</a>
+				<a class="link" target="_blank" href="https://cody-framework.fr/">Cody Framework</a>
+				<a class="link" target="_blank" href="https://drive.google.com/drive/folders/1lGwJfvDDhVmi40vz_ad2SAEmMONAytdG?usp=sharing">Google drive</a>
+				<a class="link" target="_blank" href="https://github.com/TheRake66/ma_voiture_gene">Git Hub</a>
+			</div>
+
+			<div class="reseaux">
+				<h5>Réseaux sociaux</h5>
+				<a class="link" target="_blank" href="https://github.com/TheRake66/">Thibault BUSTOS</a>
+				<a class="link" target="_blank" href="https://allmylinks.com/titoufr33">Thibault HEYTMANN</a>
+				<a class="link" target="_blank" href="https://www.linkedin.com/in/baptiste-daujat-31a397215/">Baptiste DAUJAT</a>
+				<a class="link" target="_blank" href="https://www.linkedin.com/in/dar%C3%A9-samuel-anyaronke-000a85232/">Samuel ANYARONKE DARE</a>
+			</div>
+			
+		</div>
+		<hr>
+
+		<div class="inscription">
+			<div class="logo">
+				<img src="../../../assets/img/logo.png" width="50px" alt="logo">
+				<p>Ma voiture gêne</p>
+			</div>
+			<a href="/inscription" class="button">Je m'inscris</a>
+
+		</div>
+
+	</div>
+
+</accueil-footer>

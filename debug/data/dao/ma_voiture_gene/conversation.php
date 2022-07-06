@@ -21,11 +21,24 @@ use Model\Dto\Ma_voiture_gene\Vu;
  */
 class Conversation {
 
-
+    /**
+     * Supprime une conversation.
+     * 
+     * @param int $id L'identifiant de la conversation.
+     * @return bool True si la conversation a été supprimée, false sinon.
+     */
     static function delete($id) {
         return Toogle::object(function() use ($id) {
             try {
                 Transaction::begin();
+
+                Query::execute(
+                    'DELETE n.*
+                    FROM notification AS n
+                    INNER JOIN message AS m 
+                        ON n.id_message = m.id
+                        AND m.id_conversation = ?',
+                    $id);
 
                 Query::execute(
                     'DELETE v.*

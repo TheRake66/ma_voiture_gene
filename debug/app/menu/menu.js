@@ -22,7 +22,34 @@ export default class Menu {
      * @return {void}
      */
     constructor() {
-        
+        this.notificationChecker();
+    }
+
+
+    /**
+     * Envoie les notifications.
+     * 
+     * @return {void}
+     */
+    async notificationChecker() {
+        while (true) {
+            Rest.getFor(`/api/messages/notifications`,
+                (notification, json) => { // Success
+                    Rest.get(`/api/messages/${notification._id_Message}`,
+                        (message, json) => { // Success
+                            Rest.get(`/api/utilisateurs/${message.id_Utilisateur}`,
+                                (utilisateur, json) => { // Success
+                                    window.sendNotification(
+                                        `${utilisateur.prenom} ${utilisateur.nom}`,
+                                        message.contenu,
+                                        utilisateur.photo === null ?
+                                            '/assets/img/default.png' :
+                                            'data:image/png;base64,' + utilisateur.photo);
+                                }, null, null, null, null, 0, false);
+                        }, null, null, null, null, 0, false);
+                }, null, null, null, null, null, null, 0, false);
+            await new Promise(resolve => setTimeout(resolve, 1000));
+        }
     }
 
 }

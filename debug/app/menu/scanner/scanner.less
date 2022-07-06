@@ -16,23 +16,39 @@ menu-scanner {
 	flex-direction: column;
 	height: 100%;
 
-	div {
-		width: 100%;
-		background-color: black;
-		margin-top: auto;
+	> div {
+		margin: auto;
 		margin-bottom: 32px;
+		position: relative;
+		background-color: black;
+		border-radius: @border-radius;
+		box-shadow: @shadow;
+		overflow: hidden;
 		display: flex;
 
 		video {
-			width: 70vw;
-			height: 70vh;
-			background-color: black;
-			margin: 0 auto;
+			max-width: 70vw; 
+			max-height: 70vw;
+			width: auto;
+			height: auto;
 		}
+	
+		#barre {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			border-top: solid 10px rgba(255, 0, 0, 0.5);
+			z-index: 1;
+			animation: barre 3s infinite alternate ease-in-out;
+		}
+
 		canvas {
 			display: none;
 		}
 	}
+
 
 	button {
 		width: fit-content;
@@ -42,6 +58,15 @@ menu-scanner {
 	}
 }
 
+
+@keyframes barre {
+	0% {
+		transform: translateY(0);
+	}
+	100% {
+		transform: translateY(calc(100% - 10px));
+	}
+}
 
 modal #add {
 	display: flex !important;
@@ -57,16 +82,21 @@ modal #add {
 @media all and (max-width: @responsive-max-width) {
 	menu-scanner {
 		position: relative;
+		background-color: black;
+
 		div {
-			width: 100%;
-			height: 100%;
-			margin: 0;
+			margin: auto;
+			border-radius: 0;
+			box-shadow: none;
 
 			video {
+				max-width: 100%;
+				max-height: 100%;
 				width: 100%;
 				height: 100%;
 			}
 		}
+
 		button {
 			position: absolute;
 			left: 50%;

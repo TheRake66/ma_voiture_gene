@@ -65,23 +65,23 @@ class Plaque extends Rest {
 
     
             // Traitement de l'image en niveau de gris
-            // $width = imagesx($resource);
-            // $height = imagesy($resource);
-            // for($x = 0; $x < $width; $x++) {
-            //     for($y = 0; $y < $height; $y++) {
-            //         $color = imagecolorat($resource, $x, $y);
-            //         $r = ($color >> 16) & 0xFF;
-            //         $g = ($color >> 8) & 0xFF;
-            //         $b = $color & 0xFF;
-            //         $gray = ($r + $g + $b) / 3;
-            //         if($gray > 100) {
-            //            $color = imagecolorallocate($resource, 255, 255, 255);
-            //         } else {
-            //            $color = imagecolorallocate($resource, 0, 0, 0);
-            //         }
-            //         imagesetpixel($resource, $x, $y, $color);
-            //     }
-            // }
+            $width = imagesx($resource);
+            $height = imagesy($resource);
+            for($x = 0; $x < $width; $x++) {
+                for($y = 0; $y < $height; $y++) {
+                    $color = imagecolorat($resource, $x, $y);
+                    $r = ($color >> 16) & 0xFF;
+                    $g = ($color >> 8) & 0xFF;
+                    $b = $color & 0xFF;
+                    $gray = ($r + $g + $b) / 3;
+                    if($gray > 15) {
+                       $color = imagecolorallocate($resource, 255, 255, 255);
+                    } else {
+                       $color = imagecolorallocate($resource, 0, 0, 0);
+                    }
+                    imagesetpixel($resource, $x, $y, $color);
+                }
+            }
 
             
             // Création de l'image
@@ -104,25 +104,28 @@ class Plaque extends Rest {
             }
 
 
-            if ($sucess) {
-                // Suppression de l'image
-                if (file_exists($file)) {
-                    chmod($file, 0644);
-                    unlink($file);
-                }
+            // Suppression de l'image
+            if (file_exists($file)) {
+                chmod($file, 0644);
+                unlink($file);
+            }
 
-    
+
+            if ($sucess) {
                 // Extraction de la plaque
                 $m = [];
                 $string = strtoupper($string);
                 $string = str_replace(' ', '', $string);
                 $string = str_replace('\n', '', $string);
-                preg_match('/[A-Z]{2}-[0-9]{3}-[A-Z]{2}/', $string, $m);
+                $string = preg_replace('/[^A-Z0-9]/', '', $string);
+                preg_match('/[A-Z]{2}[0-9]{3}[A-Z]{2}/', $string, $m);
     
     
                 // Envoi de la réponse
                 if (count($m) > 0) {
-                    $this->send($m[0], 0, 'Analyse de la plaque réussie.');
+                    $founded = $m[0];
+                    $plaque = substr($founded, 0, 2) . '-' . substr($founded, 2, 3) . '-' . substr($founded, 5, 2);
+                    $this->send($plaque, 0, 'Analyse de la plaque réussie.');
                 } else {
                     $this->send(false, 0, 'Analyse de la plaque échouée.');
                 }

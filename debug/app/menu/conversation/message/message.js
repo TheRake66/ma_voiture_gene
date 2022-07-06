@@ -36,6 +36,7 @@ export default class Message {
     interlocutor_id = null;
     last_message_offset = 0;
     bloquer = false;
+    last_date = new Date();
 
 
     /**
@@ -45,12 +46,7 @@ export default class Message {
      * @return {void}
      */
     constructor() {
-        this.loadMy();
-        this.loadPredefini();
-        // Dom loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            this.refreshMessage();
-        });
+        
     }
 
 
@@ -115,7 +111,7 @@ export default class Message {
      */
     scrollToLast() {
         let div = Finder.queryLast('div', this.section);
-        if (div !== null) {
+        if (div) {
             div.scrollIntoView();
         }
     }
@@ -194,6 +190,7 @@ export default class Message {
         `, this.section);
 
         this.scrollToLast();
+        menu_conversation_liste.refreshMessage();
     }
 
 
@@ -283,6 +280,7 @@ export default class Message {
                     }
                     this.addMessageMy(message);
                     this.input.value = '';
+                    menu_conversation_liste.refreshMessage();
                 } else {
                     error();
                 }
@@ -306,66 +304,84 @@ export default class Message {
 
 
     /**
+     * Actualise les messages.
+     * 
+     * @returns {void}
+     */
+    async mainLoop() {
+        while (true) {
+            if (this.conversation_id !== null) {
+                this.refreshMessage();
+            }
+            await new Promise(resolve => setTimeout(resolve, 3000));
+        }
+    }
+
+
+    /**
      * Rafraichit les messages.
      * 
      * @returns {void}
      */
-    async refreshMessage() {
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        let last_date = null;
-        while (true) {
-            if (this.conversation_id !== null) {
-                Rest.getFor(`/api/conversations/${this.conversation_id}/messages/${this.last_message_offset}`,
-                    (message, json) => { // Success
-                        // Date
-                        let date = new Date(message.envoye_le);
-                        if (last_date === null || 
-                            (last_date.getDay() !== date.getDay() &&
-                            last_date.getMonth() !== date.getMonth() &&
-                            last_date.getFullYear() !== date.getFullYear())) {
-                            Dom.insert(/*html*/`
-                                <span>${message.envoye_le}</span>
-                            `, this.section);
-                            last_date = date;
-                        }
+    refreshMessage() {
+        Rest.getFor(`/api/conversations/${this.conversation_id}/messages/${this.last_message_offset}`,
+            (message, json) => { // Success
+                // Date
+                let date = new Date(message.envoye_le);
+                if (this.last_date === null || 
+                    (this.last_date.getDay() !== date.getDay() &&
+                    this.last_date.getMonth() !== date.getMonth() &&
+                    this.last_date.getFullYear() !== date.getFullYear())) {
+                    Dom.insert(/*html*/`
+                        <span>${message.envoye_le}</span>
+                    `, this.section);
+                    this.last_date = date;
+                }
 
-                        // Ajout du message
-                        let i_am_sender = message.id_Utilisateur == this.my_id;
-                        if (i_am_sender) {
-                            this.addMessageMy(message);
-                        } else {                    
-                            this.addMessageInterlocutor(message);
-                        }
-                    },
-                    () => { // Pre
-                        
-                    },
-                    () => { // Post
-                        // Change au moment de la reception des messages en pc
-                        if (!window.onMobile || menu_conversation_liste.open) {
-                            Rest.post(`/api/conversations/${this.conversation_id}/vu`);
-                        }
-                    },
-                    () => { // Empty
-                        
-                    },
-                    () => { // Failed
-                        
-                    },
-                    () => { // Expired,
-                        
-                    },
-                    {
-                        
-                    },
-                    0,
-                    false
-                );
+                // Ajout du message
+                let i_am_sender = message.id_Utilisateur == this.my_id;
+                if (i_am_sender) {
+                    this.addMessageMy(message);
+                } else {                    
+                    this.addMessageInterlocutor(message);
+                }
+            },
+            () => { // Pre
+                
+            },
+            () => { // Post
+                this.setAllSeen();
                 this.checkBloque();
-                await new Promise(resolve => setTimeout(resolve, 3000));
-            } else {
-                await new Promise(resolve => setTimeout(resolve, 100));
-            }
+            },
+            () => { // Empty
+                this.setAllSeen();
+                this.checkBloque();
+            },
+            () => { // Failed
+                this.setAllSeen();
+                this.checkBloque();
+            },
+            () => { // Expired,
+                
+            },
+            {
+                
+            },
+            0,
+            true
+        );
+    }
+
+
+    /**
+     * Met tous les messages en vu.
+     * 
+     * @returns {void}
+     */
+    setAllSeen() {
+        // Change au moment de la reception des messages en pc
+        if (!window.onMobile || menu_conversation_liste.open) {
+            Rest.post(`/api/conversations/${this.conversation_id}/vu`);
         }
     }
  
@@ -387,6 +403,7 @@ export default class Message {
         this.predefini.style.display = 'flex';
         this.loadConversation();
         this.checkBloque();
+        this.refreshMessage();
     }
 
 
@@ -406,6 +423,7 @@ export default class Message {
         this.predefini.style.display = 'none';
         this.picture.src = '/assets/img/default.png';
         this.name.innerText = '';
+        this.refreshMessage();
         if (window.onMobile) {
             this.comeBack();
         }

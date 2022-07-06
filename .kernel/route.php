@@ -7,9 +7,10 @@ use Kernel\Session\User;
 
 
 // Route vers les composants.
-r::notfound('/connexion');
-r::default('/connexion');
+r::notfound('/accueil');
+r::default('/accueil');
 r::add([ 
+    '/accueil' => c\Accueil::class,
     '/connexion' => c\Connexion::class,
     '/inscription' => c\Inscription::class,
     '/oublie' => c\Oublie::class 
@@ -31,7 +32,7 @@ if (User::has()) {
 
 
 // Route vers les API.
-r::add([
+r::add([    
     '/api/plaques' => [
         a\Plaque::class, [
             r::METHOD_POST
@@ -88,11 +89,20 @@ r::add([
     ]],
 
 
-    '/api/messages/{id}/vu/{user}' => [ 
+    
+    '/api/messages/exemples' => [ 
         a\Message::class, [
             r::METHOD_GET
     ]],
-    '/api/messages/exemples' => [ 
+    '/api/messages/notifications' => [
+        a\Message::class, [
+            r::METHOD_GET
+    ]],
+    '/api/messages/{id}' => [ 
+        a\Message::class, [
+            r::METHOD_GET
+    ]],
+    '/api/messages/{id}/vu/{user}' => [ 
         a\Message::class, [
             r::METHOD_GET
     ]],

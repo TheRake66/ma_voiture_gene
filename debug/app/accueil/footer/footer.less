@@ -1,0 +1,141 @@
+@import '../../../../.kernel/theme.less';
+@import '../../../../debug/lib/less/button.less';
+@import '../../../../debug/lib/less/link.less';
+
+
+// Style du composant Footer.
+// Author: thibault
+// Version: 1.0
+// Categorie: Style
+accueil-footer {
+
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+	min-height: 350px;
+	background-color: @black;
+
+	
+	.footer {
+		width: 70%;
+		align-self: center;
+	
+
+		.communication{
+			display: flex;
+			flex-direction: row;
+			align-items: flex-start;
+			align-content: center;
+			justify-content: space-between;
+			margin-bottom: 20px;
+
+			a{
+				color: @font-color;
+				font-size: 15px;
+				text-decoration: none;
+				margin-top: 5px;
+			}
+
+			h5{
+				color: @blue;
+			}
+
+			.copyright{
+				
+				h4{
+					color:@blue;
+					font-weight: bold;
+					font-size: 30px;
+					text-transform: uppercase;
+				}
+
+				.langue{
+					display: flex;
+					align-items: center;
+
+					p{
+						font-size: 15px;
+						margin-left: 5px;
+					}
+				}
+			}
+
+			.membres {
+				display: flex;
+				flex-direction: column;
+			}
+
+			.lien {
+				display: flex;
+				flex-direction: column;
+			}
+
+			.reseaux {
+				display: flex;
+				flex-direction: column;
+			}
+		}
+
+		hr {
+			border: 1px solid @blue;
+		}
+
+		.inscription {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			align-content: center;
+			margin-top: 20px;
+
+			.logo {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+
+				p{
+					font-weight: bold;
+					font-size: 20px;
+				}
+			}
+
+			.button{
+				border-radius: 25px;
+				text-decoration: none;
+			}
+
+		}
+	}
+
+}
+
+
+
+// Style responsive du composant Footer.
+@media all and (max-width: @responsive-max-width) {
+	accueil-footer {
+
+		.footer{
+			margin-top: 50px;
+
+			.communication{
+				flex-direction: column;
+
+				.copyright,.membres,.lien,.reseaux{
+					margin-top: 25px;
+				}
+			}
+
+			.inscription{
+				margin-bottom: 20px;
+
+
+				.button{
+					text-align: center;
+				}
+			}
+		}
+
+	}
+}

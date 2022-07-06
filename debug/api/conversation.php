@@ -10,6 +10,7 @@ use Kernel\Security\Vulnerability\Csrf;
 use Kernel\Security\Validation;
 use Kernel\Session\User;
 use Model\Dao\Ma_voiture_gene\Conversation as DAOConversation;
+use Model\Dao\Ma_voiture_gene\Message as Ma_voiture_geneMessage;
 use Model\Dto\Ma_voiture_gene\Conversation as Ma_voiture_geneConversation;
 use Model\Dto\Ma_voiture_gene\Membre;
 use Model\Dto\Ma_voiture_gene\Message;
@@ -81,13 +82,26 @@ class Conversation extends Rest {
         $this->match('/api/conversations/{id}/messages', function() use ($query, $body) {
             $id = $this->data($query, 'id');
             $contenu = $this->data($body, 'contenu');
-            $message = new Message(
-                null, 
-                $contenu, 
-                new \DateTime(), 
-                User::get()->_id, 
-                $id);
-            $this->send($message->create(), 0, 'Envoie un message.');
+            try {
+                Transaction::begin();
+
+                $message = new Message(
+                    null, 
+                    $contenu, 
+                    new \DateTime(), 
+                    User::get()->_id, 
+                    $id);
+                $message->create();
+                $message->_id = Statement::instance()->lastInsertId();
+
+                Ma_voiture_geneMessage::sendNotification($message->_id);
+
+                Transaction::commit();
+                $this->send(true, 0, 'Envoie un message.');
+            } catch (\Exception $e) {
+                Transaction::rollback();
+                $this->send(false, 1, 'Erreur lors de l\'envoi du message.');
+            }
         });
         $this->match('/api/conversations/{id}/vu', function() use ($query) {
             $id = $this->data($query, 'id');

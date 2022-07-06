@@ -119,5 +119,38 @@
       "debug/app/menu/conversation/liste/liste.php",
       "debug/app/menu/conversation/liste/liste.phtml"
     ]
+  },
+  {
+    "name": "accueil",
+    "created": "2022-07-06T18:47:06.7504047+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/app/accueil/accueil.js",
+      "debug/app/accueil/accueil.less",
+      "debug/app/accueil/accueil.php",
+      "debug/app/accueil/accueil.phtml"
+    ]
+  },
+  {
+    "name": "accueil\\footer",
+    "created": "2022-07-06T18:47:09.8927274+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/app/accueil/footer/footer.js",
+      "debug/app/accueil/footer/footer.less",
+      "debug/app/accueil/footer/footer.php",
+      "debug/app/accueil/footer/footer.phtml"
+    ]
+  },
+  {
+    "name": "accueil\\header",
+    "created": "2022-07-06T18:47:12.9300923+02:00",
+    "madeby": "thiba",
+    "paths": [
+      "debug/app/accueil/header/header.js",
+      "debug/app/accueil/header/header.less",
+      "debug/app/accueil/header/header.php",
+      "debug/app/accueil/header/header.phtml"
+    ]
   }
 ]

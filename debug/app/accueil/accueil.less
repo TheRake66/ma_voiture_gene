@@ -1,0 +1,260 @@
+@import '../../../.kernel/theme.less';
+@import '../../../debug/lib/less/button.less';
+
+
+// Style du composant Accueil.
+// Author: thibault
+// Version: 1.0
+// Categorie: Style
+accueil {
+	.presentation{
+		background-image: url('../../../assets/img/presentation.svg');
+		background-size: cover;
+		background-color: @blue;
+		height: 800px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+
+		#voiture{
+			background-image: url('../../../assets/img/voiture.svg');
+			background-repeat: no-repeat;
+			height: 500px!important;
+    		width: 650px!important;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+
+		#mockup{
+			background-image: url('../../../assets/img/mockup2.png');
+			background-repeat: no-repeat;
+			height: 500px!important;
+			width: 325px!important;
+			position: absolute;
+			right: 100px;
+			animation: floating 2.5s infinite ease-out;
+		}
+
+		@keyframes floating {
+			0% {transform: translatey(-10px);}
+			50% {transform: translatey(0px);}
+			100% {transform: translatey(-10px);}
+			
+		}
+
+		h1{
+			font-size: 80px;
+			margin-bottom: 15px;
+		}
+
+		h2{
+			font-size: 25px;
+			margin-bottom: 20px;
+		}
+		p{
+			font-size: 20px;
+			margin-bottom: 25px;
+			max-width: 700px;
+			text-align: center;
+		}
+
+		.button{
+			background-color: @white;
+			color: @black;
+			border-radius: 25px;
+			text-decoration: none;
+			margin-right: 24px;
+			font-size: 20px;
+			padding: 10px 32px;
+    		letter-spacing: 2.5px;	
+
+			&:hover{
+				box-shadow: 0 8px 15px rgb(0 0 0 / 20%);
+				color:@blue-light;
+			}
+		}
+
+		.button2{
+			background-color: @black;
+			color: @white;	
+			
+			&:hover{
+				background-color: @black-light;
+				color:@white;
+			}
+		}
+
+		#arrow{
+			position: absolute;
+			bottom: 50px;
+			width: 50px;
+			height: 50px;
+			background-image: url('../../../assets/img/arrow.png');
+			background-repeat: no-repeat;
+			background-size: cover;
+			animation: floating 1.5s infinite ease-out;
+		}
+	}
+
+	.banniere{
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		background-color: @white;
+		min-height: 550px;
+
+		#image{
+			background-image: url('../../../assets/img/voiture2.svg');
+			background-repeat: no-repeat;
+			height: 435px!important;
+			width: 650px!important;
+		}
+
+		.text{
+			max-width: 550px;
+			margin-left: 100px;
+
+			h3{
+				color: @black;
+				font-size: 55px;
+				margin-bottom: 10px;
+			}
+
+			p {
+				font-size: 20px;
+				color: @black-light;
+			}
+		}
+
+		.full-width-text{
+			display: flex;
+    		flex-direction: column;
+   			align-items: center;
+			max-width: 750px;
+			margin-left: 0;
+
+			.button{
+				border-radius: 25px;
+				text-decoration: none;
+				font-size: 20px;
+				padding: 15px 45px;
+				letter-spacing: 3px;
+
+				&:hover{
+					box-shadow: 0 8px 15px rgb(0 0 0 / 20%);
+				}
+			}
+		}
+
+
+	}
+
+	.banniere2{
+		background-color: @gray-light;
+
+		.text{
+			margin-left: 0;
+			margin-right: 100px;
+		}
+
+		#image{
+			background-image: url('../../../assets/img/voiture3.svg');
+		}
+	}
+
+}
+
+
+
+// Style responsive du composant Accueil.
+@media screen and (max-width: @responsive-max-width) {
+	accueil {
+		.presentation{
+
+			padding: 40% 5% 0%;
+
+			#voiture{
+				height: 190px!important;
+    			width: 300px!important;
+				margin-top: 30px;
+			}
+
+			#mockup{
+				display: none;
+			}
+
+			h1, h2{
+				text-align: center;
+			}
+
+			h1{
+				font-size: 50px;
+				margin-bottom: 50px;
+			}
+
+			.buttons {
+				display: flex;
+				flex-direction: column;
+				align-content: center;
+				justify-content: center;
+
+				.button{
+					padding: 10px 100px;
+					margin-bottom: 15px;
+					margin-right: 0;
+				}
+			}
+
+			#arrow{
+				bottom: 10px;
+			}
+		}
+
+		.banniere{
+			flex-direction: column;
+
+			#image{
+				height: 265px!important;
+				width: 360px!important;
+				margin-top: 50px;
+			}
+
+			.text{
+				padding: 5% 10%;
+				margin-left : 0;
+				margin-bottom: 45px;
+
+				h3{
+					font-size: 35px;
+				}
+			}
+
+			.full-width-text{
+				text-align: center;
+			}
+		}
+
+		.banniere2{
+			.text{
+				margin: 0;
+			}
+
+			#image{
+				margin-bottom: 50px;
+			}
+		}
+
+	}
+}
+
+@media screen and (min-width: 2559px) and (max-width : 2561px) {
+	accueil {
+		#arrow{	
+			bottom: 490px;
+		}
+	}
+}

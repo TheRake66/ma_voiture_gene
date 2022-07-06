@@ -5,14 +5,15 @@ import Rest from '../../../../.kernel/js/communication/rest.js';
 import Location from '../../../../.kernel/js/url/location.js';
 
 
+
 /**
- * Script du composant Conversation.
+ * Script du composant Footer.
  * 
  * @author thiba
  * @version 1.0
  * @category Script
  */
-export default class Conversation {
+export default class Footer {
 
     /**
      * Point d'entrée du script.
@@ -20,16 +21,8 @@ export default class Conversation {
      * @access public
      * @return {void}
      */
-     constructor() {
-        menu_conversation_liste.mainLoop();
-        menu_conversation_message.loadMy();
-        menu_conversation_message.loadPredefini();
-        menu_conversation_message.mainLoop();
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                menu_conversation_message.scrollToLast();
-            }, 500);
-        });
+    constructor() {
+        
     }
 
 }

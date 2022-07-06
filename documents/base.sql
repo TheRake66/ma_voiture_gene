@@ -131,3 +131,17 @@ CREATE TABLE Signale(
 	,CONSTRAINT Signale_Utilisateur0_FK FOREIGN KEY (id_Utilisateur) REFERENCES Utilisateur(id)
 )ENGINE=InnoDB;
 
+
+#------------------------------------------------------------
+# Table: Notification
+#------------------------------------------------------------
+
+CREATE TABLE Notification(
+        id         Int NOT NULL ,
+        id_Message Int NOT NULL
+	,CONSTRAINT Notification_PK PRIMARY KEY (id,id_Message)
+
+	,CONSTRAINT Notification_Utilisateur_FK FOREIGN KEY (id) REFERENCES Utilisateur(id)
+	,CONSTRAINT Notification_Message0_FK FOREIGN KEY (id_Message) REFERENCES Message(id)
+)ENGINE=InnoDB;
+

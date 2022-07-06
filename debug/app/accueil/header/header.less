@@ -1,0 +1,85 @@
+@import '../../../../.kernel/theme.less';
+@import '../../../../debug/lib/less/button.less';
+@import '../../../../debug/lib/less/link.less';
+
+
+
+// Style du composant Header.
+// Author: Titou
+// Version: 1.0
+// Categorie: Style
+accueil-header {
+    width: 100%;
+	position: absolute;
+    z-index: 2;
+	margin-top: 5px;
+
+	.navbar{
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+
+		a{
+			font-size: 18px;
+		}
+
+		.link{
+			color: @white;
+			font-weight: bold;
+		}
+
+		.navbar-left{
+			a {
+				display: flex;
+				align-items: center;
+
+				img{
+					margin-right: 5px;
+				}
+			}
+		}
+
+		.navbar-center{
+			margin: 0 100px;
+
+			a:nth-child(2){
+				margin: 0 15px;
+			}
+		}
+
+		.navbar-right{
+			.button{
+				border-radius: 25px;
+				padding: 10px;
+				color: @black;
+				background-color: @white;
+				text-decoration: none;
+
+				&:hover{
+					color: @blue-light;
+					box-shadow: 0 8px 15px rgb(0 0 0 / 20%);
+				}
+			}
+		}
+	}
+}
+
+
+
+// Style responsive du composant Header.
+@media all and (max-width: @responsive-max-width) {
+	accueil-header {
+
+		.navbar{
+			justify-content: space-around;
+
+
+			.navbar-center{
+				display: none;
+			}
+		}
+
+		
+	}
+}
