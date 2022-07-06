@@ -1,0 +1,47 @@
+<?php
+use Kernel\Security\Vulnerability\Xss;
+use Kernel\Security\Vulnerability\Csrf;
+use Kernel\Html\Attribute;
+use Kernel\Html\Builder;
+use Kernel\Html\Output;
+use Kernel\Convert\Encoded;
+use Kernel\Convert\Number;
+use Kernel\Url\Location;
+?>
+
+
+
+<!-- 
+Vue du composant Connexion.
+Author: thiba
+Version: 1.0
+Categorie: Vue
+ -->
+<connexion>
+	<div id="img1"></div>
+	<div id="img2"></div>
+	<div id="img3"></div>
+
+	<form <?= Attribute::form('post', false, '/connexion') ?>>
+		<?= Csrf::init() ?>
+
+		<h1>Ha, te revoila !</h1>
+		<p>Nous sommes heureux de vous revoir !</p>
+
+		<label class="label" for="">ADRESSE E-MAIL</label>
+		<input class="input" type="email" name="email" id="email" required <?= Output::post('email') ?>>
+
+		<label class="label" for="">MOT DE PASSE</label>
+		<input class="input" type="password" name="password" id="password"required <?= Output::post('password') ?>>
+
+		<a class="link" href="/oublie">Tu as oublié ton mot de passe ?</a>
+
+		<button type="submit" class="button" id="connect" name="connect">Se connecter</button>
+		
+		<div>
+			<p>Besoin d'un compte ?</p>
+			<a class="link" href="/inscription">S'inscrire</a>
+		</div>
+
+	</form>
+</connexion>

@@ -1,0 +1,28 @@
+<?php
+
+use Controller\Menu\Conversation\Info;
+use Controller\Menu\Conversation\Liste;
+use Controller\Menu\Conversation\Message;
+use Kernel\Security\Vulnerability\Xss;
+use Kernel\Security\Vulnerability\Csrf;
+use Kernel\Html\Attribute;
+use Kernel\Html\Builder;
+use Kernel\Html\Output;
+use Kernel\Convert\Encoded;
+use Kernel\Convert\Number;
+use Kernel\Url\Location;
+?>
+
+
+
+<!-- 
+Vue du composant Conversation.
+Author: thiba
+Version: 1.0
+Categorie: Vue
+ -->
+<menu-conversation>
+    <?php new Liste ?>
+    <?php new Message ?>
+    <?php new Info ?>
+</menu-conversation>

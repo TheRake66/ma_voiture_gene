@@ -1,0 +1,38 @@
+<?php
+use Kernel\Security\Vulnerability\Xss;
+use Kernel\Security\Vulnerability\Csrf;
+use Kernel\Html\Attribute;
+use Kernel\Html\Builder;
+use Kernel\Html\Output;
+use Kernel\Convert\Encoded;
+use Kernel\Convert\Number;
+use Kernel\Url\Location;
+?>
+
+
+
+<!-- 
+Vue du composant Header.
+Author: thiba
+Version: 1.0
+Categorie: Vue
+ -->
+<accueil-header>
+	<div class="navbar">
+
+		<div class="navbar-left">
+			<a class="link" href="/accueil"><img src="../../../assets/img/logo2.png" width="50px" alt="logo">Ma voiture gêne</a>
+		</div>
+
+		<div class="navbar-center">
+			<a class="link" href="/accueil">Accueil</a>
+			<a class="link" href="/connexion">Connexion</a>
+			<a class="link" href="/inscription">Inscription</a>
+		</div>
+
+		<div class="navbar-right">
+			<a href="/connexion" class="button">Se connecter</a>
+		</div>
+
+	</div>
+</accueil-header>

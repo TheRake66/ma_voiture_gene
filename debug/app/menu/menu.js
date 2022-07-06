@@ -48,7 +48,7 @@ export default class Menu {
                                 }, null, null, null, null, 0, false);
                         }, null, null, null, null, 0, false);
                 }, null, null, null, null, null, null, 0, false);
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await new Promise(resolve => setTimeout(resolve, 3000));
         }
     }
 

@@ -1,0 +1,24 @@
+<?php
+use Kernel\Security\Vulnerability\Xss;
+use Kernel\Security\Vulnerability\Csrf;
+use Kernel\Html\Attribute;
+use Kernel\Html\Builder;
+use Kernel\Html\Output;
+use Kernel\Convert\Encoded;
+use Kernel\Convert\Number;
+use Kernel\Url\Location;
+?>
+
+
+
+<!-- 
+Vue du composant Vehicule.
+Author: thiba
+Version: 1.0
+Categorie: Vue
+ -->
+<menu-vehicule>
+	<h2>Vos véhicules</h2>
+	<div id="liste"></div>
+	<button class="button" onclick="menu_vehicule.addPlate()">Ajouter une plaque</button>
+</menu-vehicule>

@@ -1,0 +1,1 @@
+.input{border:none;outline:0;border-radius:6px;padding:12px;background-color:#2f2e41;color:#ccc;font-size:16px;transition:box-shadow .1s;box-shadow:0 2px 5px 0 rgba(0,0,0,.2)}.input:focus{box-shadow:0 0 0 4px #847dff}.input:disabled{filter:brightness(.5);cursor:not-allowed}

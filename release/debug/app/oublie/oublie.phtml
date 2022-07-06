@@ -1,0 +1,42 @@
+<?php
+use Kernel\Security\Vulnerability\Xss;
+use Kernel\Security\Vulnerability\Csrf;
+use Kernel\Html\Attribute;
+use Kernel\Html\Builder;
+use Kernel\Html\Output;
+use Kernel\Convert\Encoded;
+use Kernel\Convert\Number;
+use Kernel\Url\Location;
+?>
+
+
+
+<!-- 
+Vue du composant Oublie.
+Author: thiba
+Version: 1.0
+Categorie: Vue
+ -->
+<oublie>
+	<div id="img1"></div>
+	<div id="img2"></div>
+	<div id="img3"></div>
+
+	<form <?= Attribute::form('post', false, '/oublie') ?>>
+		<?= Csrf::init() ?>
+
+		<h1>Un petit oubli ?</h1>
+		<p>Ne t'inquiète pas, nous te donnerons un nouveau mot de passe.</p>
+
+		<label class="label" for="">ADRESSE E-MAIL</label>
+		<input class="input" type="email" name="email" id="email" required <?= Output::post('email') ?>>
+
+		<button type="submit" class="button" id="new" name="new">Envoyer un nouveau</button>
+		
+		<div>
+			<p>Tu t'en souviens ?</p>
+			<a class="link" href="/connexion">Se connecter</a>
+		</div>
+
+	</form>
+</oublie>

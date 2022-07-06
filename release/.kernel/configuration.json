@@ -1,0 +1,75 @@
+{
+    "security": {
+        "redirect_to_https": false,
+        "self_xss_prevent": true,
+        "cookie_path": "/",
+        "cookie_domain": "",
+        "cookie_only_https": false,
+        "cookie_prevent_xss": false,
+        "cookie_lifetime": 0
+    },
+    "render": {
+        "use_minifying": true,
+        "catch_error": false, 
+        "show_error_message": false,
+        "show_supervisor": false,
+        "wait_dom_loaded": true,
+        "delay_after_load": 20,
+        "api_beautify_json": true
+    },
+    "log": {
+        "use_log_file": true,
+        "ip_identify": true,
+        "throw_if_unwritable": true,
+        "max_lenght": 1000,
+        "query": {
+            "print_query": true,
+            "print_parameters": true,
+            "print_results": true,
+            "print_mail": true,
+            "print_mail_header": true,
+            "print_mail_content": true
+        }
+    },
+    "website_head": {
+        "charset": "utf-8",
+        "description": "ma_voiture_gene",
+        "keywords": "ma_voiture_gene",
+        "author": "thiba",
+        "viewport": "width=device-width, initial-scale=1.0",
+        "theme_color": "#3F3D56",
+        "robots": "index, follow",
+        "title": "Ma voiture gène"
+    },
+    "region": {
+        "timezone": "Europe/Paris",
+        "main_lang": "fr"
+    },
+    "session": {
+        "open_session": true,
+        "multiple_session": true,
+        "session_name": "ma_voiture_gene",
+        "token_lifetime_days": 31,
+        "regenerate_delay": -1,
+        "regenerate_delete_old": false
+    },
+    "database": {
+        "default_database": "ma_voiture_gene",
+        "progressive_connection": true,
+        "databases_list": [
+            {
+				"login": "root", 
+				"password": "", 
+				"host": "localhost", 
+				"port": "3306", 
+				"name": "ma_voiture_gene", 
+                "encoding": "utf8mb4", 
+                "type": "mysql",
+                "throw_sql_error": true,
+                "throw_transaction": true,
+                "emulate_prepare": false,
+                "persistent_mode": false
+            }
+        ]
+    }
+}

@@ -1,0 +1,42 @@
+<?php
+use Kernel\Security\Vulnerability\Xss;
+use Kernel\Security\Vulnerability\Csrf;
+use Kernel\Html\Attribute;
+use Kernel\Html\Builder;
+use Kernel\Html\Output;
+use Kernel\Convert\Encoded;
+use Kernel\Convert\Number;
+use Kernel\Url\Location;
+?>
+
+
+
+<!-- 
+Vue du composant Message.
+Author: thiba
+Version: 1.0
+Categorie: Vue
+ -->
+<menu-conversation-message>
+
+	<header>
+		<img id="retour" onclick="menu_conversation_message.comeBack()" src="/assets/img/icons8-arrière-60.png" alt="Retour">
+		<span id="name"></span>
+		<img id="picture" src="/assets/img/default.png" alt="PP">
+		<img id="info" onclick="menu_conversation_message.showInfo()" src="/assets/img/icons8-info-60.png" alt="Info">
+	</header>
+
+	<section>
+		<div id="section"></div>
+	</section>
+
+	<div>
+		<div id="predefini">
+		</div>
+		<div id="sender">
+			<input disabled id="input" type="text" class="input" placeholder="Votre message...">
+			<button disabled id="send" onclick="menu_conversation_message.sendInput()" class="button">
+		</div>
+	</div>
+
+</menu-conversation-message>

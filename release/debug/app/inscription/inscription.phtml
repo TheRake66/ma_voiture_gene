@@ -1,0 +1,59 @@
+<?php
+use Kernel\Security\Vulnerability\Xss;
+use Kernel\Security\Vulnerability\Csrf;
+use Kernel\Html\Attribute;
+use Kernel\Html\Builder;
+use Kernel\Html\Output;
+use Kernel\Convert\Encoded;
+use Kernel\Convert\Number;
+use Kernel\Url\Location;
+?>
+
+
+
+<!-- 
+Vue du composant Inscription.
+Author: thiba
+Version: 1.0
+Categorie: Vue
+ -->
+<inscription>
+	<div id="img1"></div>
+	<div id="img2"></div>
+	<div id="img3"></div>
+
+	<form <?= Attribute::form('post', false, '/inscription') ?>>
+		<?= Csrf::init() ?>
+
+		<h1>Créez votre compte !</h1>
+
+		<label class="label" for="">NOM</label>
+		<input class="input" type="text" name="nom" id="nom" required <?= Output::post('nom') ?>>
+
+		<label class="label" for="">PRENOM</label>
+		<input class="input" type="text" name="prenom" id="prenom" required <?= Output::post('prenom') ?>>
+
+		<label class="label" for="">ADRESSE E-MAIL</label>
+		<input class="input" type="email" name="email" id="email" required <?= Output::post('email') ?>>
+
+		<label class="label" for="">MOT DE PASSE</label>
+		<input class="input" type="password" name="password" id="password" required <?= Output::post('password') ?>>
+
+		<label class="label" for="">CONFIRMER</label>
+		<input class="input" type="password" name="confirm" id="confirm" required <?= Output::post('confirm') ?>>
+
+		<div id="cgudiv">
+			<input class="toogle" type="checkbox" name="cgu" id="cgu" required>
+			<label for="cgu">J'accepte les <a class="link" href="/cgu">conditions d'utilisation</a></label>
+		</div>
+		
+		<button type="submit" class="button" name="inscription" id="inscription">S'inscrire</button>
+
+		<div>
+			<p>Tu as déjà un compte ?</p>
+			<a class="link" href="/connexion">Se connecter</a>
+		</div>
+
+	</form>
+
+</inscription>

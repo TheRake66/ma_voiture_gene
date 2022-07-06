@@ -1,4 +1,4 @@
 logs/
 .vscode/
-release/
+# release/
 tmp/

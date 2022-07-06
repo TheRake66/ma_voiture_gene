@@ -1,0 +1,32 @@
+<?php
+namespace Controller\Accueil;
+use Kernel\Security\Vulnerability\Xss;
+use Kernel\Security\Vulnerability\Csrf;
+use Kernel\Security\Validation;
+use Kernel\Io\Render;
+
+
+
+/**
+ * Controleur du composant Header.
+ * 
+ * @author thiba
+ * @version 1.0
+ * @package Controller\Accueil
+ * @category Controleur
+ */
+class Header extends Render {
+
+    /**
+     * Point d'entrée du controleur.
+     * 
+     * @access public
+     * @return void
+     */
+    function __construct() {
+        $this->view();
+    }
+
+}
+
+?>

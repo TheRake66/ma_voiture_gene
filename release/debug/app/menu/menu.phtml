@@ -1,0 +1,31 @@
+<?php
+use Kernel\Security\Vulnerability\Xss;
+use Kernel\Security\Vulnerability\Csrf;
+use Kernel\Html\Attribute;
+use Kernel\Html\Builder;
+use Kernel\Html\Output;
+use Kernel\Convert\Encoded;
+use Kernel\Convert\Number;
+use Kernel\Url\Location;
+?>
+
+
+
+<!-- 
+Vue du composant Menu.
+Author: thiba
+Version: 1.0
+Categorie: Vue
+ -->
+<menu>
+	<div>
+		<?php $get() ?>
+	</div>
+	<nav>
+		<?= $make('/vehicules', 'icons8-voiture-60', 'Voiture', 'Vos véhicules') ?>
+		<?= $make('/scanner', 'icons8-vision-60', 'Scan', 'Scanner un véhicule') ?>
+		<?= $make('/conversations', 'icons8-messagerie-60', 'Messagerie', 'Vos conversations') ?>
+		<?= $make('/parametres', 'icons8-services-60', 'Parametres', 'Les paramètres') ?>
+		<?= $make('/connexion?deconnexion', 'icons8-déconnexion-60', 'Deconnexion', 'Se deconnecter') ?>
+	</nav>
+</menu>

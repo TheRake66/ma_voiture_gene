@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `exemple` (
 
 INSERT INTO `exemple` (`id`, `contenu`) VALUES
 (1, 'Hello, ta voiture est mal garée !'),
-(2, 'Bonjour, pouvez-vous déplacer votre voiture ?'),
+(2, 'Bonjour, ta voiture gène !'),
 (3, 'Salut, tu as un pneu crevé !'),
 (4, 'Attention, tu t\'es fait vandalisé ! '),
 (5, 'Tes feux sont allumés !'),
